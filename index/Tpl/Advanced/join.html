@@ -1,0 +1,70 @@
+<include file="Public:header"/>
+	<div class="container">
+		<div class="wrap">
+			<div class="bg-join clearfix">
+				<include file="Public:breadcrumbs"/>
+				<include file="Public:left"/>
+				<div class="main">
+					<div class="ja clearfix">
+						<p class="fl"><img src="__PUBLIC__/images/p313x215.jpg" width="313" height="215"></p>
+						<div class="fr">
+							<h4>如果你有项目需要加盟,欢迎您随时联系我们!</h4>
+							<p>我们将提供：</p>
+							<p>·专业人员支持,24小时提供专业系统的产品介绍及处理相关问题,</p> 
+							<p>·丰富多样的产品, 每季度至少发布一个系列的新品，</p>
+							<p>如果您想成为我们在当地的加盟商,请您现在就联系我们,我们将会给您提供的合作价格。</p>
+							<p>我们相信双方本着互相合作、双赢发展的共同目标而努力，就一定能够一起做大做强。</p>
+						</div>
+					</div>
+					<p class="jb">欢迎您查阅巴黎咖啡服务平台，您可以在本栏目在线咨询各式关于巴黎咖啡的各式疑问，提交问题后请持续关注本栏目，以便及时获得我们的答复！感谢您的支持！</p>
+					<form action="" name="join_form" method="post" class="jf">
+						<div class="jfu clearfix">
+							<ul>
+								<li class="jfun">姓名</li>
+								<li><input type="text" name="name" class="text" /></li>
+								<li class="jfun">电话</li>
+								<li><input type="text" name="phone" class="text" /></li>
+							</ul>
+						</div>
+						<div class="jfu clearfix">
+							<ul>
+								<li class="jfun">内容</li>
+								<li><textarea class="textarea" name="content"></textarea></li>
+							</ul>
+						</div>
+						<div class="jfus clearfix">
+							<ul>
+								<li><input type="button" class="submit" value="确认" /><input type="reset" class="reset" value="重置" /></li>
+							</ul>
+						</div>
+					</form>
+					<script type="text/javascript">
+					var url="{:U('Advanced/submitJoin')}";
+					$(function(){
+						$(".submit").click(function(){
+							var name=$("input[name='name']").val();
+							var phone=$("input[name='phone']").val();
+							var content=$("textarea[name='content']").val();
+
+							if(name==""||content==""){
+								alert("留言人和留言内容不能为空");
+								return;
+							}
+							else{
+								var data={"name":name,"phone":phone,"content":content};
+								$.ajax({type:'POST',url:url,data:data,success:function (data,textStatus){
+										var obj=eval("("+data+")");
+										if(obj.returnInfo=="ok"){
+											alert("留言成功，我们将尽快予以查看,谢谢！");
+											document.join_form.reset();
+										}else{
+											alert(obj.returnInfo);
+										}
+
+										this;}});
+							}
+						});
+					});
+					</script>
+				</div>
+<include file="Public:footer"/>

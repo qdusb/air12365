@@ -1,0 +1,9 @@
+<div class="sidebar">
+	<div class="menu">
+		<dl>
+			<volist name="seconds" id="v">
+				<dt><a href="{$v.second.url}" <if condition="$v['second']['id'] eq $id_configs['second_id']">class="current"</if>>{$v.second.name}</a></dt>
+			</volist>
+		</dl>
+	</div>
+</div>

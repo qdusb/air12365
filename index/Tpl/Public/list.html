@@ -1,0 +1,23 @@
+<div class="news">
+	<foreach name="infos" item="v">
+	<div class="item">
+		<h2><span></span><a href="javascript:">{$v.title|msubstr=0,60}</a> <em>{$v.create_time|strtotime|date="m-d",###}</em></h2>
+		<div class="hotNews clearfix">
+			<div class="pic"><a href="{$v.url}"><img src="{$v.pic}" width="146" height="100" /></a></div>
+			<dl>
+				<dd class="info">{$v.content|strip_tags|msubstr=0,60}</dd>
+				<dd class="more"><a href="{$v.url}">阅读全文&gt;&gt;</a></dd>
+			</dl>
+		</div>
+	</div>
+	</foreach>
+</div>
+<script type="text/javascript">
+$(function(){
+	$(".news .item").eq(0).addClass("on");
+	$(".news .item h2").click(function(){
+		$(".news .item").removeClass("on");
+		var $parent=$(this).parent(".item").addClass("on");
+	});
+})
+</script>

@@ -1,0 +1,18 @@
+<include file="Public:header"/>
+	<div class="container">
+		<div class="wrap">
+			<div class="{$bbg} clearfix">
+				<include file="Public:breadcrumbs"/>
+				<include file="Public:left"/>
+				<div class="main">
+					<if condition="$info_state eq 'list'">
+						<include file="Public:list"/>
+						<include file="Public:page"/>
+					<elseif condition="$info_state eq 'pic'"/>
+						<include file="Public:pic"/>
+						<include file="Public:page"/>
+					<elseif condition="$info_state eq 'content'"/>
+						<include file="Public:content"/>
+					</if>
+				</div>
+<include file="Public:footer"/>

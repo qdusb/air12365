@@ -1,0 +1,7 @@
+<div class="page">
+	<a href="{$page_config.prev}"><img src="__PUBLIC__/images/ico_07.gif" width="29" height="27"></a>
+	<volist name="page_config['page']" id="v">
+		<a href="{$v.url}" <if condition="$v['label'] eq $page_config['page_id']">class="current"</if>>{$v.label}</a>
+	</volist>
+	<a href="{$page_config.next}"><img src="__PUBLIC__/images/ico_08.gif" width="29" height="27"></a>
+</div>
