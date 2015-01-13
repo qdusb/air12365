@@ -303,9 +303,7 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">管理权限</td>
 					<td class="editRightTd">
-						<input type="radio" name="grade" value="5"<? if ($grade == 5) echo " checked";?>>普通管理员
-                        <input type="radio" name="grade" value="6"<? if ($grade == 6) echo " checked";?>>审核管理员
-                        <input type="radio" name="grade" value="7"<? if ($grade == 7) echo " checked";?>>高级管理员
+                        <input type="radio" name="grade" value="7"<? if ($grade == 7) echo " checked";?>>分销商管理员
                         <input type="radio" name="grade" value="8"<? if ($grade == 8) echo " checked";?>>系统管理员
 					</td>
 				</tr>
@@ -316,80 +314,11 @@ else
                         <input type="radio" name="state" value="1"<? if ($state == 1) echo " checked";?>>正常
                     </td>
                 </tr>
-				<tr class="editTr">
-					<td class="editLeftTd">管理权限</td>
-					<td class="editRightTd">
-                    	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        	<?
-                            $sql = "select id, name from info_class where id like '" . CLASS_SPACE . "' order by sortnum asc";
-							$rst = $db->query($sql);
-							while ($row = $db->fetch_array($rst))
-							{
-							?>
-								<tr>
-									<td colspan="6"><input type="checkbox" name="class_id[]" value="<?=$row["id"]?>"<? if (hasInclude($class_id, $row["id"]) == true) echo " checked"?>> <font color="#FF6600"><?=$row["name"]?></font></td>
-								</tr>
-                                <?
-                                $sql = "select id, name from info_class where id like '" . $row["id"] . CLASS_SPACE . "' order by sortnum asc";
-								$rst2 = $db->query($sql);
-								$i = 1;
-								while ($row2 = $db->fetch_array($rst2))
-								{
-									if ($i % 5 == 1) echo "<tr><td width='20'></td>";
-								?>
-                                    <td><input type="checkbox" name="class_id[]" value="<?=$row2["id"]?>"<? if (hasInclude($class_id, $row2["id"]) == true) echo " checked"?>><?=$row2["name"]?></td>
-							<?
-									$i++;
-									if ($i % 5 == 1) echo "</tr>";
-								}
-								
-								while ($i % 5 != 1)
-								{
-									echo "<td>&nbsp;</td>";
-									$i++;
-									if ($i % 5 == 1) echo "</tr>";
-								}
-                            }
-                            ?>
-						</table>
-					</td>
-				</tr>
-				<tr class="editTr">
-					<td class="editLeftTd">高级权限</td>
-					<td class="editRightTd">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-							<?
-                            $sql = "select id, name from advanced where state=1 order by sortnum asc";
-							$rst = $db->query($sql);
-							$i = 1;
-							while ($row = $db->fetch_array($rst))
-							{
-								if ($i % 5 == 1) echo "<tr>";
-							?>
-                                <td><input type="checkbox" name="advanced_id[]" value="<?=$row["id"]?>"<? if (hasInclude($advanced_id, $row["id"]) == true) echo " checked"?>><?=$row["name"]?></td>
-							<?
-								$i++;
-								if ($i % 5 == 1) echo "</tr>";
-                            }
-								
-							while ($i % 5 != 1)
-							{
-								echo "<td>&nbsp;</td>";
-								$i++;
-								if ($i % 5 == 1) echo "</tr>";
-							}
-							?>
-						</table>						
-					</td>
-				</tr>
                 <tr class="editTr">
 					<td class="editLeftTd">说明</td>
 					<td class="editRightTd">
-                        1、普通管理员：在指定栏目内，允许新增，允许编辑、删除自己发布的并且未审核的内容。<br />
-                        2、审核管理员：在指定栏目内，允许新增、审核、编辑、删除栏目内的所有内容。<br />
-                        3、高级管理员：在所有栏目内，具有新增、审核、编辑、删除的权限。<br />
-                        4、以上管理员的高级权限都需要单独分配。<br />
-                        5、系统管理员：具有最高权限。<br />
+                        1、分销商管理员：管理自己的客户。<br />
+                        2、系统管理员：具有最高权限。<br />
 					</td>
 				</tr>
 				<tr class="editFooterTr">

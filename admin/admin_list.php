@@ -11,6 +11,7 @@ $clear_id	= (int)$_GET["clear_id"];
 $listUrl = "admin_list.php";
 $editUrl = "admin_edit.php";
 
+$grades=array("8"=>"<font color='#FF6600'>系统管理员</font>","7"=>"<font color='#0066FF'>分销商管理员</font>");
 
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
@@ -153,26 +154,7 @@ if ($clear_id > 0)
 					<td><a href="<?=$editUrl?>?id=<?=$row["id"]?>"><?=$row["name"]?></a></td>
 					<td><?=$row["realname"]?></td>
 					<td>
-						<?
-						switch ($row["grade"])
-						{
-							case 8:
-								echo "<font color='#FF6600'>系统管理员</font>";
-								break;
-							case 7:
-								echo "<font color='#0066FF'>高级管理员</font>";
-								break;
-							case 6:
-								echo "审核管理员";
-								break;
-							case 5:
-								echo "普通管理员";
-								break;
-							default:
-								echo "<font color='#FF0000'>错误</font>";
-								break;
-						}
-						?>
+						<?=$grades[$row["grade"]];?>
 					</td>
 					<td><?=$row["login_count"]?></td>
 					<td><a href="admin_login_list.php?id=<?=$row["id"]?>">查看日志</a>&nbsp;&nbsp;<a href="<?=$listUrl?>?clear_id=<?=$row["id"]?>" onClick="return clearLogin()">清空</a></td>

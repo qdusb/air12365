@@ -6,14 +6,7 @@ require "excel_class.php";
 
 $docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
 $levels=array("VIP会员","钻石会员");
-//高级管理权限
-if ($session_admin_grade != ADMIN_HIDDEN && $session_admin_grade != ADMIN_SYSTEM && hasInclude($session_admin_advanced, MESSAGE_ADVANCEDID) == false)
-{
-	info("没有权限！");
-}
-
 $page = (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
-
 $listUrl = "member_list.php?page=$page";
 $editUrl = "member_edit.php?page=$page";
 
@@ -67,12 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			$db->query("rollback");
 			$db->close();
-			info("删除留言失败！");
+			info("删除失败！");
 		}
 	}
 }
 ?>
-
 
 <html>
 	<head>
@@ -104,10 +96,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					//设置每页数
 					$page_size = DEFAULT_PAGE_SIZE;
 					//总记录数
-					$sql = "select count(*) as cnt from member";
-					$rst = $db->query($sql);
-					$row = $db->fetch_array($rst);
-					$record_count = $row["cnt"];
+					if($session_admin_grade==7){
+						$record_count = $db->getCount("member","admin_id={$session_admin_id}");
+					}else{
+						$record_count = $db->getCount("member");
+					}
+					$record_count = $db->getCount("member");
 					$page_count = ceil($record_count / $page_size);
 					$page_str = page($page, $page_count, $pageUrl);
 					echo $page_str;
@@ -131,8 +125,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					<td>创建时间</td>
 				</tr>
 				<?
-				$sql = "select * from member order by sortnum desc";
-				$sql .= " limit " . ($page - 1) * $page_size . ", " . $page_size;
+				$sql = "select * from member ";
+				if($session_admin_grade==7){
+					$sql.="where admin_id={$session_admin_id} ";
+				}
+				$sql .= "order by sortnum desc limit " . ($page - 1) * $page_size . ", " . $page_size;
 				$rst = $db->query($sql);
 				while ($row = $db->fetch_array($rst))
 				{

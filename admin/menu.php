@@ -111,10 +111,7 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 					<?
 						}
                     }
-
-                    if ($session_admin_grade == ADMIN_HIDDEN || $session_admin_grade == ADMIN_SYSTEM || count($session_admin_advanced) > 0)
-					{
-						$i++;
+					$i++;
 					?>
                         <table width="150" border="0" cellspacing="0" cellpadding="0">
                             <tr height="22">
@@ -130,23 +127,18 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 							$rst = $db->query($sql);
 							while ($row = $db->fetch_array($rst))
 							{
-								if ($session_admin_grade == ADMIN_HIDDEN || $session_admin_grade == ADMIN_SYSTEM || hasInclude($session_admin_advanced, $row["id"]) == true)
-								{
+								
 							?>
                                     <tr height="20">
                                         <td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
                                         <td><a href="<?=$row["default_file"]?>" class="menuChild" target="main"><?=$row["name"]?></a></td>
                                     </tr>
-							<?
-								}
-                            }
-                            ?>
+							<? }?>
                             <tr height="4">
                                 <td colspan="2"></td>
                             </tr>
                         </table>
 					<?
-                    }
 
                     if ($session_admin_grade == ADMIN_HIDDEN || $session_admin_grade == ADMIN_SYSTEM)
 					{

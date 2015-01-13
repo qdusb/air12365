@@ -3,12 +3,6 @@ require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
 
-//高级管理权限
-if ($session_admin_grade != ADMIN_HIDDEN && $session_admin_grade != ADMIN_SYSTEM && hasInclude($session_admin_advanced, MESSAGE_ADVANCEDID) == false)
-{
-	info("没有权限！");
-}
-
 $id		= (int)$_GET["id"];
 $page	= (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
 
