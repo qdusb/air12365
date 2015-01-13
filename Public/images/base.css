@@ -1,0 +1,16 @@
+@charset "utf-8";
+/*
+ibw.cn Reset Stylesheet
+v2.4
+Author: Carter
+Last Updated: 2014-06-13
+*/
+body,h1,h2,h3,h4,h5,h6,p,dl,dd,ul,ol{margin:0;padding:0}em,i{font-style:normal}li{list-style:none}a,a:hover{text-decoration:none}img{border:0}table{border-collapse:collapse;border-spacing:0}label{cursor:default}body,button,input,select,textarea{font:12px/1.5 Tahoma,arial,'Hiragino Sans GB','microsoft yahei',\5b8b\4f53}textarea{resize:none}a,a:focus{outline:none}.clearfix:after{content:'\20';display:block;height:0;clear:both}.clearfix{*zoom:1}.clear{display:block;height:0;clear:both;font-size:0;line-height:0;overflow:hidden}.fl{float:left;display:inline}.fr{float:right;display:inline}.fn{float:none}.tl{text-align:left}.tr{text-align:right}.tc{text-align:center}.hide{display:none}.show{display:block}.mt10{margin-top:10px}.noBg{background:none!important}.noBorder{border:0!important}.yahei{font-family:'microsoft yahei'}.red{color:red}
+	/* 项目主体部分设置 */
+body{background:#141414;color:#141414;}
+a{color:#141414;text-decoration:none;/*transition:color 0.2s linear 0s*/}
+a:hover{color:#bb694e;}
+/* 容器 */
+.wrapper { position:relative; width:100%; min-width:1000px; height:100%; overflow:hidden; }
+
+
