@@ -2,7 +2,7 @@
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
-require "excel_class.php";
+require(dirname(__FILE__) . "/excel_class.php");
 
 $docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
 $levels=array("VIP会员","钻石会员");
@@ -10,62 +10,49 @@ $page = (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
 $listUrl = "member_list.php?page=$page";
 $editUrl = "member_edit.php?page=$page";
 
-
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
 
-//删除
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-{
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
 	$action		=$_POST['action'];
-	if ($action == "download")
-	{
-		$date="<table border='1' bordercolor='#999999' width='100%' bordercolor='#000000'>";
-		$date.=("<tr class='listHeaderTr'><td width='10%'>用户名</td><td width='15%'>会员级别</td><td width='10%'>会员编号</td><td width='10%'>会员姓名</td>".
-			"<td width='10%'>证件类型</td><td width='10%'>证件编号</td><td width='10%'>手机号</td><td width='15%'>工作单位</td><td>创建时间</td></tr>");
-		$cnt=0;
-		$sql = "select * from member order by sortnum asc";
-		$rst = $db->query($sql);
-		while($row = $db->fetch_array($rst))
-		{
-			$vip=$levels[$row['level']];
-			$docu=$docu_types[intval($row["docu_type"])];
-			$bg=$cnt%2==0?"#FFFF00":"#FFFFFF";
-		$date.=("<tr bgcolor={$bg}><td>".$row['user']."</td><td>".$vip."</td><td>".$row["user_no"]."</td><td>".$row["name"]."</td><td>".$docu."</td><td>".$row["docu_no"]."</td><td>".$row["phone"]."</td><td>".$row["company"]."</td><td>".$row["create_time"]."</td></tr>");
-		$cnt++;
-		}
-		$date.="</table>";
-		Create_Excel_File("member.xls",$date);
-	}
-	else
-	{
+	/*下载*/
+	if ($action == "download"){
+		$data=getPersonalMemberData($db);
+		Create_Excel_File("personal_member.xls",$data);
+	}elseif ($action == "delete"){
 		$id_array = $_POST["ids"];
-		if (!is_array($id_array))
-		{
+		if (!is_array($id_array)){
 			$id_array = array($id_array);
 		}
-	
 		$db->query("begin");
 		$sql = "delete from member where id in (" . implode(",", $id_array) . ")";
 		$rst = $db->query($sql);
-
-		if ($rst)
-		{
+		if ($rst){
 			$db->query("commit");
 			$db->close();
 			header("Location: $listUrl");
 			exit();
-		}
-		else
-		{
+		}else{
 			$db->query("rollback");
 			$db->close();
 			info("删除失败！");
 		}
+	}elseif($action == "send_message"){
+		$id_array = $_POST["ids"];
+		$sms_id = $_POST["sms_id"];
+		if (!is_array($id_array)){
+			$id_array = array($id_array);
+		}
+		$retval=sendMessage($db,$id_array,$sms_id);
+		if($retval){
+			info("发送信息成功");
+		}else{
+			info("发送信息失败");
+		}
+		
 	}
 }
 ?>
-
 <html>
 	<head>
 		<title></title>
@@ -87,10 +74,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				<td>
 					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
 					<a href="javascript:reverseCheck(document.form1.ids);">[反向选择]</a>&nbsp;
-					<a href="javascript:if(delCheck(document.form1.ids)) {document.form1.submit();}">[删除]</a>&nbsp;
+					<a href="javascript:if(delCheck(document.form1.ids)) {document.form1.action.value = 'delete';document.form1.submit();}">[删除]</a>&nbsp;
 					<a href="<?php echo $editUrl?>">[新增会员]</a>&nbsp;
 					<a href="javascript:document.form1.action.value = 'download';document.form1.submit();">[数据导出]</a>&nbsp;&nbsp;
+					<a href="javascript:return false;" id="send_message">[发送短信]</a>&nbsp;&nbsp;
 				</td>
+				
 				<td align="right">
 					<?php
 					//设置每页数
@@ -107,6 +96,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					echo $page_str;
 					?>
 				</td>
+			</tr>
+			<tr height="30" id="sms_td" style="display:none">
+			<td>
+				<select name="sms_id">
+				<?php
+				$sql="select * from sms where state=1 order by create_time desc";
+				$rst=$db->query($sql);
+				while($row=$db->fetch_array($rst)){
+					echo "<option value={$row['id']}>".$row['content']."</option>";
+				}
+				?>
+				</select>	
+				<td align="right">
+					<a href="javascript:document.form1.action.value = 'send_message';document.form1.submit();" id="send_message">发送短信</a>
+				</td>
+			</td>
 			</tr>
 		</table>
 			<form name="form1" action="" method="post">

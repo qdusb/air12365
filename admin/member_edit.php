@@ -61,13 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$sql = "insert into member set ".implode(",", $insert_sqls);
 			$rst = $db->query($sql);
 			$db->close();
-			if(!$rst)
-			{
-				
+			if(!$rst){
 				info("新增失败");
-			}
-			else
-			{
+			}else{
 				header("location: $listUrl");
 				exit;
 			}
@@ -110,23 +106,21 @@ if(!empty($id)){
 
 		if($user_no==""){
 			if($level==1){
-				$user_no=getVipNo($db);
+				$user_no=getDiamondNo($db);
 			}else{
-				$user_no=getCommonNo($db);
+				$user_no=getVipNo($db);
 			}
 		}
-	}
-	else
-	{
+	}else{
 		$db->close();
 		info("指定的记录不存在！");
 	}
-}
-else
-{
+}else{
 	$read_only="";
 	$sortnum=$db->getMax("member", "sortnum") + 10;
-	$user_no=getCommonNo($db);
+	$user_no=getVipNo($db);
+    $level=0;
+    
 }
 
 ?>
@@ -139,6 +133,7 @@ else
 		<meta http-equiv="Expires" content="-1000">
 		<link href="images/admin.css" rel="stylesheet" type="text/css">
 		<script type="text/javascript" src="images/common.js"></script>
+        <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript">
 			function check(form)
 			{
@@ -186,21 +181,28 @@ else
 					<td class="editRightTd"><input type="text" name="user" maxlength="20" size="60" value="<?php echo $user?>" <?php echo $read_only?>/></td>
 				</tr>
 				<tr class="editTr">
-					<td class="editLeftTd">会员编号</td>
-					<td class="editRightTd"><input type="text" name="user_no" maxlength="20" size="60" value="<?php echo $user_no?>"/></td>
+					<td class="editLeftTd">会员编号/级别</td>
+					<td class="editRightTd">
+                    <input type="text" name="user_no" id="user_no" maxlength="20" size="30" value="<?php echo $user_no?>"/>
+                    <input type="radio" value="0" name="level" <?php if($level == 0) echo "checked";?> class="user_no_type"/>Vip会员 &nbsp;
+                    <input type="radio" value="1" name="level" <?php if($level == 1) echo "checked";?> class="user_no_type"/>钻石会员
+                    <script>
+                    var diamond_no="<?php echo getDiamondNo($db);?>";
+                    var vip_no="<?php echo $user_no?>";
+                    $(function(){
+                        var $user_no=$("#user_no");
+                        $(".user_no_type").click(function(){
+                            var val=$(this).val();
+                            var no=val==0?vip_no:diamond_no
+                            $user_no.val(no);
+                        });
+                    })
+                    </script>
+                    </td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">会员密码</td>
 					<td class="editRightTd"><input type="password" name="pass" maxlength="20" size="60" value=""/></td>
-				</tr>
-				<tr class="editTr">
-					<td class="editLeftTd">会员等级</td>
-					<td class="editRightTd">
-					<select name="level" style="width:80px;">
-						<option value="0"  <?php if($level == 0) echo "selected";?>>Vip用户</option>
-						<option value="1"  <?php if($level == 1) echo "selected";?>>钻石会员</option>
-					</select>
-					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">姓名</td>

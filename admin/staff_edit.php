@@ -38,14 +38,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		deleteFile($pic, 1);
 	}
 
-	if (empty($name))
-	{
+	if (empty($name)){
 		$db->close();
 		info("填写的参数错误！");
 	}
 
-	if ($id < 1)
-	{
+	if ($id < 1){
 		$sortnum = $db->getMax("staff", "sortnum") + 10;
 		$sql = "insert into staff (id, sortnum, name, depart, pic,tel, birthday,tel) values(" . ($db->getMax("staff", "id", "") + 1) . ",  '$sortnum', '$name', '$depart', '$pic', '$tel','$birthday','tel')";
 		
@@ -66,19 +64,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	$rst = $db->query($sql);
 	$db->close();
 
-	if ($rst)
-	{
-		//修改成功后删除老图片、附件
-		if ($id > 0)
-		{
+	if ($rst){
+		if ($id > 0){
 			deleteFile($oldPic, 1);
 		}
-
 		header("Location: $listUrl");
 		exit;
-	}
-	else
-	{
+	}else{
 		//添加或修改失败后 删除上传的图片、附件
 		deleteFile($pic, 1);
 	}

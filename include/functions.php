@@ -1,20 +1,74 @@
 <?php
+function sendMessage($db,$id_array,$sms_id){
+	$retval="";
+	$content=$db->getTableFieldValue("sms","content","id={$sms_id}");
+	foreach($id_array as $id){
+		$phone=$db->getTableFieldValue("member","phone","id={$id}");
+		if($phone){
+			$retval=sendMessageAdapter($phone,$content);
+			$sql="insert into sms_log set sms_id=$sms_id,member_id=$id";
+			$db->query($sql);
+		}
+	}
+	return $retval;
+}
+function sendMessageAdapter($phone,$content){
+	return "ok";
+}
+function getPersonalMemberData($db){
+	$personal_datas=array();
+	$sql = "select * from member where user_type=0 order by sortnum asc";
+	$rst = $db->query($sql);
+	while($row = $db->fetch_array($rst)){
+		$personal_datas[]=$row;
+	}
 
+	$data="<table border='1' bordercolor='#999999' width='100%' bordercolor='#000000'>";
+	$data.=("<tr class='listHeaderTr'><td width='10%'>用户名</td><td width='15%'>会员级别</td><td width='10%'>会员编号</td><td width='10%'>会员姓名</td>".
+		"<td width='10%'>证件类型</td><td width='10%'>证件编号</td><td width='10%'>手机号</td><td width='15%'>工作单位</td><td>创建时间</td></tr>");
+	foreach($personal_datas as $key=>$row){
+		$vip=$levels[$row['level']];
+		$docu=$docu_types[intval($row["docu_type"])];
+		$bg=$key%2==0?"#FFFF00":"#FFFFFF";
+		$data.=("<tr bgcolor={$bg}><td>".$row['user']."</td><td>".$vip."</td><td>".$row["user_no"]."</td><td>".$row["name"]."</td><td>".$docu."</td><td>".$row["docu_no"]."</td><td>".$row["phone"]."</td><td>".$row["company"]."</td><td>".$row["create_time"]."</td></tr>");
+	}
+	$data.="</table>";
+	return $data;
+}
+function getCompanyMemberData($db){
+	$personal_datas=array();
+	$sql = "select * from member where user_type=0 order by sortnum asc";
+	$rst = $db->query($sql);
+	while($row = $db->fetch_array($rst)){
+		$personal_datas[]=$row;
+	}
+
+	$data="<table border='1' bordercolor='#999999' width='100%' bordercolor='#000000'>";
+	$data.=("<tr class='listHeaderTr'><td width='10%'>用户名</td><td width='15%'>会员级别</td><td width='10%'>会员编号</td><td width='10%'>会员姓名</td>".
+		"<td width='10%'>证件类型</td><td width='10%'>证件编号</td><td width='10%'>手机号</td><td width='15%'>工作单位</td><td>创建时间</td></tr>");
+	foreach($personal_datas as $key=>$row){
+		$vip=$levels[$row['level']];
+		$docu=$docu_types[intval($row["docu_type"])];
+		$bg=$key%2==0?"#FFFF00":"#FFFFFF";
+		$data.=("<tr bgcolor={$bg}><td>".$row['user']."</td><td>".$vip."</td><td>".$row["user_no"]."</td><td>".$row["name"]."</td><td>".$docu."</td><td>".$row["docu_no"]."</td><td>".$row["phone"]."</td><td>".$row["company"]."</td><td>".$row["create_time"]."</td></tr>");
+	}
+	$data.="</table>";
+	return $data;
+}
 function getCompanyNo($db){
-	$num=(string)rand(1,999);
-	while($num=="888")$num=(string)rand(1,999);
+	$num=(string)rand(0,999);
 	$len=strlen($num);
-	for($i=0;$i<6-$len;$i++){
+	for($i=0;$i<3-$len;$i++){
 		$num="0".$num;
 	}
-	$user_no="xc999".$num;
+	$user_no="xc999".$num."888";
 	$cnt=$db->getCount("member","user_no='{$user_no}'");
 	while($cnt>0){
 		$user_no=getCompanyNo();
 	}
 	return $user_no;
 }
-function getVipNo($db){
+function getDiamondNo($db){
 	$num=(string)rand(1,999);
 	while($num=="888")$num=(string)rand(1,999);
 	$len=strlen($num);
@@ -24,12 +78,12 @@ function getVipNo($db){
 	$user_no="xc999".$num;
 	$cnt=$db->getCount("member","user_no='{$user_no}'");
 	while($cnt>0){
-		$user_no=getVipNo();
+		$user_no=getDiamondNo();
 	}
 	return $user_no;
 }
 
-function getCommonNo($db){
+function getVipNo($db){
 	$num=(string)mt_rand(1000,999999);
 	
 	while($num=="888")$num=(string)mt_rand(1,999999);
@@ -41,7 +95,7 @@ function getCommonNo($db){
 	
 	$cnt=$db->getCount("member","user_no='{$user_no}'");
 	while($cnt>0){
-		$user_no=getCommonNo();
+		$user_no=getVipNo();
 	}
 	return $user_no;
 }

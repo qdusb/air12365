@@ -504,10 +504,6 @@ class onlyDB
 		return $row["cnt"];
 	}
 	
-	/*
-	 *	»ñÈ¡Ä³±íµÄÄ³¸ö×Ö¶ÎÖµ
-	 *	$where °üº¬where 
-	*/
 	function getTableFieldValue($table, $getField, $where)
 	{
 		if ($table != "" && $getField != "" && $where != "")
