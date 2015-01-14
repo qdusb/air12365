@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		"docu_no"=>$docu_no,
 		"phone"=>$phone,
 		"company"=>$company,
+		"admin_id"=>$session_admin_id
 	);
 
 	if($id<1)

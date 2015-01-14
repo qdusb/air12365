@@ -122,18 +122,28 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
                             </tr>
                         </table>
                         <table id="child<?php echo $i?>" width="150" border="0" cellspacing="0" cellpadding="0" style="DISPLAY:none">
+                    			
                         	<?php
 							$sql = "select id, name, default_file from advanced where state=1 order by sortnum asc";
 							$rst = $db->query($sql);
 							while ($row = $db->fetch_array($rst))
 							{
-								
+								if ($session_admin_grade == ADMIN_HIDDEN || $session_admin_grade == ADMIN_SYSTEM )
+								{
 							?>
                                     <tr height="20">
                                         <td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
                                         <td><a href="<?php echo $row["default_file"]?>" class="menuChild" target="main"><?php echo $row["name"]?></a></td>
                                     </tr>
-							<?php }?>
+							<?php }}?>
+							<tr height="20">
+                                <td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
+                                <td><a href="member_list.php" class="menuChild" target="main">个人会员管理</a></td>
+                            </tr>
+                            <tr height="20">
+                                <td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
+                                <td><a href="company_member_list.php" class="menuChild" target="main">企业会员管理</a></td>
+                            </tr>
                             <tr height="4">
                                 <td colspan="2"></td>
                             </tr>

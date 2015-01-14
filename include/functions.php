@@ -1,9 +1,10 @@
 <?php
 function sendMessage($db,$id_array,$sms_id){
+
 	$retval="";
-	$content=$db->getTableFieldValue("sms","content","id={$sms_id}");
+	$content=$db->getTableFieldValue("sms","content","where id={$sms_id}");
 	foreach($id_array as $id){
-		$phone=$db->getTableFieldValue("member","phone","id={$id}");
+		$phone=$db->getTableFieldValue("member","phone","where id={$id}");
 		if($phone){
 			$retval=sendMessageAdapter($phone,$content);
 			$sql="insert into sms_log set sms_id=$sms_id,member_id=$id";
@@ -15,9 +16,15 @@ function sendMessage($db,$id_array,$sms_id){
 function sendMessageAdapter($phone,$content){
 	return "ok";
 }
-function getPersonalMemberData($db){
+function getPersonalMemberData($db,$admin_id,$admin_grade){
+	$docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
+	$levels=array("VIP会员","钻石会员");
 	$personal_datas=array();
-	$sql = "select * from member where user_type=0 order by sortnum asc";
+	if($admin_grade==7){
+		$sql = "select * from member where user_type=0 and admin_id={$admin_id} order by sortnum asc";
+	}else{
+		$sql = "select * from member where user_type=0 order by sortnum asc";
+	}
 	$rst = $db->query($sql);
 	while($row = $db->fetch_array($rst)){
 		$personal_datas[]=$row;
@@ -35,9 +42,13 @@ function getPersonalMemberData($db){
 	$data.="</table>";
 	return $data;
 }
-function getCompanyMemberData($db){
+function getCompanyMemberData($db,$admin_id,$admin_grade){
 	$personal_datas=array();
-	$sql = "select * from member where user_type=0 order by sortnum asc";
+	if($admin_grade==7){
+		$sql = "select * from member where user_type=1 and admin_id={$admin_id} order by sortnum asc";
+	}else{
+		$sql = "select * from member where user_type=1 order by sortnum asc";
+	}
 	$rst = $db->query($sql);
 	while($row = $db->fetch_array($rst)){
 		$personal_datas[]=$row;

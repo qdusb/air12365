@@ -5,9 +5,7 @@
 
 session_start();
 
-define("ADMIN_COMMON", 5);		//普通管理员
-define("ADMIN_CONFIRM", 6);		//审核管理员
-define("ADMIN_ADVANCED", 7);	//高级管理员
+define("ADMIN_ADVANCED", 7);	//分销商管理员
 define("ADMIN_SYSTEM", 8);		//系统管理员
 define("ADMIN_HIDDEN", 9);		//隐藏管理员
 
