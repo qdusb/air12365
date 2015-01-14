@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 
@@ -69,10 +69,10 @@ else
 				<td>
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" height="100">
 						<tr>
-							<td>当前时间：<?=date("Y-m-d H:m:s")?></td>
+							<td>当前时间：<?php echo date("Y-m-d H:m:s")?></td>
 						</tr>
 						<tr>
-							<td style="font-size:16px;font-weight:bold;"><?=$session_admin_name?></td>
+							<td style="font-size:16px;font-weight:bold;"><?php echo $session_admin_name?></td>
 						</tr>
 						<tr>
 							<td>欢迎进入网站管理中心！</td>
@@ -101,23 +101,23 @@ else
 		<table width="95%" border="0" cellspacing="0" cellpadding="2" align="center">
 			<tr>
 				<td width="100" align="right">登陆帐号：</td>
-				<td style="color:#880000;"><?=$session_admin_name?></td>
+				<td style="color:#880000;"><?php echo $session_admin_name?></td>
 			</tr>
 			<tr>
 				<td align="right">真实姓名：</td>
-				<td style="color:#880000;"><?=$realname?></td>
+				<td style="color:#880000;"><?php echo $realname?></td>
 			</tr>
 			<tr>
 				<td align="right">登陆次数：</td>
-				<td style="color:#880000;"><?=$login_count?></td>
+				<td style="color:#880000;"><?php echo $login_count?></td>
 			</tr>
 			<tr>
 				<td align="right">上线时间：</td>
-				<td style="color:#880000;"><?=$last_login_time?></td>
+				<td style="color:#880000;"><?php echo $last_login_time?></td>
 			</tr>
 			<tr>
 				<td align="right">IP地址：</td>
-				<td style="color:#880000;"><?=$last_login_ip?></td>
+				<td style="color:#880000;"><?php echo $last_login_ip?></td>
 			</tr>
 		</table>
 	</body>

@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -140,7 +140,7 @@ else
 					return false;
 				}
 
-				<?
+				<?php
 				if ($class_haspic == 1)
 				{
 				?>
@@ -154,7 +154,7 @@ else
 							return false;
 						}
 					}
-				<?
+				<?php
 				}
 				?>
 
@@ -165,13 +165,13 @@ else
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr class="position">
-				<td class="position">当前位置: 管理中心 -&gt; <?echo $class_name?> -&gt; 新增/编辑</td>
+				<td class="position">当前位置: 管理中心 -&gt; <?phpecho $class_name?> -&gt; 新增/编辑</td>
 			</tr>
 		</table>
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>
+					<a href="<?php echo $listUrl?>">[返回列表]</a>
 				</td>
 			</tr>
 		</table>
@@ -184,29 +184,29 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">排列序号</td>
 					<td class="editRightTd">
-						<input type="text" name="sortnum" value="<?=$sortnum?>" maxlength="10" size="5">
+						<input type="text" name="sortnum" value="<?php echo $sortnum?>" maxlength="10" size="5">
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">姓名</td>
-					<td class="editRightTd"><input type="text" value="<?=$name?>" name="name" maxlength="100" size="50"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $name?>" name="name" maxlength="100" size="50"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">性别</td>
-					<td class="editRightTd"><input type="text" value="<?=$sex?>" name="sex" maxlength="100" size="50"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $sex?>" name="sex" maxlength="100" size="50"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">电话</td>
-					 <td class="editRightTd"><input type="text" value="<?=$tel?>" name="tel" maxlength="100" size="50"></td>
+					 <td class="editRightTd"><input type="text" value="<?php echo $tel?>" name="tel" maxlength="100" size="50"></td>
 					
 				</tr>
 				 <tr class="editTr">
 					<td class="editLeftTd">生日</td>
-					<td class="editRightTd"><input type="text" value="<?=$birthday?>" name="birthday" maxlength="100" size="50" class="wDate" onClick="WdatePicker()"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $birthday?>" name="birthday" maxlength="100" size="50" class="wDate" onClick="WdatePicker()"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">部门</td>
-					 <td class="editRightTd"><input type="text" value="<?=$depart?>" name="depart" maxlength="100" size="50"></td>
+					 <td class="editRightTd"><input type="text" value="<?php echo $depart?>" name="depart" maxlength="100" size="50"></td>
 					
 				</tr>
 			 
@@ -214,12 +214,12 @@ else
 						<td class="editLeftTd">缩略图</td>
 						<td class="editRightTd">
 							<input type="file" name="pic" size="40">
-							<?
+							<?php
 							if ($pic != "")
 							{
 							?>
 								<input type="checkbox" name="del_pic" value="1"> 删除现有图片
-							<?
+							<?php
 							}
 							?>
 						</td>
@@ -234,7 +234,7 @@ else
 			</form>
 		</table>
 		<script type="text/javascript">document.form1.title.focus();</script>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

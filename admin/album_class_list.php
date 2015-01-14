@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -66,11 +66,11 @@ if ($id != "")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>&nbsp;
-					<a href="<?=$editUrl?>">[增加]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
+					<a href="<?php echo $editUrl?>">[增加]</a>&nbsp;
 				</td>
 				<td align="right">
-					<?
+					<?php
 					//设置每页数
 					$page_size = DEFAULT_PAGE_SIZE;
 					//总记录数
@@ -95,7 +95,7 @@ if ($id != "")
 				<td>传看图片</td>
 				<td>删除</td>
 			</tr>
-			<?
+			<?php
 			$sql = "select * from album_class order by sortnum asc";
 			$sql .= " limit " . ($page - 1) * $page_size . ", " . $page_size;
 			$rst = $db->query($sql);
@@ -104,10 +104,10 @@ if ($id != "")
 				$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 			?>
 				
-				<tr class="<?=$css?>">
-					<td><?=$row["sortnum"]?></td>
-					<td><a href="<?=$editUrl?>?id=<?=$row["id"]?>"><?=$row["name"]?></a></td>
-					<?
+				<tr class="<?php echo $css?>">
+					<td><?php echo $row["sortnum"]?></td>
+					<td><a href="<?php echo $editUrl?>?id=<?php echo $row["id"]?>"><?php echo $row["name"]?></a></td>
+					<?php
 					if(trim($row["pic"])=="")
 					{
 						echo "<td>无</td>";
@@ -117,18 +117,18 @@ if ($id != "")
 						echo "<td><a href=".$row['pic'].">图片</a></td>";
 					}
 					?>
-					<td><a href="album_upload.php?class_id=<?=$row["id"]?>">批量上传图片</a></td>
-					<td><a href="album_list.php?class_id=<?=$row["id"]?>">查看图片</a></td>
-					<td><a href="<?=$listUrl?>&id=<?=$row["id"]?>" onClick="return del();">删除</a></td>
+					<td><a href="album_upload.php?class_id=<?php echo $row["id"]?>">批量上传图片</a></td>
+					<td><a href="album_list.php?class_id=<?php echo $row["id"]?>">查看图片</a></td>
+					<td><a href="<?php echo $listUrl?>&id=<?php echo $row["id"]?>" onClick="return del();">删除</a></td>
 				</tr>
-			<?
+			<?php
 			}
 			?>
 			<tr class="listFooterTr">
-				<td colspan="10"><?=$page_str?></td>
+				<td colspan="10"><?php echo $page_str?></td>
 			</tr>
 		</table>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

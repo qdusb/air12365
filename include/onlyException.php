@@ -1,17 +1,10 @@
 <?php
-/*
- *	数据库错误堆楗
- *	Exception raise catch finally classname define
- *	author: lj
- *	lastmodify: 2004-07-29
-*/
 
 define ("CONNECT_FAILD", "Faild to connect database server");
 
 
 //保存异常的堆栈
 $ExceptionStack = Array();  //结构：('异常名' => 异常实例)
-
 
 function raise(&$e, $file = __FILE__, $line = __Line__)
 {
@@ -53,7 +46,7 @@ function onlyCatch($E_name)
 	}
 }
 
-function finally()
+function finally_call()
 {
 	//发生异常而未捕获时进行处理，例如可以写入异常文件
 

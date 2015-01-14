@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -88,10 +88,10 @@ if ($id != "")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>
-					<a href="<?=$editUrl?>">[增加]</a>
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>
+					<a href="<?php echo $editUrl?>">[增加]</a>
 					<select name="select_class" onChange="window.location='?class_id=' + this.options[this.selectedIndex].value;">
-						<?
+						<?php
 						$sql = "select id, name from link_class order by sortnum asc";
 						$rst = $db->query($sql);
 						while ($row = $db->fetch_array($rst))
@@ -99,14 +99,14 @@ if ($id != "")
 							if ($class_id == $row["id"])
 							{
 						?>
-								<option value="<?echo $row["id"]?>" selected><?echo $row["name"]?></option>
-						<?
+								<option value="<?phpecho $row["id"]?>" selected><?phpecho $row["name"]?></option>
+						<?php
 							}
 							else
 							{
 						?>
-								<option value="<?echo $row["id"]?>"><?echo $row["name"]?></option>
-						<?
+								<option value="<?phpecho $row["id"]?>"><?phpecho $row["name"]?></option>
+						<?php
 							}
 						}
 						?>
@@ -124,18 +124,18 @@ if ($id != "")
                     <td>链接地址</td>
                     <td>状态</td>
 
-					<?
+					<?php
 					if ($class_haspic == 1)
 					{
 					?>
 						<td>图片</td>
-					<?
+					<?php
 					}
 					?>
 
                     <td>删除</td>
                 </tr>
-				<?
+				<?php
 				//设置每页数
 				$page_size		= DEFAULT_PAGE_SIZE;
 				//总记录数
@@ -154,12 +154,12 @@ if ($id != "")
                 {
                 	$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
                 ?>
-                    <tr class="<?=$css?>">
-                       	<td><?=$row["sortnum"]?></td>
-						<td><a href="<?=$editUrl?>&id=<?=$row["id"]?>"><?=$row["name"]?></a></td>
-                        <td><?=$row["url"]?></td>
+                    <tr class="<?php echo $css?>">
+                       	<td><?php echo $row["sortnum"]?></td>
+						<td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["name"]?></a></td>
+                        <td><?php echo $row["url"]?></td>
 						<td>
-							<?
+							<?php
 							switch ($row["state"])
 							{
 								case 0:
@@ -175,26 +175,26 @@ if ($id != "")
 							?>
 						</td>
 
-						<?
+						<?php
 						if ($class_haspic == 1)
 						{
 						?>
-							<td><?=(empty($row["pic"])) ? "无" : "<a href='" . UPLOAD_PATH_FOR_ADMIN . $row["pic"] . "' target='_blank'>图片</a>"?></td>
-						<?
+							<td><?php echo (empty($row["pic"])) ? "无" : "<a href='" . UPLOAD_PATH_FOR_ADMIN . $row["pic"] . "' target='_blank'>图片</a>"?></td>
+						<?php
 						}
 						?>
 
-						<td><a href="<?=$listUrl?>&id=<?=$row["id"]?>" onClick="return del();">删除</a></td>
+						<td><a href="<?php echo $listUrl?>&id=<?php echo $row["id"]?>" onClick="return del();">删除</a></td>
 					</tr>
-				<?
+				<?php
                 }
                 ?>
                 <tr class="listFooterTr">
-                    <td colspan="15"><?=$page_str?></td>
+                    <td colspan="15"><?php echo $page_str?></td>
                 </tr>
 			</form>
 		</table>
-		<?
+		<?php
         $db->close();
 		?>
 	</body>

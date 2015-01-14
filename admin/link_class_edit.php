@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -99,7 +99,7 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>
+					<a href="<?php echo $listUrl?>">[返回列表]</a>
 				</td>
 			</tr>
 		</table>
@@ -110,17 +110,17 @@ else
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">排列序号</td>
-					<td class="editRightTd"><input type="text" name="sortnum" value="<?=$sortnum?>" size="10" maxlength="5"></td>
+					<td class="editRightTd"><input type="text" name="sortnum" value="<?php echo $sortnum?>" size="10" maxlength="5"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">分类名称</td>
-					<td class="editRightTd"><input type="text" name="name" value="<?=$name?>" maxlength="50" size="30"></td>
+					<td class="editRightTd"><input type="text" name="name" value="<?php echo $name?>" maxlength="50" size="30"></td>
 				</tr>
 				<tr class="editTr" style="display:none">
 					<td class="editLeftTd">链接模式</td>
 					<td class="editRightTd">
-						<input type="radio" name="haspic" value="1"<? if ($haspic == 1) echo " checked"?>>图片
-						<input type="radio" name="haspic" value="0"<? if ($haspic == 0) echo " checked"?>>文字
+						<input type="radio" name="haspic" value="1"<?php if ($haspic == 1) echo " checked"?>>图片
+						<input type="radio" name="haspic" value="0"<?php if ($haspic == 0) echo " checked"?>>文字
 					</td>
 				</tr>
 				<tr class="editFooterTr">
@@ -132,7 +132,7 @@ else
 			</form>
 		</table>
 		<script type="text/javascript">document.form1.name.focus();</script>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

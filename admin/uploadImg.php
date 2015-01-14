@@ -1,4 +1,4 @@
-<?
+<?php
 function uploadImg($imgfile, $exts)
 {
 	if ($imgfile["size"])

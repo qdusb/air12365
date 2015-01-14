@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -61,7 +61,7 @@ if ($id != "")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -79,7 +79,7 @@ if ($id != "")
                     <td>状态</td>
                     <td>删除</td>
                 </tr>
-                <?
+                <?php
 				$page_size = DEFAULT_PAGE_SIZE;
 				//总记录数
 				$sql = "select count(*) as cnt from joinus";
@@ -97,17 +97,17 @@ if ($id != "")
                 {
                     $css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
                 ?>
-                    <tr class="<?=$css?>">
-                        <td><?=$row["sortnum"]?></td>
-                        <td><?=$row["company"]?></td>
-                        <td><a href="<?=$viewUrl?>&id=<?=$row["id"]?>"><?=$row["name"]?></a></td>
-                        <td><?=$row["job_post"]?></td>
-                        <td><?=$row["sex"]?></td>
-                        <td><?=$row["phone"]?></td>
-                        <td><?=$row["email"]?></td>
-                        <td><?=formatDate("Y-m-d", $row["create_time"])?></td>
+                    <tr class="<?php echo $css?>">
+                        <td><?php echo $row["sortnum"]?></td>
+                        <td><?php echo $row["company"]?></td>
+                        <td><a href="<?php echo $viewUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["name"]?></a></td>
+                        <td><?php echo $row["job_post"]?></td>
+                        <td><?php echo $row["sex"]?></td>
+                        <td><?php echo $row["phone"]?></td>
+                        <td><?php echo $row["email"]?></td>
+                        <td><?php echo formatDate("Y-m-d", $row["create_time"])?></td>
                         <td>
-                            <?
+                            <?php
                             switch ($row["state"])
                             {
 							case 0:
@@ -121,17 +121,17 @@ if ($id != "")
 								break;
                             }
                             ?>
-						<td><a href="<?=$listUrl?>&id=<?=$row["id"]?>" onClick="return del();">删除</a></td>
+						<td><a href="<?php echo $listUrl?>&id=<?php echo $row["id"]?>" onClick="return del();">删除</a></td>
                     </tr>
-                <?
+                <?php
                 }
                 ?>
                 <tr class="listFooterTr">
-                    <td colspan="10"><?=$page_str?></td>
+                    <td colspan="10"><?php echo $page_str?></td>
                 </tr>
             </form>
 		</table>
-		<?
+		<?php
         $db->close();
         ?>
 	</body>

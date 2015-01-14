@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -85,14 +85,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
 					<a href="javascript:reverseCheck(document.form1.ids);">[反向选择]</a>&nbsp;
 					<a href="javascript:if(delCheck(document.form1.ids)) {document.form1.submit();}">[删除]</a>&nbsp;
-					<a href="<?=$editUrl?>">[新增会员]</a>&nbsp;
+					<a href="<?php echo $editUrl?>">[新增会员]</a>&nbsp;
 					<a href="javascript:document.form1.action.value = 'download';document.form1.submit();">[数据导出]</a>&nbsp;&nbsp;
 				</td>
 				<td align="right">
-					<?
+					<?php
 					//设置每页数
 					$page_size = DEFAULT_PAGE_SIZE;
 					//总记录数
@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					<td width="15%">工作单位</td>
 					<td>创建时间</td>
 				</tr>
-				<?
+				<?php
 				$sql = "select * from member ";
 				if($session_admin_grade==7){
 					$sql.="where admin_id={$session_admin_id} ";
@@ -135,28 +135,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				{
 					$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 				?>
-					<tr class="<?=$css?>">
-						<td><input type="checkbox" id="ids" name="ids[]" value="<?=$row["id"]?>"></td>
-						<td><a href="<?=$editUrl?>&id=<?=$row["id"]?>"><?=$row["user"]?></a></td>
-						<td><?=$row["user_no"]?></td>
-						<td><?=$row["name"]?></td>
-						<td><?=$docu_types[$row['docu_type']];?></td>
-						<td><?=$row["docu_no"]?></td>
-						<td><?=$levels[$row['level']];?></td>
-						<td><?=$row["phone"]?></td>
-						<td><?=$row["company"]?></td> 
-						<td><?=$row["create_time"]?></td>           
+					<tr class="<?php echo $css?>">
+						<td><input type="checkbox" id="ids" name="ids[]" value="<?php echo $row["id"]?>"></td>
+						<td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["user"]?></a></td>
+						<td><?php echo $row["user_no"]?></td>
+						<td><?php echo $row["name"]?></td>
+						<td><?php echo $docu_types[$row['docu_type']];?></td>
+						<td><?php echo $row["docu_no"]?></td>
+						<td><?php echo $levels[$row['level']];?></td>
+						<td><?php echo $row["phone"]?></td>
+						<td><?php echo $row["company"]?></td> 
+						<td><?php echo $row["create_time"]?></td>           
 					</tr>
-				<?
+				<?php
 				}
 				?>
 				<tr class="listFooterTr">
-					<td colspan="10"><?=$page_str?></td>
+					<td colspan="10"><?php echo $page_str?></td>
 				</tr>
 				</table>
 			</form>
 		
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

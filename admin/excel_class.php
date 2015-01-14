@@ -1,4 +1,4 @@
-<?
+<?php
 define('ABC_CRITICAL',      0);
 define('ABC_ERROR',         1);
 define('ABC_ALERT',         2);

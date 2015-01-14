@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -72,12 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
 					<a href="javascript:reverseCheck(document.form1.ids);">[反向选择]</a>&nbsp;
 					<a href="javascript:if(delCheck(document.form1.ids)) {document.form1.submit();}">[删除]</a>&nbsp;
 				</td>
 				<td align="right">
-					<?
+					<?php
 					//设置每页数
 					$page_size = DEFAULT_PAGE_SIZE;
 					//总记录数
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					<td width="8%">预约时间</td>
 					
 				</tr>
-				<?
+				<?php
 				$sql = "select * from active order by sortnum desc";
 				$sql .= " limit " . ($page - 1) * $page_size . ", " . $page_size;
 				$rst = $db->query($sql);
@@ -114,26 +114,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				{
 					$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 				?>
-					<tr class="<?=$css?>">
-						<td><input type="checkbox" id="ids" name="ids[]" value="<?=$row["id"]?>"></td>
-						<td><?=$row["sortnum"]?></td>
-						<td><a href="<?=$viewUrl?>&id=<?=$row["id"]?>"><?=$row["user_name"]?></a></td>
-						<td><?=$row["product_name"]?></td>
-						<td><?=$row["phone"]?></td>
-						<td><?=$row["city"]?></td>
-						<td><?=formatDate("Y-m-d", $row["create_time"])?></td>
-						<td><?=$row["area"]?></td>
+					<tr class="<?php echo $css?>">
+						<td><input type="checkbox" id="ids" name="ids[]" value="<?php echo $row["id"]?>"></td>
+						<td><?php echo $row["sortnum"]?></td>
+						<td><a href="<?php echo $viewUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["user_name"]?></a></td>
+						<td><?php echo $row["product_name"]?></td>
+						<td><?php echo $row["phone"]?></td>
+						<td><?php echo $row["city"]?></td>
+						<td><?php echo formatDate("Y-m-d", $row["create_time"])?></td>
+						<td><?php echo $row["area"]?></td>
 					  
 					</tr>
-				<?
+				<?php
 				}
 				?>
 				<tr class="listFooterTr">
-					<td colspan="10"><?=$page_str?></td>
+					<td colspan="10"><?php echo $page_str?></td>
 				</tr>
 			</form>
 		</table>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

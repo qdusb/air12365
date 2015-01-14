@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -52,8 +52,8 @@ if ($id > 0)
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>&nbsp;
-					<a href="<?=$editUrl?>">[增加]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
+					<a href="<?php echo $editUrl?>">[增加]</a>&nbsp;
 				</td>
 				<td width="500" align="right">
 				</td>
@@ -68,29 +68,29 @@ if ($id > 0)
 				<td width="8%">状态</td>
 				<td width="8%">删除</td>
 			</tr>
-			<?
+			<?php
 			$sql = "select id, sortnum, name, default_file, state from advanced order by sortnum asc";
 			$rst = $db->query($sql);
 			while ($row = $db->fetch_array($rst))
 			{
 				$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 			?>
-				<tr class="<?=$css?>">
-					<td><?=$row["id"]?></td>
-					<td><?=$row["sortnum"]?></td>
-					<td><a href="<?=$editUrl?>?id=<?=$row["id"]?>"><?=$row["name"]?></a></td>
-					<td><?=$row["default_file"]?></td>
-					<td><?=$row["state"] == 1 ? "显示" : "<font color=#FF6600>不显示</font>"?></td>
-					<td><a href="<?=$listUrl?>?id=<?=$row["id"]?>" onClick="return del('<?=$row["name"]?>');">删除</a></td>
+				<tr class="<?php echo $css?>">
+					<td><?php echo $row["id"]?></td>
+					<td><?php echo $row["sortnum"]?></td>
+					<td><a href="<?php echo $editUrl?>?id=<?php echo $row["id"]?>"><?php echo $row["name"]?></a></td>
+					<td><?php echo $row["default_file"]?></td>
+					<td><?php echo $row["state"] == 1 ? "显示" : "<font color=#FF6600>不显示</font>"?></td>
+					<td><a href="<?php echo $listUrl?>?id=<?php echo $row["id"]?>" onClick="return del('<?php echo $row["name"]?>');">删除</a></td>
 				</tr>
-			<?
+			<?php
 			}
 			?>
 			<tr class="listFooterTr">
 				<td colspan="10"></td>
 			</tr>
 		</table>
-		<?
+		<?php
         $db->close();
 		?>
 	</body>

@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -145,7 +145,7 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[返回列表]</a>&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -156,35 +156,35 @@ else
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">序号</td>
-					<td class="editRightTd"><input type="text" name="sortnum" maxlength="20" size="24" value="<?=$sortnum?>"/></td>
+					<td class="editRightTd"><input type="text" name="sortnum" maxlength="20" size="24" value="<?php echo $sortnum?>"/></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">报名人姓名</td>
-					<td class="editRightTd"><?=$name?></td>
+					<td class="editRightTd"><?php echo $name?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">报名活动</td>
-					<td class="editRightTd"><?=$product_name?></td>
+					<td class="editRightTd"><?php echo $product_name?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">联系电话</td>
-					<td class="editRightTd"><?=$phone?></td>
+					<td class="editRightTd"><?php echo $phone?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">城市</td>
-					<td class="editRightTd"><?=$city?></td>
+					<td class="editRightTd"><?php echo $city?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">小区</td>
-					<td class="editRightTd"><?=$area?></td>
+					<td class="editRightTd"><?php echo $area?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">QQ</td>
-					<td class="editRightTd"><?=$QQ?></td>
+					<td class="editRightTd"><?php echo $QQ?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">申请时间</td>
-					<td class="editRightTd"><?=$create_time?></td>
+					<td class="editRightTd"><?php echo $create_time?></td>
 				</tr>
 				<tr class="editFooterTr">
 					<td class="editFooterTd" colSpan="2">
@@ -194,7 +194,7 @@ else
 				</tr>
 			</table>
 		</form>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

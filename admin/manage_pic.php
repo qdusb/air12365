@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 
@@ -81,7 +81,7 @@ else
         	<div class="i1">图片管理</div>
             <div>
                 <ul>
-                    <?
+                    <?php
                     if (trim($files) != "")
                     {
                         $files_array = explode(",", $files);
@@ -90,8 +90,8 @@ else
                             if (file_exists($_SERVER["DOCUMENT_ROOT"] . $value))
                             {
                     ?>
-                                <li><span style="width:700px;"><a href="<?=$value?>" target="_blank"><img src="<?=$value?>" onload="javascript:if (this.width > 600) {this.width=600;}" border="0" /></a></span><span><a href="?table=<?=$table?>&id=<?=$id?>&action=delete&file=<?=$value?>">删除</a></span></li>
-                    <?
+                                <li><span style="width:700px;"><a href="<?php echo $value?>" target="_blank"><img src="<?php echo $value?>" onload="javascript:if (this.width > 600) {this.width=600;}" border="0" /></a></span><span><a href="?table=<?php echo $table?>&id=<?php echo $id?>&action=delete&file=<?php echo $value?>">删除</a></span></li>
+                    <?php
                             }
                         }
                     }

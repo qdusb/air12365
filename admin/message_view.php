@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -141,7 +141,7 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[返回列表]</a>&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -152,57 +152,57 @@ else
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">序号</td>
-					<td class="editRightTd"><input type="text" name="sortnum" maxlength="20" size="24" value="<?=$sortnum?>"/></td>
+					<td class="editRightTd"><input type="text" name="sortnum" maxlength="20" size="24" value="<?php echo $sortnum?>"/></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">留言人姓名</td>
-					<td class="editRightTd"><?=$name?></td>
+					<td class="editRightTd"><?php echo $name?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">联系电话</td>
-					<td class="editRightTd"><?=$phone?></td>
+					<td class="editRightTd"><?php echo $phone?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">电子信箱</td>
-					<td class="editRightTd"><?=$email?></td>
+					<td class="editRightTd"><?php echo $email?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">传真</td>
-					<td class="editRightTd"><?=$fax?></td>
+					<td class="editRightTd"><?php echo $fax?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">工作单位</td>
-					<td class="editRightTd"><?=$company?></td>
+					<td class="editRightTd"><?php echo $company?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">留言内容</td>
-					<td class="editRightTd"><?=nl2br($content)?></td>
+					<td class="editRightTd"><?php echo nl2br($content)?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">留言时间</td>
-					<td class="editRightTd"><?=$create_time?></td>
+					<td class="editRightTd"><?php echo $create_time?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">留言IP</td>
-					<td class="editRightTd"><?=$ip?></td>
+					<td class="editRightTd"><?php echo $ip?></td>
 				</tr>
 				<!--tr class="editTr">
 					<td colspan="2"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">序号</td>
-					<td class="editRightTd"><input type="text" name="sortnum" value="<?=$sortnum?>" size="10" maxlength="5"></td>
+					<td class="editRightTd"><input type="text" name="sortnum" value="<?php echo $sortnum?>" size="10" maxlength="5"></td>
 				</tr-->
 				<tr class="editTr">
 					<td class="editLeftTd">是否显示</td>
 					<td class="editRightTd">
-						<input type="radio" name="state" value="1"<? if ($state == 1) echo " checked"?>> 不显示
-						<input type="radio" name="state" value="2"<? if ($state == 2) echo " checked"?>> 显示
+						<input type="radio" name="state" value="1"<?php if ($state == 1) echo " checked"?>> 不显示
+						<input type="radio" name="state" value="2"<?php if ($state == 2) echo " checked"?>> 显示
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">回复</td>
-					<td class="editRightTd"><textarea name="reply" cols="100" rows="10"><?=$reply?></textarea>
+					<td class="editRightTd"><textarea name="reply" cols="100" rows="10"><?php echo $reply?></textarea>
 					</td>
 				</tr>
 				<tr class="editFooterTr">
@@ -213,7 +213,7 @@ else
 				</tr>
 			</table>
 		</form>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

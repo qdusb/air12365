@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -89,7 +89,7 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[返回列表]</a>&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -97,83 +97,83 @@ else
 			<form name="form1" action="" method="post">
 				<tr class="editTr">
 					<td class="editLeftTd">序号</td>
-					<td class="editRightTd"><?=$sortnum?></td>
+					<td class="editRightTd"><?php echo $sortnum?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">姓名</td>
-					<td class="editRightTd"><?=$name?></td>
+					<td class="editRightTd"><?php echo $name?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">性别</td>
-					<td class="editRightTd"><?=$sex?></td>
+					<td class="editRightTd"><?php echo $sex?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">联系电话</td>
-					<td class="editRightTd"><?=$phone?></td>
+					<td class="editRightTd"><?php echo $phone?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">电子邮箱</td>
-					<td class="editRightTd"><?=$email?></td>
+					<td class="editRightTd"><?php echo $email?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">1、目前，您属于哪个群族？</td>
-					<td class="editRightTd"><?=$zuqu?></td>
+					<td class="editRightTd"><?php echo $zuqu?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">2、是否购买过客来福家具？</td>
-					<td class="editRightTd"><?=$buy?></td>
+					<td class="editRightTd"><?php echo $buy?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">3、您目前的月收入如何？</td>
-					<td class="editRightTd"><?=$shouru?></td>
+					<td class="editRightTd"><?php echo $shouru?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">4、您是通过什么渠道了解客来福？</td>
-					<td class="editRightTd"><?=$liaojie?></td>
+					<td class="editRightTd"><?php echo $liaojie?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">5、您在网上获取客来福衣柜、移门相关信息的主要渠道是什么？</td>
-					<td class="editRightTd"><?=$wangshang?></td>
+					<td class="editRightTd"><?php echo $wangshang?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">6、您选购衣柜、移门喜欢通过哪些渠道获取产品信息？</td>
-					<td class="editRightTd"><?=$xuangou?></td>
+					<td class="editRightTd"><?php echo $xuangou?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">7、购买家具谁说的话算数儿？</td>
-					<td class="editRightTd"><?=$shuangshu?></td>
+					<td class="editRightTd"><?php echo $shuangshu?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">8、您会在什么时候购买衣柜、移门呢？</td>
-					<td class="editRightTd"><?=$shihou?></td>
+					<td class="editRightTd"><?php echo $shihou?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">9、您喜欢哪种类型的衣柜、移门？</td>
-					<td class="editRightTd"><?=$leixing?></td>
+					<td class="editRightTd"><?php echo $leixing?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">10、在选购衣柜、移门时，您最注视的问题是？</td>
-					<td class="editRightTd"><?=$zhushi?></td>
+					<td class="editRightTd"><?php echo $zhushi?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">11、喜欢布置家里的哪个空间？</td>
-					<td class="editRightTd"><?=$kongjiang?></td>
+					<td class="editRightTd"><?php echo $kongjiang?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">12、喜欢什么材质的家具？</td>
-					<td class="editRightTd"><?=$caizhi?></td>
+					<td class="editRightTd"><?php echo $caizhi?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">留言IP</td>
-					<td class="editRightTd"><?=$ip?></td>
+					<td class="editRightTd"><?php echo $ip?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">留言时间</td>
-					<td class="editRightTd"><?=$create_time?></td>
+					<td class="editRightTd"><?php echo $create_time?></td>
 				</tr>
 			</form>
 		</table>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

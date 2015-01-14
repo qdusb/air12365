@@ -1,4 +1,4 @@
-<?
+<?php
 //菜单
 
 require(dirname(__FILE__) . "/init.php");
@@ -47,7 +47,7 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 							<td height="10"></td>
 						</tr>
 					</table>
-                    <?
+                    <?php
                     $sql = "select id, name, state from info_class where id like '" . CLASS_SPACE . "' order by sortnum asc";
 					$rst = $db->query($sql);
 					while ($row = $db->fetch_array($rst))
@@ -58,14 +58,14 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 					?>
                             <table width="150" border="0" cellspacing="0" cellpadding="0">
                                 <tr height="22">
-                                    <td background="images/menu_bt.jpg" style="padding-left:30px"><a href="javascript:void(0)" onClick="expand(<?=$i?>)" class="menuParent"><?=$row["name"]?></a></td>
+                                    <td background="images/menu_bt.jpg" style="padding-left:30px"><a href="javascript:void(0)" onClick="expand(<?php echo $i?>)" class="menuParent"><?php echo $row["name"]?></a></td>
                                 </tr>
                                 <tr height="4">
                                     <td></td>
                                 </tr>
                             </table>
-                            <table id="child<?=$i?>" width="150" border="0" cellspacing="0" cellpadding="0" style="display:<?=($row["id"] == $menu_id) ? "block" : "none"?>">
-								<?
+                            <table id="child<?php echo $i?>" width="150" border="0" cellspacing="0" cellpadding="0" style="display:<?php echo ($row["id"] == $menu_id) ? "block" : "none"?>">
+								<?php
 								$sql  = "select id, name from info_class where id like '" . $row["id"] . CLASS_SPACE . "' order by sortnum asc";
 								$rst2 = $db->query($sql);
 								while ($row2 = $db->fetch_array($rst2))
@@ -75,9 +75,9 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 								?>
                                         <tr height="20">
                                             <td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
-                                            <td><a href="info_list.php?class_id=<?=$row2["id"]?>" class="menuChild" target="main"><?=$row2["name"]?></a></td>
+                                            <td><a href="info_list.php?class_id=<?php echo $row2["id"]?>" class="menuChild" target="main"><?php echo $row2["name"]?></a></td>
                                         </tr>
-                                <?
+                                <?php
 									}
                                 }
 
@@ -86,43 +86,43 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
                                 ?>
                                     <tr height="20">
                                         <td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
-                                        <?
+                                        <?php
                                         if ($row["state"] == 1)
 										{
 										?>
-                                        	<td><a href="second_class_list.php?class_id=<?=$row["id"]?>" class="menuChild" target="main">分类管理</a></td>
-                                        <?
+                                        	<td><a href="second_class_list.php?class_id=<?php echo $row["id"]?>" class="menuChild" target="main">分类管理</a></td>
+                                        <?php
                                         }
 										else
 										{
 										?>
-                                            <td><a href="second_class_list.php?class_id=<?=$row["id"]?>" class="menuChild" target="main"><font color="#FF0000">分类管理</font></a></td>
-										<?
+                                            <td><a href="second_class_list.php?class_id=<?php echo $row["id"]?>" class="menuChild" target="main"><font color="#FF0000">分类管理</font></a></td>
+										<?php
                                         }
                                         ?>
                                     </tr>
-                                <?
+                                <?php
                                 }
                                 ?>
                                 <tr height="4">
                                     <td colspan="2"></td>
                                 </tr>
                             </table>
-					<?
+					<?php
 						}
                     }
 					$i++;
 					?>
                         <table width="150" border="0" cellspacing="0" cellpadding="0">
                             <tr height="22">
-                                <td background="images/menu_bt.jpg" style="padding-left:30px"><a href="javascript:void(0)" onClick="expand(<?=$i?>)" class="menuParent">高级管理</a></td>
+                                <td background="images/menu_bt.jpg" style="padding-left:30px"><a href="javascript:void(0)" onClick="expand(<?php echo $i?>)" class="menuParent">高级管理</a></td>
                             </tr>
                             <tr height="4">
                                 <td></td>
                             </tr>
                         </table>
-                        <table id="child<?=$i?>" width="150" border="0" cellspacing="0" cellpadding="0" style="DISPLAY:none">
-                        	<?
+                        <table id="child<?php echo $i?>" width="150" border="0" cellspacing="0" cellpadding="0" style="DISPLAY:none">
+                        	<?php
 							$sql = "select id, name, default_file from advanced where state=1 order by sortnum asc";
 							$rst = $db->query($sql);
 							while ($row = $db->fetch_array($rst))
@@ -131,14 +131,14 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 							?>
                                     <tr height="20">
                                         <td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
-                                        <td><a href="<?=$row["default_file"]?>" class="menuChild" target="main"><?=$row["name"]?></a></td>
+                                        <td><a href="<?php echo $row["default_file"]?>" class="menuChild" target="main"><?php echo $row["name"]?></a></td>
                                     </tr>
-							<? }?>
+							<?php }?>
                             <tr height="4">
                                 <td colspan="2"></td>
                             </tr>
                         </table>
-					<?
+					<?php
 
                     if ($session_admin_grade == ADMIN_HIDDEN || $session_admin_grade == ADMIN_SYSTEM)
 					{
@@ -146,13 +146,13 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 					?>
                         <table width="150" border="0" cellspacing="0" cellpadding="0">
                             <tr height="22">
-                                <td background="images/menu_bt.jpg" style="padding-left:30px"><a href="javascript:void(0)" onClick="expand(<?=$i?>)" class="menuParent">系统管理</a></td>
+                                <td background="images/menu_bt.jpg" style="padding-left:30px"><a href="javascript:void(0)" onClick="expand(<?php echo $i?>)" class="menuParent">系统管理</a></td>
                             </tr>
                             <tr height="4">
                                 <td></td>
                             </tr>
                         </table>
-                        <table id="child<?=$i?>" width="150" border="0" cellspacing="0" cellpadding="0" style="DISPLAY:none">
+                        <table id="child<?php echo $i?>" width="150" border="0" cellspacing="0" cellpadding="0" style="DISPLAY:none">
 							<tr height="20">
 								<td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
 								<td><a href="admin_list.php" class="menuChild" target="main">管理员列表</a></td>
@@ -161,7 +161,7 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
                                 <td colspan="2"></td>
                             </tr>
                         </table>
-					<?
+					<?php
                     }
 
                     if ($session_admin_grade == ADMIN_HIDDEN)
@@ -170,13 +170,13 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 					?>
                         <table width="150" border="0" cellspacing="0" cellpadding="0">
                             <tr height="22">
-                                <td background="images/menu_bt.jpg" style="padding-left:30px"><a href="javascript:void(0)" onClick="expand(<?=$i?>)" class="menuParent">隐藏管理</a></td>
+                                <td background="images/menu_bt.jpg" style="padding-left:30px"><a href="javascript:void(0)" onClick="expand(<?php echo $i?>)" class="menuParent">隐藏管理</a></td>
                             </tr>
                             <tr height="4">
                                 <td></td>
                             </tr>
                         </table>
-                        <table id="child<?=$i?>" width="150" border="0" cellspacing="0" cellpadding="0" style="DISPLAY:none">
+                        <table id="child<?php echo $i?>" width="150" border="0" cellspacing="0" cellpadding="0" style="DISPLAY:none">
                             <tr height="20">
                                 <td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
                                 <td><a href="base_class_list.php" class="menuChild" target="main">一级分类管理</a></td>
@@ -189,7 +189,7 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
                                 <td colspan="2"></td>
                             </tr>
                         </table>
-					<?
+					<?php
                     }
 					?>
 					<table width="150" border="0" cellspacing="0" cellpadding="0">
@@ -214,7 +214,7 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 				<td bgcolor="#D1E6F7" width="1"></td>
 			</tr>
 		</table>
-		<?
+		<?php
         $db->close();
 		?>
 	</body>

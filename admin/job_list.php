@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -63,11 +63,11 @@ if ($id != "")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>&nbsp;
-					<a href="<?=$editUrl?>">[增加]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
+					<a href="<?php echo $editUrl?>">[增加]</a>&nbsp;
 				</td>
 				<td align="right">
-					<?
+					<?php
 					//设置每页数
 					$page_size = DEFAULT_PAGE_SIZE;
 					//总记录数
@@ -92,7 +92,7 @@ if ($id != "")
 					<td width="8%">状态</td>
 					<td width="8%">操作</td>
 				</tr>
-				<?
+				<?php
 				$sql = "select id, sortnum, name, email, state from job order by sortnum desc";
 				$sql .= " limit " . ($page - 1) * $page_size . ", " . $page_size;
 				$rst = $db->query($sql);
@@ -100,12 +100,12 @@ if ($id != "")
 				{
 					$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 				?>
-					<tr class="<?=$css?>">
-						<td><?=$row["sortnum"]?></td>
-						<td><a href="<?=$editUrl?>&id=<?=$row["id"]?>"><?=$row["name"]?></a></td>
-						<td><?=$row["email"]?></td>
+					<tr class="<?php echo $css?>">
+						<td><?php echo $row["sortnum"]?></td>
+						<td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["name"]?></a></td>
+						<td><?php echo $row["email"]?></td>
 						<td>
-							<?
+							<?php
 							switch ($row["state"])
 							{
 								case 0:
@@ -120,17 +120,17 @@ if ($id != "")
 							}
 							?>
 						</td>
-						<td><a href="<?=$listUrl?>&id=<?=$row["id"]?>" onClick="return del();">删除</a></td>
+						<td><a href="<?php echo $listUrl?>&id=<?php echo $row["id"]?>" onClick="return del();">删除</a></td>
 					</tr>
-				<?
+				<?php
 				}
 				?>
 				<tr class="listFooterTr">
-					<td colspan="10"><?=$page_str?></td>
+					<td colspan="10"><?php echo $page_str?></td>
 				</tr>
 			</form>
 		</table>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

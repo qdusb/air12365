@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -147,13 +147,13 @@ else
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr class="position">
-				<td class="position">当前位置: 管理中心 -&gt; <?echo $class_name?> -&gt; 新增/编辑</td>
+				<td class="position">当前位置: 管理中心 -&gt; <?phpecho $class_name?> -&gt; 新增/编辑</td>
 			</tr>
 		</table>
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>
+					<a href="<?php echo $listUrl?>">[返回列表]</a>
 				</td>
 			</tr>
 		</table>
@@ -166,21 +166,21 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">排列序号</td>
 					<td class="editRightTd">
-						<input type="text" name="sortnum" value="<?=$sortnum?>" maxlength="10" size="5">
+						<input type="text" name="sortnum" value="<?php echo $sortnum?>" maxlength="10" size="5">
 					</td>
 				</tr>
 
 				<tr class="editTr">
 					<td class="editLeftTd">状态</td>
 					<td class="editRightTd">
-						<input type="radio" name="state" value="1"<? if ($state == 1) echo " checked"?>>显示
-						<input type="radio" name="state" value="0"<? if ($state == 0) echo " checked"?>>不显示
+						<input type="radio" name="state" value="1"<?php if ($state == 1) echo " checked"?>>显示
+						<input type="radio" name="state" value="0"<?php if ($state == 0) echo " checked"?>>不显示
 					</td>
 				</tr>
 
 				<tr class="editTr">
 					<td class="editLeftTd">杂志名称</td>
-					<td class="editRightTd"><input type="text" value="<?=$name?>" name="name" maxlength="100" size="50"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $name?>" name="name" maxlength="100" size="50"></td>
 				</tr>
 
 			   
@@ -188,12 +188,12 @@ else
 						<td class="editLeftTd">缩略图</td>
 						<td class="editRightTd">
 							<input type="file" name="pic" size="40">
-							<?
+							<?php
 							if ($pic != "")
 							{
 							?>
 								<input type="checkbox" name="del_pic" value="1"> 删除现有图片
-							<?
+							<?php
 							}
 							?>
 						</td>
@@ -207,7 +207,7 @@ else
 			</form>
 		</table>
 		<script type="text/javascript">document.form1.title.focus();</script>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

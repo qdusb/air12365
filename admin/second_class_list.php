@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -110,14 +110,14 @@ if ($id != "")
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr class="position">
-				<td class="position">当前位置: 管理中心 -&gt; <?=$sup_class_name?> -&gt; 二级分类管理</td>
+				<td class="position">当前位置: 管理中心 -&gt; <?php echo $sup_class_name?> -&gt; 二级分类管理</td>
 			</tr>
 		</table>
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>&nbsp;
-					<a href="<?=$editUrl?>">[增加]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
+					<a href="<?php echo $editUrl?>">[增加]</a>&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -125,46 +125,46 @@ if ($id != "")
 			<tr class="listHeaderTr">
 				<td>序号</td>
 				<td>分类名称</td>
-                <?
+                <?php
                 if ($sub_pic == 1)
 				{
 				?>
                     <td>图片</td>
-                <?
+                <?php
                 }
 				?>
                 <td>记录状态</td>
-                <?
+                <?php
                 if ($max_level > 2)
 				{
 				?>
                 	<td>子类管理</td>
-                <?
+                <?php
                 }
 				?>
 				<td>删除</td>
 			</tr>
-			<?
+			<?php
 			$sql = "select id, sortnum, name, info_state, pic, has_sub, state from info_class where id like '" . $class_id . CLASS_SPACE . "' order by sortnum asc";
 			$rst = $db->query($sql);
 			while ($row = $db->fetch_array($rst))
 			{
 				@$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 			?>
-				<tr class="<?=$css?>">
-					<td><?=$row["sortnum"]?></td>
-					<td><a href="<?=$editUrl?>&id=<?=$row["id"]?>"><?=$row["name"]?></a></td>
-					<?
+				<tr class="<?php echo $css?>">
+					<td><?php echo $row["sortnum"]?></td>
+					<td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["name"]?></a></td>
+					<?php
                     if ($sub_pic == 1)
                     {
                     ?>
                     	<td>
-                        	<?
+                        	<?php
 							if (!empty($row["pic"]))
 							{
 							?>
-								<a href="<?=UPLOAD_PATH_FOR_ADMIN . $row["pic"]?>" target="_blank">图片</a>
-							<?
+								<a href="<?php echo UPLOAD_PATH_FOR_ADMIN . $row["pic"]?>" target="_blank">图片</a>
+							<?php
 							}
 							else
 							{
@@ -172,11 +172,11 @@ if ($id != "")
 							}
 							?>
                         </td>
-                    <?
+                    <?php
                     }
 					?>
                     <td>
-                    	<?
+                    	<?php
                         switch ($row["info_state"])
 						{
 							case "content":
@@ -200,51 +200,51 @@ if ($id != "")
 						}
 						?>
                     </td>
-					<?
+					<?php
                     if ($max_level > 2)
                     {
                     ?>
                         <td>
-						<?
+						<?php
                         if ($row["has_sub"] == 1)
                         {
                         ?>
-                            <a href="third_class_list.php?class_id=<?=$row["id"]?>" title="管理 <?=$row["name"]?> 子类">管理</a>
-                        <?
+                            <a href="third_class_list.php?class_id=<?php echo $row["id"]?>" title="管理 <?php echo $row["name"]?> 子类">管理</a>
+                        <?php
                         }
                         ?>
                         </td>
-                    <?
+                    <?php
                     }
 					?>
 					<td>
-                    	<?
+                    	<?php
                         if ($row["state"] == 1 || $session_admin_grade == ADMIN_HIDDEN)
 						{
 							if ($row["state"] == 1)
 							{
 						?>
-                    			<a href="<?=$listUrl?>&id=<?=$row["id"]?>" onClick="return del();">删除</a>
-                        <?
+                    			<a href="<?php echo $listUrl?>&id=<?php echo $row["id"]?>" onClick="return del();">删除</a>
+                        <?php
 							}
 							else
 							{
 						?>
-                        		<a href="<?=$listUrl?>&id=<?=$row["id"]?>" onClick="return del();"><font color="#FF0000">删除</font></a>
-						<?
+                        		<a href="<?php echo $listUrl?>&id=<?php echo $row["id"]?>" onClick="return del();"><font color="#FF0000">删除</font></a>
+						<?php
 							}
                         }
 						?>
                     </td>
 				</tr>
-			<?
+			<?php
 			}
 			?>
 			<tr class="listFooterTr">
 				<td colspan="10"></td>
 			</tr>
 		</table>
-		<?
+		<?php
         $db->close();
 		?>
 	</body>

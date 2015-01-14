@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -164,7 +164,7 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>
+					<a href="<?php echo $listUrl?>">[返回列表]</a>
 				</td>
 			</tr>
 		</table>
@@ -176,54 +176,54 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">是否显示</td>
 					<td class="editRightTd">
-						<input type="radio" name="state" value="0"<? if ($state == 0) echo " checked";?>>不显示
-						<input type="radio" name="state" value="1"<? if ($state == 1) echo " checked";?>>显示
+						<input type="radio" name="state" value="0"<?php if ($state == 0) echo " checked";?>>不显示
+						<input type="radio" name="state" value="1"<?php if ($state == 1) echo " checked";?>>显示
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">广告类型</td>
 					<td class="editRightTd">
-						<input type="radio" name="mode" value="popup"<? if ($mode == "popup") echo " checked";?>>弹出广告
-						<input type="radio" name="mode" value="float"<? if ($mode == "float") echo " checked";?>>漂浮广告
-						<input type="radio" name="mode" value="hangL"<? if ($mode == "hangL") echo " checked";?>>左侧门帘
-						<input type="radio" name="mode" value="hangR"<? if ($mode == "hangR") echo " checked";?>>右侧门帘
-						<input type="radio" name="mode" value="hangLR"<? if ($mode == "hangLR") echo " checked";?>>左右门帘
-						<input type="radio" name="mode" value="bigScreen"<? if ($mode == "bigScreen") echo " checked";?>>拉屏广告
+						<input type="radio" name="mode" value="popup"<?php if ($mode == "popup") echo " checked";?>>弹出广告
+						<input type="radio" name="mode" value="float"<?php if ($mode == "float") echo " checked";?>>漂浮广告
+						<input type="radio" name="mode" value="hangL"<?php if ($mode == "hangL") echo " checked";?>>左侧门帘
+						<input type="radio" name="mode" value="hangR"<?php if ($mode == "hangR") echo " checked";?>>右侧门帘
+						<input type="radio" name="mode" value="hangLR"<?php if ($mode == "hangLR") echo " checked";?>>左右门帘
+						<input type="radio" name="mode" value="bigScreen"<?php if ($mode == "bigScreen") echo " checked";?>>拉屏广告
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">广告文件</td>
 					<td class="editRightTd">
 						<input type="file" name="pic" size="40">
-						<?
+						<?php
 						if (!empty($pic))
 						{
 						?>
 							<input type="checkbox" name="del_pic" value="1"> 删除现有图片
-						<?
+						<?php
 						}
 						?>
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">标题名称</td>
-					<td class="editRightTd"><input type="text" value="<?=$title?>" name="title" maxlength="50" size="50"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $title?>" name="title" maxlength="50" size="50"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">链接网址</td>
-					<td class="editRightTd"><input type="text" value="<?=$url?>" name="url" maxlength="100" size="70"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $url?>" name="url" maxlength="100" size="70"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">宽度</td>
-					<td class="editRightTd"><input type="text" value="<?=$width?>" name="width" maxlength="5" size="10"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $width?>" name="width" maxlength="5" size="10"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">高度</td>
-					<td class="editRightTd"><input type="text" value="<?=$height?>" name="height" maxlength="5" size="10"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $height?>" name="height" maxlength="5" size="10"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">拉屏时间</td>
-					<td class="editRightTd"><input type="text" value="<?=$time?>" name="time" maxlength="3" size="6"> 秒</td>
+					<td class="editRightTd"><input type="text" value="<?php echo $time?>" name="time" maxlength="3" size="6"> 秒</td>
 				</tr>
 				<tr class="editFooterTr">
 					<td class="editFooterTd" colSpan="2">
@@ -234,7 +234,7 @@ else
 			</form>
 		</table>
 		<script type="text/javascript">document.form1.title.focus();</script>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

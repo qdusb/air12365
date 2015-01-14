@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -107,13 +107,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>&nbsp;
-					<a href="<?=$editUrl?>">[增加]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
+					<a href="<?php echo $editUrl?>">[增加]</a>&nbsp;
 					<a href="javascript:reverseCheck(document.form1.ids);">[反向选择]</a>&nbsp;
 					<a href="javascript:if(delCheck(document.form1.ids)) {document.form1.action.value = 'delete';document.form1.submit();}">[删除]</a>&nbsp;
 				</td>
 				<td align="right">
-					<?
+					<?php
 					//设置每页数
 				   $page_size = DEFAULT_PAGE_SIZE;
 					//总记录数
@@ -140,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					<td width="20%">电话</td>
 					<td width="20%">部门</td>
 				</tr>
-				<?
+				<?php
 				$sql = "select * from staff order by sortnum asc";
 				$sql .= " limit " . ($page - 1) * $page_size . ", " . $page_size;
 				$rst = $db->query($sql);
@@ -150,12 +150,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 				?>
 					
-					<tr class="<?=$css?>">
-						<td><input type="checkbox" id="ids" name="ids[]" value="<?=$row["id"]?>"></td>
-						<td><?=$row["sortnum"]?></td>
-						<td><a href="<?=$editUrl."?id=".$row["id"]?>"><?=$row["name"]?></a></td>
+					<tr class="<?php echo $css?>">
+						<td><input type="checkbox" id="ids" name="ids[]" value="<?php echo $row["id"]?>"></td>
+						<td><?php echo $row["sortnum"]?></td>
+						<td><a href="<?php echo $editUrl."?id=".$row["id"]?>"><?php echo $row["name"]?></a></td>
 						<td>
-						<?
+						<?php
 						if(empty($row['pic']))
 						{
 							echo "无头像";
@@ -167,15 +167,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 						}
 						?>
 						</td>
-						<td><?=$row["sex"]?></td>
-						<td><?=$row["birthday"]?></td>
-						<td><?=$row["tel"]?></td>
-						<td><?=$row["depart"]?></td>
-				<?
+						<td><?php echo $row["sex"]?></td>
+						<td><?php echo $row["birthday"]?></td>
+						<td><?php echo $row["tel"]?></td>
+						<td><?php echo $row["depart"]?></td>
+				<?php
 				}
 				?>
 				<tr class="listFooterTr">
-					<td colspan="10"><?=$page_str?></td>
+					<td colspan="10"><?php echo $page_str?></td>
 				</tr>
 				 <tr class="listFooterTr">
 					<td colspan="2" align="center">导入员工表格：</td>
@@ -189,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			  
 			</form>
 		</table>
-		<?
+		<?php
 		function readExcel($file,$db)
 		{ 	
 			Read_Excel_File($file,$return);

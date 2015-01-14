@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -197,7 +197,7 @@ else
 		<script type="text/javascript">
 		function check(form)
 		{
-			<?
+			<?php
 			//添加帐号时
 			if ($id < 1)
 			{
@@ -208,7 +208,7 @@ else
 					form.name.focus();
 					return false;
 				}
-			<?
+			<?php
 			}
 			?>
 
@@ -235,7 +235,7 @@ else
 					return false;
 				}
 			}
-			<?
+			<?php
 			if ($id < 1)
 			{
 			?>
@@ -245,7 +245,7 @@ else
 					form.pass.focus();
 					return false;
 				}
-			<?
+			<?php
 			}
 			?>
 
@@ -262,7 +262,7 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>
+					<a href="<?php echo $listUrl?>">[返回列表]</a>
 				</td>
 			</tr>
 		</table>
@@ -274,7 +274,7 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">登陆帐号</td>
 					<td class="editRightTd">
-                    	<?
+                    	<?php
                         if ($id > 0)
 						{
 							echo $name;
@@ -283,14 +283,14 @@ else
 						{
 						?>
                         	<input type="text" name="name" value="" size="30" maxlength="50">
-                        <?
+                        <?php
                         }
 						?>
                     </td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">真实姓名</td>
-					<td class="editRightTd"><input type="text" name="realname" value="<?=$realname?>" size="30" maxlength="20"></td>
+					<td class="editRightTd"><input type="text" name="realname" value="<?php echo $realname?>" size="30" maxlength="20"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">密码</td>
@@ -303,15 +303,15 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">管理权限</td>
 					<td class="editRightTd">
-                        <input type="radio" name="grade" value="7"<? if ($grade == 7) echo " checked";?>>分销商管理员
-                        <input type="radio" name="grade" value="8"<? if ($grade == 8) echo " checked";?>>系统管理员
+                        <input type="radio" name="grade" value="7"<?php if ($grade == 7) echo " checked";?>>分销商管理员
+                        <input type="radio" name="grade" value="8"<?php if ($grade == 8) echo " checked";?>>系统管理员
 					</td>
 				</tr>
                 <tr class="editTr">
 					<td class="editLeftTd">状态</td>
 					<td class="editRightTd">
-                        <input type="radio" name="state" value="0"<? if ($state == 0) echo " checked";?>>锁定
-                        <input type="radio" name="state" value="1"<? if ($state == 1) echo " checked";?>>正常
+                        <input type="radio" name="state" value="0"<?php if ($state == 0) echo " checked";?>>锁定
+                        <input type="radio" name="state" value="1"<?php if ($state == 1) echo " checked";?>>正常
                     </td>
                 </tr>
                 <tr class="editTr">
@@ -329,12 +329,12 @@ else
 				</tr>
 			</form>
 		</table>
-        <?
+        <?php
         if ($id < 1)
 		{
 		?>
 			<script type="text/javascript">document.form1.name.focus();</script>
-		<?
+		<?php
         }
 
 		$db->close();

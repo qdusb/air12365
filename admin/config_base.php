@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -177,39 +177,39 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">公司名称</td>
 					<td class="editRightTd">
-						<input type="text" name="name" value="<?=$name?>" size="50" maxlength="100">
+						<input type="text" name="name" value="<?php echo $name?>" size="50" maxlength="100">
 					</td>
 				</tr>
               	<tr class="editTr">
 					<td class="editLeftTd">公司地址</td>
 					<td class="editRightTd">
-						<input type="text" name="address2" value="<?=$address2?>" size="50" maxlength="100">
+						<input type="text" name="address2" value="<?php echo $address2?>" size="50" maxlength="100">
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">网站标题</td>
 					<td class="editRightTd">
-						<input type="text" name="title" value="<?=$title?>" size="50" maxlength="100">
+						<input type="text" name="title" value="<?php echo $title?>" size="50" maxlength="100">
 					</td>
 				</tr>
                 
 				<tr class="editTr">
 					<td class="editLeftTd">ICP备案号</td>
 					<td class="editRightTd">
-						<input type="text" name="icp" value="<?=$icp?>" size="30" maxlength="30">
+						<input type="text" name="icp" value="<?php echo $icp?>" size="30" maxlength="30">
 					</td>
 				</tr>
                 
 				<tr class="editTr">
 					<td class="editLeftTd">网站关键字</td>
 					<td class="editRightTd" style="padding:10px;">
-						<input type="text" name="keyword" value="<?=$keyword?>" size="100" maxlength="200">
+						<input type="text" name="keyword" value="<?php echo $keyword?>" size="100" maxlength="200">
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">网站描述</td>
 					<td class="editRightTd" style="padding:10px;">
-						<input type="text" name="description" value="<?=$description?>" size="100" maxlength="200">
+						<input type="text" name="description" value="<?php echo $description?>" size="100" maxlength="200">
 					</td>
 				</tr>
                 <tr class="editTr">
@@ -227,7 +227,7 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">Javascript 代码</td>
 					<td class="editRightTd" style="padding:10px;">
-						<textarea name="javascript" cols="105" rows="5"><?=$javascript?></textarea>
+						<textarea name="javascript" cols="105" rows="5"><?php echo $javascript?></textarea>
 					</td>
 				</tr>
 				<tr class="editTr">

@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -82,7 +82,7 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[返回列表]</a>&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -93,65 +93,65 @@ else
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">序号</td>
-                    <td class="editRightTd"><?=$sortnum?></td>
+                    <td class="editRightTd"><?php echo $sortnum?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">姓名</td>
-                    <td class="editRightTd"><?=$name?></td>
+                    <td class="editRightTd"><?php echo $name?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">性别</td>
-                    <td class="editRightTd"><?=$sex?></td>
+                    <td class="editRightTd"><?php echo $sex?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">学历</td>
-                    <td class="editRightTd"><?=$edu?></td>
+                    <td class="editRightTd"><?php echo $edu?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">出生年月</td>
-                    <td class="editRightTd"><?=$birth?></td>
+                    <td class="editRightTd"><?php echo $birth?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">电话/传真</td>
-                    <td class="editRightTd"><?=$tel?></td>
+                    <td class="editRightTd"><?php echo $tel?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">电子邮箱</td>
-                    <td class="editRightTd"><?=$email?></td>
+                    <td class="editRightTd"><?php echo $email?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">担任职位</td>
-                    <td class="editRightTd"><?=$job_post?></td>
+                    <td class="editRightTd"><?php echo $job_post?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">民族</td>
-                    <td class="editRightTd"><?=$tribe?></td>
+                    <td class="editRightTd"><?php echo $tribe?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">邮编</td>
-                    <td class="editRightTd"><?=$zip_code?></td>
+                    <td class="editRightTd"><?php echo $zip_code?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">公司名称</td>
-                    <td class="editRightTd"><?=$company?></td>
+                    <td class="editRightTd"><?php echo $company?></td>
                 </tr>
 
                 <tr class="editTr">
                     <td class="editLeftTd">公司地址</td>
-                    <td class="editRightTd"><?=$address?></td>
+                    <td class="editRightTd"><?php echo $address?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">申请职位意向</td>
-                    <td class="editRightTd"><?=$job_intention?></td>
+                    <td class="editRightTd"><?php echo $job_intention?></td>
                 </tr>
                
                 <tr class="editTr">
                     <td class="editLeftTd">申请时间</td>
-                    <td class="editRightTd"><?=$create_time?></td>
+                    <td class="editRightTd"><?php echo $create_time?></td>
                 </tr>
 			</form>
 		</table>
-		<?
+		<?php
         $db->close();
 		?>
 	</body>

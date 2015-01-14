@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -51,10 +51,10 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-                	<a href="<?=$backUrl?>">[返回]</a>
-					<a href="<?=$listUrl?>">[刷新列表]</a>
+                	<a href="<?php echo $backUrl?>">[返回]</a>
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>
 				</td>
-                <td align="right">登录帐号：<?=$name?> 真实姓名：<?=$realname?> 登录次数：<?=$login_count?></td>
+                <td align="right">登录帐号：<?php echo $name?> 真实姓名：<?php echo $realname?> 登录次数：<?php echo $login_count?></td>
 			</tr>
 		</table>
 		<table width="100%" border="0" cellspacing="1" cellpadding="0" align="center" class="listTable">
@@ -63,7 +63,7 @@ else
 				<td>登录IP</td>
 				<td>登录时间</td>
 			</tr>
-			<?
+			<?php
 			//设置每页数
 			$page_size   = DEFAULT_PAGE_SIZE;
 			//总记录数
@@ -83,20 +83,20 @@ else
 			{
 				$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 			?>
-				<tr class="<?=$css?>">
-					<td><?=$i?></td>
-					<td><?=$row["login_ip"]?></td>
-					<td><?=$row["login_time"]?></td>
+				<tr class="<?php echo $css?>">
+					<td><?php echo $i?></td>
+					<td><?php echo $row["login_ip"]?></td>
+					<td><?php echo $row["login_time"]?></td>
 				</tr>
-			<?
+			<?php
 				$i++;
 			}
 			?>
             <tr class="listFooterTr">
-                <td colspan="10"><?=$page_str?></td>
+                <td colspan="10"><?php echo $page_str?></td>
             </tr>
 		</table>
-		<?
+		<?php
         $db->close();
 		?>
 	</body>

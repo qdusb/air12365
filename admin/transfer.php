@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			</tr>
 			
 			<tr>
-				<td height="30" align="left">　<a href="<?=$listUrl."?class_id=".$class_id."&mude_class=".$mude_class?>">[刷新列表]</a></td>
+				<td height="30" align="left">　<a href="<?php echo $listUrl."?class_id=".$class_id."&mude_class=".$mude_class?>">[刷新列表]</a></td>
 				<td align="center"><a href="javascript:reverseCheck(document.form1.ids);">[反向选择]</a></td>
 				<td>　　<a href="javascript:document.form1.action.value = 'transfer';document.form1.submit();">[开始转移]</a>&nbsp;</td>
 				<td>　　<a href="javascript:document.form1.action.value = 'copy';document.form1.submit();">[开始复制]</a>&nbsp;</td>
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					<td width="8%">选择栏目：</td>
 					<td  colspan="3" align="left">
 						<select name="info_class" style="width:25%;" onChange="window.location='transfer.php?class_id='+this.options[this.selectedIndex].value">
-						<?
+						<?php
 						$sql = "select id, name from info_class order by id asc";
 						$rst = $db->query($sql);
 						while ($row = $db->fetch_array($rst))
@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					<td width="8%">目标栏目：</td>
 					<td  colspan="3"  align="left">
 						<select name="mude_class" style="width:25%;">
-						<?
+						<?php
 						$sql = "select id, name from info_class order by id asc";
 						$rst = $db->query($sql);
 						while ($row = $db->fetch_array($rst))
@@ -188,25 +188,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					<td width="50%">标题</td>
 					<td>发布时间</td>
 				</tr>
-			   <?
+			   <?php
 					$sql = "select * from info where class_id='$class_id' order by sortnum desc";
 					$rst = $db->query($sql);
 					while ($row = $db->fetch_array($rst))
 					{
 				?>
 				<tr class="listFooterTr">
-				 <td><input type="checkbox" id="ids" name="ids[]" checked value="<?=$row["id"]?>"></td>
-					<td><?=$row['id']?></td>
-					<td><?=$row['title']?></td>
-					<td><?=$row['create_time']?></td>
+				 <td><input type="checkbox" id="ids" name="ids[]" checked value="<?php echo $row["id"]?>"></td>
+					<td><?php echo $row['id']?></td>
+					<td><?php echo $row['title']?></td>
+					<td><?php echo $row['create_time']?></td>
 				</tr>
-				<?
+				<?php
 					}
 				?>
 		 
 		</table>
 		</form> 
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

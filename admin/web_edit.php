@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -106,13 +106,13 @@ else
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr class="position">
-				<td class="position">当前位置: 管理中心 -&gt; <?echo $class_name?> -&gt; 新增/编辑</td>
+				<td class="position">当前位置: 管理中心 -&gt; <?phpecho $class_name?> -&gt; 新增/编辑</td>
 			</tr>
 		</table>
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>
+					<a href="<?php echo $listUrl?>">[返回列表]</a>
 				</td>
 			</tr>
 		</table>
@@ -125,16 +125,16 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">排列序号</td>
 					<td class="editRightTd">
-						<input type="text" name="sortnum" value="<?=$sortnum?>" maxlength="10" size="5">
+						<input type="text" name="sortnum" value="<?php echo $sortnum?>" maxlength="10" size="5">
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">网站名</td>
-					<td class="editRightTd"><input type="text" value="<?=$name?>" name="name" maxlength="100" size="50"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $name?>" name="name" maxlength="100" size="50"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">网站地址</td>
-					<td class="editRightTd"><input type="text" value="<?=$url?>" name="url" maxlength="100" size="50"></textarea></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $url?>" name="url" maxlength="100" size="50"></textarea></td>
 				</tr>
 				   
 			  
@@ -147,7 +147,7 @@ else
 			</form>
 		</table>
 		<script type="text/javascript">document.form1.title.focus();</script>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

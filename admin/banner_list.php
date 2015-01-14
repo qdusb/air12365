@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -89,17 +89,17 @@ if ($id != "")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>
-					<?
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>
+					<?php
 					if($class_add_deny == 0)
 					{
 					?>
-						<a href="<?=$editUrl?>">[增加]</a>
-					<?
+						<a href="<?php echo $editUrl?>">[增加]</a>
+					<?php
 					}
 					?>
 					<select name="select_class" onChange="window.location='?class_id=' + this.options[this.selectedIndex].value;">
-						<?
+						<?php
 						$sql = "select id, name from banner_class order by sortnum asc";
 						$rst = $db->query($sql);
 						while ($row = $db->fetch_array($rst))
@@ -107,21 +107,21 @@ if ($id != "")
 							if ($class_id == $row["id"])
 							{
 						?>
-								<option value="<?echo $row["id"]?>" selected><?echo $row["name"]?></option>
-						<?
+								<option value="<?phpecho $row["id"]?>" selected><?phpecho $row["name"]?></option>
+						<?php
 							}
 							else
 							{
 						?>
-								<option value="<?echo $row["id"]?>"><?echo $row["name"]?></option>
-						<?
+								<option value="<?phpecho $row["id"]?>"><?phpecho $row["name"]?></option>
+						<?php
 							}
 						}
 						?>
 					</select>
 				</td>
 				<td align="right">
-					<?
+					<?php
 					//设置每页数
 					$page_size		= DEFAULT_PAGE_SIZE;
 					//总记录数
@@ -148,16 +148,16 @@ if ($id != "")
                     <td>高度</td>
                     <td>广告文件</td>
                     <td>状态</td>
-					<?
+					<?php
 					if($class_delete_deny == 0)
 					{
 					?>
 						<td>删除</td>
-					<?
+					<?php
 					}
 					?>
                 </tr>
-				<?
+				<?php
 				//列表
 				$sql = "select id, class_id, sortnum, title, url, pic, width, height, state from banner where class_id=$class_id order by sortnum desc";
                 $sql .= " limit " . ($page - 1) * $page_size . ", " . $page_size;
@@ -166,14 +166,14 @@ if ($id != "")
                 {
                 	$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
                 ?>
-                    <tr class="<?=$css?>">
-                       	<td><?=$row["sortnum"]?></td>
-						<td><a href="<?=$editUrl?>&id=<?=$row["id"]?>"><?=$row["title"]?></a></td>
-                        <td><?=$row["width"]?></td>
-                        <td><?=$row["height"]?></td>
-						<td><?=(empty($row["pic"])) ? "无" : "<a href='" . UPLOAD_PATH_FOR_ADMIN . $row["pic"] . "' target='_blank'>图片</a>"?></td>
+                    <tr class="<?php echo $css?>">
+                       	<td><?php echo $row["sortnum"]?></td>
+						<td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["title"]?></a></td>
+                        <td><?php echo $row["width"]?></td>
+                        <td><?php echo $row["height"]?></td>
+						<td><?php echo (empty($row["pic"])) ? "无" : "<a href='" . UPLOAD_PATH_FOR_ADMIN . $row["pic"] . "' target='_blank'>图片</a>"?></td>
 						<td>
-							<?
+							<?php
 							switch ($row["state"])
 							{
 								case 0:
@@ -188,24 +188,24 @@ if ($id != "")
 							}
 							?>
 						</td>
-						<?
+						<?php
 						if($class_delete_deny == 0)
 						{
 						?>
-							<td><a href="<?=$listUrl?>&id=<?=$row["id"]?>" onClick="return del();">删除</a></td>
-						<?
+							<td><a href="<?php echo $listUrl?>&id=<?php echo $row["id"]?>" onClick="return del();">删除</a></td>
+						<?php
 						}
 						?>
 					</tr>
-				<?
+				<?php
                 }
                 ?>
                 <tr class="listFooterTr">
-                    <td colspan="15"><?=$page_str?></td>
+                    <td colspan="15"><?php echo $page_str?></td>
                 </tr>
 			</form>
 		</table>
-		<?
+		<?php
         $db->close();
 		?>
 	</body>

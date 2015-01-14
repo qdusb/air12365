@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -63,10 +63,10 @@ if ($id != "")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
 				</td>
 				<td align="right">
-					<?
+					<?php
 					//设置每页数
 					$page_size = DEFAULT_PAGE_SIZE;
 					//总记录数
@@ -95,7 +95,7 @@ if ($id != "")
 					<td width="5%">状态</td>
 					<td width="5%">操作</td>
 				</tr>
-				<?
+				<?php
 				
 				$sql = "select * from job_apply order by sortnum desc";
 				$sql .= " limit " . ($page - 1) * $page_size . ", " . $page_size;
@@ -104,21 +104,21 @@ if ($id != "")
 				{
 					$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 				?>
-					<tr class="<?=$css?>">
-						<td><?=$row["sortnum"]?></td>
-						<td><a href="<?=$viewUrl?>&id=<?=$row["id"]?>"><?=$row["name"]?></a></td>
-						<?
+					<tr class="<?php echo $css?>">
+						<td><?php echo $row["sortnum"]?></td>
+						<td><a href="<?php echo $viewUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["name"]?></a></td>
+						<?php
 						$sql1 = "select name from job where id=".$row["job_id"];
 						$rst1 = $db->query($sql1);
 						$row1 = $db->fetch_array($rst1);
 						?>
-						<td><?=$row1["name"]?></td>
-						<td><?=$row["major"]?></td>
-						<td><?=$row["phone"]?></td>
-						<td><?=$row["graduate_time"]?></td>
-						<td><?=$row["create_time"]?></td>
+						<td><?php echo $row1["name"]?></td>
+						<td><?php echo $row["major"]?></td>
+						<td><?php echo $row["phone"]?></td>
+						<td><?php echo $row["graduate_time"]?></td>
+						<td><?php echo $row["create_time"]?></td>
 						<td>
-							<?
+							<?php
 							switch ($row["state"])
 							{
 								case 0:
@@ -133,17 +133,17 @@ if ($id != "")
 							}
 							?>
 						</td>
-						<td><a href="<?=$listUrl?>&id=<?=$row["id"]?>" onClick="return del();">删除</a></td>
+						<td><a href="<?php echo $listUrl?>&id=<?php echo $row["id"]?>" onClick="return del();">删除</a></td>
 					</tr>
-				<?
+				<?php
 				}
 				?>
 				<tr class="listFooterTr">
-					<td colspan="10"><?=$page_str?></td>
+					<td colspan="10"><?php echo $page_str?></td>
 				</tr>
 			</form>
 		</table>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -76,7 +76,7 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[返回列表]</a>&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -84,43 +84,43 @@ else
 			<form name="form1" action="" method="post">
                 <tr class="editTr">
                     <td class="editLeftTd">序号</td>
-                    <td class="editRightTd"><?=$sortnum?></td>
+                    <td class="editRightTd"><?php echo $sortnum?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">姓名</td>
-                    <td class="editRightTd"><?=$name?></td>
+                    <td class="editRightTd"><?php echo $name?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">所在地</td>
-                    <td class="editRightTd"><?=$address?></td>
+                    <td class="editRightTd"><?php echo $address?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">详细地址</td>
-                    <td class="editRightTd"><?=$address1?></td>
+                    <td class="editRightTd"><?php echo $address1?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">联系电话</td>
-                    <td class="editRightTd"><?=$phone?></td>
+                    <td class="editRightTd"><?php echo $phone?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">电子邮箱</td>
-                    <td class="editRightTd"><?=$email?></td>
+                    <td class="editRightTd"><?php echo $email?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">问题内容</td>
-                    <td class="editRightTd"><?=$content?></td>
+                    <td class="editRightTd"><?php echo $content?></td>
                 </tr
                 <tr class="editTr">
                     <td class="editLeftTd">留言IP</td>
-                    <td class="editRightTd"><?=$ip?></td>
+                    <td class="editRightTd"><?php echo $ip?></td>
                 </tr>
                 <tr class="editTr">
                     <td class="editLeftTd">留言时间</td>
-                    <td class="editRightTd"><?=$create_time?></td>
+                    <td class="editRightTd"><?php echo $create_time?></td>
                 </tr>
 			</form>
 		</table>
-		<?
+		<?php
         $db->close();
 		?>
 	</body>

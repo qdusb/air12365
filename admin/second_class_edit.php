@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -254,7 +254,7 @@ else
 					return false;
 				}
 
-				<?
+				<?php
 				if ($sub_pic == 1)
 				{
 				?>
@@ -268,7 +268,7 @@ else
 							return false;
 						}
 					}
-				<?
+				<?php
 				}
 				?>
 
@@ -279,12 +279,12 @@ else
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr class="position">
-				<td class="position">当前位置: 管理中心 -&gt; <?=$sup_class_name?> -&gt; 二级分类管理</td>
+				<td class="position">当前位置: 管理中心 -&gt; <?php echo $sup_class_name?> -&gt; 二级分类管理</td>
 			</tr>
 		</table>
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
-				<td><a href="<?=$listUrl?>">[返回列表]</a></td>
+				<td><a href="<?php echo $listUrl?>">[返回列表]</a></td>
 			</tr>
 		</table>
 		<form name="form1" action="" method="post" enctype="multipart/form-data" onSubmit="return check(this);">
@@ -294,34 +294,34 @@ else
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">排列序号</td>
-					<td class="editRightTd"><input type="text" name="sortnum" value="<?=$sortnum?>" size="10" maxlength="5"></td>
+					<td class="editRightTd"><input type="text" name="sortnum" value="<?php echo $sortnum?>" size="10" maxlength="5"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">分类名称</td>
-					<td class="editRightTd"><input type="text" name="name" value="<?=$name?>" maxlength="50" size="30"></td>
+					<td class="editRightTd"><input type="text" name="name" value="<?php echo $name?>" maxlength="50" size="30"></td>
 				</tr>
                 <tr class="editTr">
 					<td class="editLeftTd">栏目链接</td>
-					<td class="editRightTd"><input type="text" name="en_name" value="<?=$en_name?>" maxlength="200" size="30"></td>
+					<td class="editRightTd"><input type="text" name="en_name" value="<?php echo $en_name?>" maxlength="200" size="30"></td>
 				</tr>
-				<?
+				<?php
 				if ($session_admin_grade == ADMIN_HIDDEN)
 				{
 				?>
 					<tr class="editTr">
 						<td class="editLeftTd">是否允许删除</td>
 						<td class="editRightTd">
-							<input type="radio" name="state" value="1"<? if ($state == 1) echo " checked"?>>允许
-							<input type="radio" name="state" value="0"<? if ($state == 0) echo " checked"?>>拒绝
+							<input type="radio" name="state" value="1"<?php if ($state == 1) echo " checked"?>>允许
+							<input type="radio" name="state" value="0"<?php if ($state == 0) echo " checked"?>>拒绝
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 				else
 				{
 				?>
-					<input type="hidden" name="state" value="<?=$state?>">
-				<?
+					<input type="hidden" name="state" value="<?php echo $state?>">
+				<?php
 				}
 
 				if ($max_level > 2)
@@ -330,17 +330,17 @@ else
 					<tr class="editTr">
 						<td class="editLeftTd">三级分类</td>
 						<td class="editRightTd">
-							<input type="radio" name="has_sub" value="1"<? if ($has_sub == 1) echo " checked"?>>有
-							<input type="radio" name="has_sub" value="0"<? if ($has_sub == 0) echo " checked"?>>无
+							<input type="radio" name="has_sub" value="1"<?php if ($has_sub == 1) echo " checked"?>>有
+							<input type="radio" name="has_sub" value="0"<?php if ($has_sub == 0) echo " checked"?>>无
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 				else
 				{
 				?>
 					<input type="hidden" name="has_sub" value="0">
-				<?
+				<?php
 				}
 
 				if ($sup_info_state == "custom")
@@ -349,20 +349,20 @@ else
 					<tr class="editTr">
 						<td class="editLeftTd">记录状态</td>
 						<td class="editRightTd">
-							<input type="radio" name="info_state" value="content"<? if ($info_state == "content") echo " checked"?>>图文模式
-							<input type="radio" name="info_state" value="list"<? if ($info_state == "list") echo " checked"?>>新闻列表
-							<input type="radio" name="info_state" value="pic"<? if ($info_state == "pic") echo " checked"?>>图片列表
-							<input type="radio" name="info_state" value="pictxt"<? if ($info_state == "pictxt") echo " checked"?>>图文列表
-							<input type="radio" name="info_state" value="custom"<? if ($info_state == "custom") echo " checked"?>>自定义
+							<input type="radio" name="info_state" value="content"<?php if ($info_state == "content") echo " checked"?>>图文模式
+							<input type="radio" name="info_state" value="list"<?php if ($info_state == "list") echo " checked"?>>新闻列表
+							<input type="radio" name="info_state" value="pic"<?php if ($info_state == "pic") echo " checked"?>>图片列表
+							<input type="radio" name="info_state" value="pictxt"<?php if ($info_state == "pictxt") echo " checked"?>>图文列表
+							<input type="radio" name="info_state" value="custom"<?php if ($info_state == "custom") echo " checked"?>>自定义
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 				else
 				{
 				?>
-					<input type="hidden" name="info_state" value="<?=$sup_info_state?>">
-				<?
+					<input type="hidden" name="info_state" value="<?php echo $sup_info_state?>">
+				<?php
 				}
 				if ($sub_pic == 1)
 				{
@@ -371,17 +371,17 @@ else
 						<td class="editLeftTd">图片</td>
 						<td class="editRightTd">
 							<input type="file" name="pic" size="40">
-							<?
+							<?php
 							if (!empty($pic))
 							{
 							?>
 								<input type="checkbox" name="del_pic" value="1"> 删除现有图片
-							<?
+							<?php
 							}
 							?>
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 
 				if ($sub_content == 1)
@@ -389,9 +389,9 @@ else
 				?>
 					<tr class="editTr">
 						<td class="editLeftTd">内容</td>
-						<td class="editRightTd"><textarea name="content"><?=$content;?></textarea></td>
+						<td class="editRightTd"><textarea name="content"><?php echo $content;?></textarea></td>
 					</tr>
-				<?
+				<?php
 				}
 				?>
 				<tr class="editTr">
@@ -409,7 +409,7 @@ else
 			</table>
 		</form>
 		<script type="text/javascript">document.form1.name.focus();</script>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

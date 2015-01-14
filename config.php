@@ -1,4 +1,4 @@
-﻿<?
+﻿<?php
 define("DEBUG", true);
 error_reporting(1);
 
@@ -29,4 +29,3 @@ return $array = array(
 	/*上线后这里的地址要做改动*/
 	'UPLOAD_PATH'	=>	"http://".$_SERVER['HTTP_HOST']."/upload/",
 );
-?>

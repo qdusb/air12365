@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -205,7 +205,7 @@ else
 					return false;
 				}
 
-				if (!/^[1-9][0-9]{<?=CLASS_LENGTH - 1?>}$/.exec(form.id.value))
+				if (!/^[1-9][0-9]{<?php echo CLASS_LENGTH - 1?>}$/.exec(form.id.value))
 				{
 					alert("请输入合法的ID号！");
 					form.id.focus();
@@ -238,7 +238,7 @@ else
 		</table>
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
-				<td><a href="<?=$listUrl?>">[返回列表]</a></td>
+				<td><a href="<?php echo $listUrl?>">[返回列表]</a></td>
 			</tr>
 		</table>
 		<form name="form1" action="" method="post"  enctype="multipart/form-data" onSubmit="return check(this);">
@@ -249,89 +249,89 @@ else
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">ID号</td>
-					<td class="editRightTd"><input type="text" name="id" value="<?=$id?>" size="10" maxlength="20"></td>
+					<td class="editRightTd"><input type="text" name="id" value="<?php echo $id?>" size="10" maxlength="20"></td>
 				</tr>
                 <tr class="editTr">
 					<td class="editLeftTd">序号</td>
-					<td class="editRightTd"><input type="text" name="sortnum" value="<?=$sortnum?>" size="10" maxlength="5"></td>
+					<td class="editRightTd"><input type="text" name="sortnum" value="<?php echo $sortnum?>" size="10" maxlength="5"></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">分类名称</td>
-					<td class="editRightTd"><input type="text" name="name" value="<?=$name?>" maxlength="50" size="30"></td>
+					<td class="editRightTd"><input type="text" name="name" value="<?php echo $name?>" maxlength="50" size="30"></td>
 				</tr>
                 <tr class="editTr">
 					<td class="editLeftTd">分类名称2</td>
-					<td class="editRightTd"><input type="text" name="en_name" value="<?=$en_name?>" maxlength="50" size="30"></td>
+					<td class="editRightTd"><input type="text" name="en_name" value="<?php echo $en_name?>" maxlength="50" size="30"></td>
 				</tr>
                 <tr class="editTr">
 					<td class="editLeftTd">二级分类</td>
 					<td class="editRightTd">
-                        <input type="radio" name="state" value="1"<? if ($state == 1) echo " checked"?>>允许
-                        <input type="radio" name="state" value="0"<? if ($state == 0) echo " checked"?>>拒绝
-                        <input type="checkbox" name="sub_content" value="1"<? if ($sub_content == 1) echo " checked"?>>有内容
-                        <input type="checkbox" name="sub_pic" value="1"<? if ($sub_pic == 1) echo " checked"?>>有图片
+                        <input type="radio" name="state" value="1"<?php if ($state == 1) echo " checked"?>>允许
+                        <input type="radio" name="state" value="0"<?php if ($state == 0) echo " checked"?>>拒绝
+                        <input type="checkbox" name="sub_content" value="1"<?php if ($sub_content == 1) echo " checked"?>>有内容
+                        <input type="checkbox" name="sub_pic" value="1"<?php if ($sub_pic == 1) echo " checked"?>>有图片
                     </td>
 				</tr>
                 <tr class="editTr">
 					<td class="editLeftTd">最大分类层次</td>
 					<td class="editRightTd">
                         <select name="max_level">
-                        	<option value="2"<? if ($max_level == 2) echo " selected"?>>2</option>
-                            <option value="3"<? if ($max_level == 3) echo " selected"?>>3</option>
-                            <option value="4"<? if ($max_level == 4) echo " selected"?>>4</option>
-                            <option value="5"<? if ($max_level == 5) echo " selected"?>>5</option>
-							<option value="6"<? if ($max_level == 6) echo " selected"?>>6</option>
+                        	<option value="2"<?php if ($max_level == 2) echo " selected"?>>2</option>
+                            <option value="3"<?php if ($max_level == 3) echo " selected"?>>3</option>
+                            <option value="4"<?php if ($max_level == 4) echo " selected"?>>4</option>
+                            <option value="5"<?php if ($max_level == 5) echo " selected"?>>5</option>
+							<option value="6"<?php if ($max_level == 6) echo " selected"?>>6</option>
                         </select>
 				    </td>
 				</tr>
                 <tr class="editTr">
 					<td class="editLeftTd">记录状态</td>
 					<td class="editRightTd">
-                        <input type="radio" name="info_state" value="content"<? if ($info_state == "content") echo " checked"?>>图文模式
-                        <input type="radio" name="info_state" value="list"<? if ($info_state == "list") echo " checked"?>>新闻列表
-                        <input type="radio" name="info_state" value="pic"<? if ($info_state == "pic") echo " checked"?>>图片列表
-                        <input type="radio" name="info_state" value="pic"<? if ($info_state == "pictxt") echo " checked"?>>图文列表
-                        <input type="radio" name="info_state" value="custom"<? if ($info_state == "custom") echo " checked"?>>自定义
+                        <input type="radio" name="info_state" value="content"<?php if ($info_state == "content") echo " checked"?>>图文模式
+                        <input type="radio" name="info_state" value="list"<?php if ($info_state == "list") echo " checked"?>>新闻列表
+                        <input type="radio" name="info_state" value="pic"<?php if ($info_state == "pic") echo " checked"?>>图片列表
+                        <input type="radio" name="info_state" value="pic"<?php if ($info_state == "pictxt") echo " checked"?>>图文列表
+                        <input type="radio" name="info_state" value="custom"<?php if ($info_state == "custom") echo " checked"?>>自定义
                     </td>
                 </tr>
                 <tr class="editTr">
 					<td class="editLeftTd">记录设置</td>
 					<td class="editRightTd">
-                        <input type="checkbox" name="hasViews" value="1" <? if ($hasViews == 1) echo "checked"?>> 点击次数
-						<input type="checkbox" name="hasState" value="1" <? if ($hasState == 1) echo "checked"?>> 是否显示
-                        <input type="checkbox" name="hasAuthor" value="1" <? if ($hasAuthor == 1) echo "checked"?>> 文章作者
-						<input type="checkbox" name="hasSource" value="1" <? if ($hasSource == 1) echo "checked"?>> 文章来源
-                        <input type="checkbox" name="hasKeyword" value="1" <? if ($hasKeyword == 1) echo "checked"?>> 关键词
+                        <input type="checkbox" name="hasViews" value="1" <?php if ($hasViews == 1) echo "checked"?>> 点击次数
+						<input type="checkbox" name="hasState" value="1" <?php if ($hasState == 1) echo "checked"?>> 是否显示
+                        <input type="checkbox" name="hasAuthor" value="1" <?php if ($hasAuthor == 1) echo "checked"?>> 文章作者
+						<input type="checkbox" name="hasSource" value="1" <?php if ($hasSource == 1) echo "checked"?>> 文章来源
+                        <input type="checkbox" name="hasKeyword" value="1" <?php if ($hasKeyword == 1) echo "checked"?>> 关键词
                         
 						<br>
 
-						<input type="checkbox" name="hasPic" value="1" <? if ($hasPic == 1) echo "checked"?>> 图片上传
-						<input type="checkbox" name="hasAnnex" value="1" <? if ($hasAnnex == 1) echo "checked"?>> 附件上传
-						<input type="checkbox" name="hasIntro" value="1" <? if ($hasIntro == 1) echo "checked"?>> 简要介绍
-						<input type="checkbox" name="hasContent" value="1" <? if ($hasContent == 1) echo "checked"?>> 详细内容
-						<input type="checkbox" name="hasWebsite" value="1" <? if ($hasWebsite == 1) echo "checked"?>> 链接地址
+						<input type="checkbox" name="hasPic" value="1" <?php if ($hasPic == 1) echo "checked"?>> 图片上传
+						<input type="checkbox" name="hasAnnex" value="1" <?php if ($hasAnnex == 1) echo "checked"?>> 附件上传
+						<input type="checkbox" name="hasIntro" value="1" <?php if ($hasIntro == 1) echo "checked"?>> 简要介绍
+						<input type="checkbox" name="hasContent" value="1" <?php if ($hasContent == 1) echo "checked"?>> 详细内容
+						<input type="checkbox" name="hasWebsite" value="1" <?php if ($hasWebsite == 1) echo "checked"?>> 链接地址
                         <br>
-                        <input type="checkbox" name="hasLevel" value="1" <? if ($hasLevel == 1) echo "checked"?>> 等级设置
-                        <input type="checkbox" name="hasShare" value="1" <? if ($hasShare == 1) echo "checked"?>> 是否分享
+                        <input type="checkbox" name="hasLevel" value="1" <?php if ($hasLevel == 1) echo "checked"?>> 等级设置
+                        <input type="checkbox" name="hasShare" value="1" <?php if ($hasShare == 1) echo "checked"?>> 是否分享
                     </td>
                 </tr>
                 <tr class="editTr">
 						<td class="editLeftTd">图片</td>
 						<td class="editRightTd">
 							<input type="file" name="pic" size="40">
-							<?
+							<?php
 							if (!empty($pic))
 							{
 							?>
 								<input type="checkbox" name="del_pic" value="1"> 删除现有图片
-							<?
+							<?php
 							}
 							?>
 						</td>
 				</tr>
 				<tr class="editTr">
 						<td class="editLeftTd">内容</td>
-						<td class="editRightTd"><textarea name="content"><?=$content;?></textarea></td>
+						<td class="editRightTd"><textarea name="content"><?php echo $content;?></textarea></td>
 					</tr>
 				<tr class="editFooterTr">
 					<td class="editFooterTd" colSpan="2">
@@ -342,7 +342,7 @@ else
 			</table>
 		</form>
 		<script type="text/javascript">document.form1.name.focus();</script>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

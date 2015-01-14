@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -69,8 +69,8 @@ if (!empty($id))
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>&nbsp;
-					<a href="<?=$editUrl?>">[增加]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
+					<a href="<?php echo $editUrl?>">[增加]</a>&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -85,19 +85,19 @@ if (!empty($id))
                 <td width="12%">二级分类</td>
 				<td width="8%">删除</td>
 			</tr>
-			<?
+			<?php
 			$sql = "select id, sortnum, name, info_state, max_level,pic, state from info_class where id like '" . CLASS_SPACE . "' order by sortnum asc";
 			$rst = $db->query($sql);
 			while ($row = $db->fetch_array($rst))
 			{
 				$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 			?>
-				<tr class="<?=$css?>">
-					<td><?=$row["id"]?></td>
-                    <td><?=$row["sortnum"]?></td>
-					<td><a href="<?=$editUrl?>?id=<?=$row["id"]?>"><?=$row["name"]?></a></td>
+				<tr class="<?php echo $css?>">
+					<td><?php echo $row["id"]?></td>
+                    <td><?php echo $row["sortnum"]?></td>
+					<td><a href="<?php echo $editUrl?>?id=<?php echo $row["id"]?>"><?php echo $row["name"]?></a></td>
                     <td>
-                    	<?
+                    	<?php
                         switch ($row["info_state"])
 						{
 							case "content":
@@ -121,32 +121,32 @@ if (!empty($id))
 						}
 						?>
                     </td>
-                    <?
+                    <?php
 					if(empty($row['pic']))
 					{
 					?>
                      <td><a href="">无图片</a></td>
-                    <?
+                    <?php
 					}
 					else
 					{
                     ?>
-                    <td><a href="<?=UPLOAD_PATH_FOR_ADMIN.$row['pic']?>">图片</a></td>
-                   	<?
+                    <td><a href="<?php echo UPLOAD_PATH_FOR_ADMIN.$row['pic']?>">图片</a></td>
+                   	<?php
 					}
 				   	?>
-                    <td><?=$row["max_level"]?></td>
-                    <td><?=($row["state"] == 1) ? "允许": "<font color='#FF6600'>拒绝</font>"?></td>
-					<td><a href="<?=$listUrl?>?id=<?=$row["id"]?>" onClick="return del();">删除</a></td>
+                    <td><?php echo $row["max_level"]?></td>
+                    <td><?php echo ($row["state"] == 1) ? "允许": "<font color='#FF6600'>拒绝</font>"?></td>
+					<td><a href="<?php echo $listUrl?>?id=<?php echo $row["id"]?>" onClick="return del();">删除</a></td>
 				</tr>
-			<?
+			<?php
 			}
 			?>
 			<tr class="listFooterTr">
 				<td colspan="10"></td>
 			</tr>
 		</table>
-		<?
+		<?php
         $db->close();
 		?>
 	</body>

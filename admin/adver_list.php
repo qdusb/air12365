@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -71,8 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>
-					<a href="<?=$editUrl?>">[增加]</a>
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>
+					<a href="<?php echo $editUrl?>">[增加]</a>
 					<a href="javascript:reverseCheck(document.form1.ids);">[反向选择]</a>&nbsp;
 					<a href="javascript:if(delCheck(document.form1.ids)) {document.form1.submit();}">[删除]</a>&nbsp;
 				</td>
@@ -90,18 +90,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					<td width="8%">广告文件</td>
 					<td width="8%">状态</td>
 				</tr>
-				<?
+				<?php
 				$sql = "select id, title, mode, url, width, height, pic, state from adver order by id asc";
 				$rst = $db->query($sql);
 				while ($row = $db->fetch_array($rst))
 				{
 					$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 				?>
-					<tr class="<?=$css?>">
-						<td><input type="checkbox" id="ids" name="ids[]" value="<?=$row["id"]?>"></td>
-						<td><a href="<?=$editUrl?>?id=<?=$row["id"]?>"><?=$row["title"]?></a></td>
+					<tr class="<?php echo $css?>">
+						<td><input type="checkbox" id="ids" name="ids[]" value="<?php echo $row["id"]?>"></td>
+						<td><a href="<?php echo $editUrl?>?id=<?php echo $row["id"]?>"><?php echo $row["title"]?></a></td>
 						<td>
-							<?
+							<?php
 							switch($row["mode"])
 							{
 								case "popup":
@@ -128,15 +128,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 							}
 							?>
 						</td>
-						<td><?=$row["width"]?></td>
-						<td><?=$row["height"]?></td>
+						<td><?php echo $row["width"]?></td>
+						<td><?php echo $row["height"]?></td>
 						<td>
-							<?
+							<?php
 							if ($row["url"] != "")
 							{
 							?>
-								<a href="<?=$row["url"]?>" target="_blank">有</a>
-							<?	
+								<a href="<?php echo $row["url"]?>" target="_blank">有</a>
+							<?php	
 							}
 							else
 							{
@@ -145,12 +145,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 							?>
 						</td>
 						<td>
-							<?
+							<?php
 								if ($row["pic"] != "")
 								{
 							?>
-									<a href="<?=UPLOAD_PATH_FOR_ADMIN . $row["pic"]?>" target="_blank">有</a>
-							<?
+									<a href="<?php echo UPLOAD_PATH_FOR_ADMIN . $row["pic"]?>" target="_blank">有</a>
+							<?php
 								}
 								else
 								{
@@ -158,9 +158,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 								}
 							?>
 						</td>
-						<td><?=($row["state"] == 1) ? "显示" : "<font color='#FF6600'>不显示</font>"?></td>
+						<td><?php echo ($row["state"] == 1) ? "显示" : "<font color='#FF6600'>不显示</font>"?></td>
 					</tr>
-				<?
+				<?php
 				}
 				?>
 				<tr class="listFooterTr">
@@ -168,7 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				</tr>
 			</form>
 		</table>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

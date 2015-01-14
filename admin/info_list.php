@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -159,17 +159,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr class="position">
-				<td class="position">当前位置: 管理中心 -&gt; <?=$db->getTableFieldValue("info_class", "name", "where id='$class_id'")?> -&gt; 列表</td>
+				<td class="position">当前位置: 管理中心 -&gt; <?php echo $db->getTableFieldValue("info_class", "name", "where id='$class_id'")?> -&gt; 列表</td>
 			</tr>
 		</table>
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>
-					<a href="<?=$editUrl?>">[增加]</a>
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>
+					<a href="<?php echo $editUrl?>">[增加]</a>
 					<a href="javascript:reverseCheck(document.form1.ids);">[反向选择]</a>&nbsp;
 					<a href="javascript:if(delCheck(document.form1.ids)) {document.form1.action.value = 'delete';document.form1.submit();}">[删除]</a>&nbsp;
-					<?
+					<?php
 					if ($db->getTableFieldValue("info_class", "has_sub", "where id='$class_id'") == 1)
 					{
 						$sql = "select id, name from info_class where id like '" . $class_id . "%' order by sortnum asc";
@@ -180,17 +180,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 						}
 						$data = getNodeData($data, substr($class_id, 0, strlen($class_id) - CLASS_LENGTH), CLASS_LENGTH);
 					?>
-						<select name="select_class" style="width:250px;" onChange="window.location='<?=$baseUrl?>&select_class=' + this.options[this.selectedIndex].value;">
-							<?=optionsTree($data, $select_class)?>
+						<select name="select_class" style="width:250px;" onChange="window.location='<?php echo $baseUrl?>&select_class=' + this.options[this.selectedIndex].value;">
+							<?php echo optionsTree($data, $select_class)?>
 						</select>
-					<?
+					<?php
 					}
 					?>
-					<select name="select_state" style="width:90px;" onChange="window.location='<?=$baseUrl?>&select_class=<?=$select_class?>&select_state=' + this.options[this.selectedIndex].value;">
+					<select name="select_state" style="width:90px;" onChange="window.location='<?php echo $baseUrl?>&select_class=<?php echo $select_class?>&select_state=' + this.options[this.selectedIndex].value;">
 						<option value="">请选择</option>
-						<option value="1"<? if ($select_state == 1) echo " selected"?>>未审核</option>
-						<option value="2"<? if ($select_state == 2) echo " selected"?>>正常</option>
-						<option value="3"<? if ($select_state == 3) echo " selected"?>>推荐</option>
+						<option value="1"<?php if ($select_state == 1) echo " selected"?>>未审核</option>
+						<option value="2"<?php if ($select_state == 2) echo " selected"?>>正常</option>
+						<option value="3"<?php if ($select_state == 3) echo " selected"?>>推荐</option>
 					</select>
 					<select name="state" id="state" onChange="if(stateCheck(document.form1.ids)) {document.form1.action.value = 'state';document.form1.state.value='' + this.options[this.selectedIndex].value + '';document.form1.submit();}">
 						<option value="-1">设置状态为</option>
@@ -201,11 +201,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				</td>
 				<td align="right">
 					<form name="searchForm" method="get" action="" style="margin:0px;">
-						查询：<input name="keyword" type="text" value="<?=urldecode($keyword)?>" size="30" maxlength="50" />
+						查询：<input name="keyword" type="text" value="<?php echo urldecode($keyword)?>" size="30" maxlength="50" />
 						<input type="submit" value="查询" style="width:60px;">
-						<input type="hidden" name="class_id" value="<?=$class_id?>" />
-						<input type="hidden" name="select_class" value="<?=$select_class?>" />
-						<input type="hidden" name="select_state" value="<?=$select_state?>" />
+						<input type="hidden" name="class_id" value="<?php echo $class_id?>" />
+						<input type="hidden" name="select_class" value="<?php echo $select_class?>" />
+						<input type="hidden" name="select_state" value="<?php echo $select_state?>" />
 					</form>
 				</td>
 			</tr>
@@ -218,38 +218,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					<td width="30"></td>
 					<td width="60">序号</td>
 					<td>标题</td>
-					<?
+					<?php
 					if ($hasPic == 1)
 					{
 					?>
 						<td width="60">缩略图</td>
-					<?
+					<?php
 					}
 
 					if ($hasAnnex == 1)
 					{
 					?>
 						<td width="60">附件</td>
-					<?
+					<?php
 					}
 
 					if ($hasViews == 1)
 					{
 					?>
 						<td width="60">浏览量</td>
-					<?
+					<?php
 					}
 
 					if ($hasState == 1)
 					{
 					?>
 						<td width="60">状态</td>
-					<?
+					<?php
 					}
 					?>
 					<td width="120">发表时间</td>
 				</tr>
-				<?
+				<?php
 				//筛选条件、权限
 				if ($session_admin_grade == ADMIN_COMMON)
 				{
@@ -292,37 +292,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				{
 					$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 				?>
-					<tr class="<?=$css?>">
-						<td><input type="checkbox" id="ids" name="ids[]" value="<?=$row["id"]?>"></td>
-						<td><?=$row["sortnum"]?></td>
-						<td><a href="<?=$editUrl?>&id=<?=$row["id"]?>"><?=$row["title"]?></a></td>
-						<?
+					<tr class="<?php echo $css?>">
+						<td><input type="checkbox" id="ids" name="ids[]" value="<?php echo $row["id"]?>"></td>
+						<td><?php echo $row["sortnum"]?></td>
+						<td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["title"]?></a></td>
+						<?php
 						if ($hasPic == 1)
 						{
 						?>
-							<td><?=(empty($row["pic"])) ? "无" : "<a href='" . UPLOAD_PATH_FOR_ADMIN . $row["pic"] . "' target='_blank'>图片</a>"?></td>
-						<?
+							<td><?php echo (empty($row["pic"])) ? "无" : "<a href='" . UPLOAD_PATH_FOR_ADMIN . $row["pic"] . "' target='_blank'>图片</a>"?></td>
+						<?php
 						}
 
 						if ($hasAnnex == 1)
 						{
 						?>
-							<td><?=$row["annex"] == "" ? "无" : "<a href='" . UPLOAD_PATH_FOR_ADMIN . $row["annex"] . "' target='_blank'>附件</a>"?></td>
-						<?
+							<td><?php echo $row["annex"] == "" ? "无" : "<a href='" . UPLOAD_PATH_FOR_ADMIN . $row["annex"] . "' target='_blank'>附件</a>"?></td>
+						<?php
 						}
 
 						if ($hasViews == 1)
 						{
 						?>
-							<td><?=$row["views"]?></td>
-						<?
+							<td><?php echo $row["views"]?></td>
+						<?php
 						}
 
 						if ($hasState == 1)
 						{
 						?>
 							<td>
-								<?
+								<?php
 								switch ($row["state"])
 								{
 									case 0:
@@ -340,20 +340,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 								}
 								?>
 							</td>
-						<?
+						<?php
 						}
 						?>
-						<td><?=formatDate("Y-m-d", $row["create_time"])?></td>
+						<td><?php echo formatDate("Y-m-d", $row["create_time"])?></td>
 					</tr>
-				<?
+				<?php
 				}
 				?>
 				<tr class="listFooterTr">
-					<td colspan="15"><?=$page_str?></td>
+					<td colspan="15"><?php echo $page_str?></td>
 				</tr>
 			</form>
 		</table>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

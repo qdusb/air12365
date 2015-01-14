@@ -1,4 +1,4 @@
-<?
+<?php
 $msg = str_replace("\n", "<br>", htmlspecialchars($_GET["msg"]));
 $url = $_GET["url"]
 ?>
@@ -22,10 +22,10 @@ $url = $_GET["url"]
 							<td style="font-weight:bold;padding-left:10px;">提示信息</td>
 						</tr>
 						<tr height="80">
-							<td style="padding-left:20px;"><?=$msg?></td>
+							<td style="padding-left:20px;"><?php echo $msg?></td>
 						</tr>
 						<tr height="30" bgcolor="#EBF4FD" align="center">
-							<td style="font-weight:bold;"><a href="<?=$url?>">请点击这里继续</a></td>
+							<td style="font-weight:bold;"><a href="<?php echo $url?>">请点击这里继续</a></td>
 						</tr>
 					</table>
 				</td>

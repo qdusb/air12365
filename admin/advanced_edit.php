@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -122,7 +122,7 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[返回列表]</a>&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -134,26 +134,26 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">序号</td>
 					<td class="editRightTd">
-						<input type="text" name="sortnum" value="<?=$sortnum?>" size="10" maxlength="4">
+						<input type="text" name="sortnum" value="<?php echo $sortnum?>" size="10" maxlength="4">
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">状态</td>
 					<td class="editRightTd">
-						<input type="radio" name="state" value="1"<? if ($state == 1) echo " checked"?>> 显示
-						<input type="radio" name="state" value="0"<? if ($state == 0) echo " checked"?>> 不显示
+						<input type="radio" name="state" value="1"<?php if ($state == 1) echo " checked"?>> 显示
+						<input type="radio" name="state" value="0"<?php if ($state == 0) echo " checked"?>> 不显示
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">功能名称</td>
 					<td class="editRightTd">
-						<input type="text" name="name" value="<?=$name?>" size="50" maxlength="50">
+						<input type="text" name="name" value="<?php echo $name?>" size="50" maxlength="50">
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">首页文件</td>
 					<td class="editRightTd">
-						<input type="text" name="default_file" value="<?=$default_file?>" size="50" maxlength="50">
+						<input type="text" name="default_file" value="<?php echo $default_file?>" size="50" maxlength="50">
 					</td>
 				</tr>
 				<tr class="editTr">
@@ -171,7 +171,7 @@ else
 			</form>
 		</table>
 		<script type="text/javascript">document.form1.name.focus();</script>
-		<?
+		<?php
         $db->close();
 		?>
 	</body>

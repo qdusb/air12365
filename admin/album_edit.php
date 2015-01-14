@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -138,13 +138,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr class="position">
-				<td class="position">当前位置: 管理中心 -&gt; <?echo $class_name?> -&gt; 新增/编辑</td>
+				<td class="position">当前位置: 管理中心 -&gt; <?phpecho $class_name?> -&gt; 新增/编辑</td>
 			</tr>
 		</table>
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>
+					<a href="<?php echo $listUrl?>">[返回列表]</a>
 				</td>
 			</tr>
 		</table>
@@ -157,19 +157,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				<tr class="editTr">
 					<td class="editLeftTd">序号</td>
 					<td class="editRightTd">
-					<input type="text" value="<?=$sortnum?>" name="sortnum">
+					<input type="text" value="<?php echo $sortnum?>" name="sortnum">
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">缩略图</td>
 					<td class="editRightTd">
 						<input type="file" name="pic" size="40">
-						<?
+						<?php
 						if ($pic != "")
 						{
 						?>
 							<input type="checkbox" name="del_pic" value="1"> 删除现有文件
-						<?
+						<?php
 						}
 						?>
 					</td>
@@ -183,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			</form>
 		</table>
 		<script type="text/javascript">document.form1.title.focus();</script>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

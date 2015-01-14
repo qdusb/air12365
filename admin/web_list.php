@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -59,8 +59,8 @@ if ($id != "")
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[刷新列表]</a>
-					<a href="<?=$editUrl?>">[增加]</a>
+					<a href="<?php echo $listUrl?>">[刷新列表]</a>
+					<a href="<?php echo $editUrl?>">[增加]</a>
 				</td>
 			</tr>
 		</table>
@@ -74,7 +74,7 @@ if ($id != "")
 					<td>网站地址</td>
 					<td>删除</td>
 				</tr>
-				<?
+				<?php
 				//设置每页数
 				$page_size		= DEFAULT_PAGE_SIZE;
 				//总记录数
@@ -93,21 +93,21 @@ if ($id != "")
 				{
 					$css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
 				?>
-					<tr class="<?=$css?>">
-						<td><?=$row["sortnum"]?></td>
-						<td><a href="<?=$editUrl?>?id=<?=$row["id"]?>"><?=$row["name"]?></a></td>
-						<td><?=$row["url"]?></td>
-						<td><a href="<?=$listUrl?>&id=<?=$row["id"]?>" onClick="return del();">删除</a></td>
+					<tr class="<?php echo $css?>">
+						<td><?php echo $row["sortnum"]?></td>
+						<td><a href="<?php echo $editUrl?>?id=<?php echo $row["id"]?>"><?php echo $row["name"]?></a></td>
+						<td><?php echo $row["url"]?></td>
+						<td><a href="<?php echo $listUrl?>&id=<?php echo $row["id"]?>" onClick="return del();">删除</a></td>
 					</tr>
-				<?
+				<?php
 				}
 				?>
 				<tr class="listFooterTr">
-					<td colspan="15"><?=$page_str?></td>
+					<td colspan="15"><?php echo $page_str?></td>
 				</tr>
 			</form>
 		</table>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>

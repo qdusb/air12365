@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">登陆帐号</td>
-					<td class="editRightTd"><?=$session_admin_name?></td>
+					<td class="editRightTd"><?php echo $session_admin_name?></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">原密码</td>

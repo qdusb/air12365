@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -168,7 +168,7 @@ else
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>&nbsp;
+					<a href="<?php echo $listUrl?>">[返回列表]</a>&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -179,15 +179,15 @@ else
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">序号</td>
-					<td class="editRightTd"><input type="text" name="sortnum" maxlength="20" size="24" value="<?=$sortnum?>"/></td>
+					<td class="editRightTd"><input type="text" name="sortnum" maxlength="20" size="24" value="<?php echo $sortnum?>"/></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">用户名</td>
-					<td class="editRightTd"><input type="text" name="user" maxlength="20" size="60" value="<?=$user?>" <?=$read_only?>/></td>
+					<td class="editRightTd"><input type="text" name="user" maxlength="20" size="60" value="<?php echo $user?>" <?php echo $read_only?>/></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">会员编号</td>
-					<td class="editRightTd"><input type="text" name="user_no" maxlength="20" size="60" value="<?=$user_no?>"/></td>
+					<td class="editRightTd"><input type="text" name="user_no" maxlength="20" size="60" value="<?php echo $user_no?>"/></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">会员密码</td>
@@ -197,14 +197,14 @@ else
 					<td class="editLeftTd">会员等级</td>
 					<td class="editRightTd">
 					<select name="level" style="width:80px;">
-						<option value="0"  <? if($level == 0) echo "selected";?>>Vip用户</option>
-						<option value="1"  <? if($level == 1) echo "selected";?>>钻石会员</option>
+						<option value="0"  <?php if($level == 0) echo "selected";?>>Vip用户</option>
+						<option value="1"  <?php if($level == 1) echo "selected";?>>钻石会员</option>
 					</select>
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">姓名</td>
-					<td class="editRightTd"><input type="text" name="name" maxlength="20" size="60" value="<?=$name?>"/></td>
+					<td class="editRightTd"><input type="text" name="name" maxlength="20" size="60" value="<?php echo $name?>"/></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">证件类型</td>
@@ -213,22 +213,22 @@ else
 						$docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
 						foreach($docu_types as $key=>$val){
 						?>
-						<input type="radio" name="docu_type" value="<?=$key?>" <?php if($key==$docu_type)echo "checked"?>/><?php echo $val ?>
+						<input type="radio" name="docu_type" value="<?php echo $key?>" <?php if($key==$docu_type)echo "checked"?>/><?php echo $val ?>
 						<?php } ?>
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">证件号码</td>
-					<td class="editRightTd"><input type="text" name="docu_no" maxlength="20" size="60" value="<?=$docu_no?>"/></td>
+					<td class="editRightTd"><input type="text" name="docu_no" maxlength="20" size="60" value="<?php echo $docu_no?>"/></td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">电话</td>
-					<td class="editRightTd"><input type="text" name="phone" maxlength="20" size="60" value="<?=$phone?>"/></td>
+					<td class="editRightTd"><input type="text" name="phone" maxlength="20" size="60" value="<?php echo $phone?>"/></td>
 				</tr>
 	
 				<tr class="editTr">
 					<td class="editLeftTd">工作单位</td>
-					<td class="editRightTd"><input type="text" name="company" maxlength="20" size="60" value="<?=$company?>"/></td>
+					<td class="editRightTd"><input type="text" name="company" maxlength="20" size="60" value="<?php echo $company?>"/></td>
 				</tr>
 				<tr class="editFooterTr">
 					<td class="editFooterTd" colSpan="2">

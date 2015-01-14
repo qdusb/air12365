@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/isadmin.php");
 ?>
 
@@ -17,7 +17,7 @@ require(dirname(__FILE__) . "/isadmin.php");
 			<tr height="56">
 				<td width="260"><img src="images/header_left.jpg" width="260" height="56"></td>
 				<td align="center" style="padding-top:20px;color:#FFF;font-weight:bold;">
-					当前用户：<?=$session_admin_name?>
+					当前用户：<?php echo $session_admin_name?>
 					&nbsp;&nbsp;
 					<a href="admin_changepass.php" target="main" style="color:#FFF;">修改口令</a>
 					&nbsp;&nbsp;

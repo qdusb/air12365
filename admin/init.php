@@ -1,4 +1,4 @@
-<?
+<?php
 ob_start();											//使用缓冲
 
 //装载必须的文件
@@ -36,4 +36,3 @@ if (!get_magic_quotes_gpc())
 	if (is_array(@$_SESSION))
 		array_walk($_SESSION, "process_variables");
 }
-?>

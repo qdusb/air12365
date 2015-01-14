@@ -1,4 +1,4 @@
-<?
+<?php
 require(dirname(__FILE__) . "/init.php");
 require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
@@ -386,7 +386,7 @@ else
 					return false;
 				}
 
-				<?
+				<?php
 				if ($hasPic == 1)
 				{
 				?>
@@ -400,11 +400,11 @@ else
 							return false;
 						}
 					}
-				<?
+				<?php
 				}
 				?>
 
-				<?
+				<?php
 				if ($hasAnnex == 1)
 				{
 				?>
@@ -418,7 +418,7 @@ else
 							return false;
 						}
 					}
-				<?
+				<?php
 				}
 				?>
 
@@ -429,13 +429,13 @@ else
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr class="position">
-				<td class="position">当前位置: 管理中心 -&gt; <?=$db->getTableFieldValue("info_class", "name", "where id='$class_id'")?> -&gt; 新增/编辑</td>
+				<td class="position">当前位置: 管理中心 -&gt; <?php echo $db->getTableFieldValue("info_class", "name", "where id='$class_id'")?> -&gt; 新增/编辑</td>
 			</tr>
 		</table>
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr height="30">
 				<td>
-					<a href="<?=$listUrl?>">[返回列表]</a>
+					<a href="<?php echo $listUrl?>">[返回列表]</a>
 				</td>
 			</tr>
 		</table>
@@ -448,10 +448,10 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">排列序号</td>
 					<td class="editRightTd">
-						<input type="text" name="sortnum" value="<?=$sortnum?>" maxlength="10" size="5">
+						<input type="text" name="sortnum" value="<?php echo $sortnum?>" maxlength="10" size="5">
 					</td>
 				</tr>
-				<?
+				<?php
 				if ($hasState == 1 && $session_admin_grade != ADMIN_COMMON)
 				{
 				?>
@@ -459,13 +459,13 @@ else
 						<td class="editLeftTd">状态</td>
 						<td class="editRightTd">
 							<select name="state" style="width:80px;">
-								<option value="0"<? if ($state == 0) echo "selected";?>>未审核</option>
-								<option value="1"<? if ($state == 1) echo "selected";?>>正常</option>
-								<option value="2"<? if ($state == 2) echo "selected";?>>推荐</option>
+								<option value="0"<?php if ($state == 0) echo "selected";?>>未审核</option>
+								<option value="1"<?php if ($state == 1) echo "selected";?>>正常</option>
+								<option value="2"<?php if ($state == 2) echo "selected";?>>推荐</option>
 							</select>
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 				if ($hasLevel == 1)
 				{
@@ -474,14 +474,14 @@ else
 						<td class="editLeftTd">文章权限分配</td>
 						<td class="editRightTd">
 							<select name="level" style="width:80px;">
-								<option value="0"  <? if($level == 0) echo "selected";?>>普通用户</option>
-								<option value="1"  <? if($level == 1) echo "selected";?>>初级会员</option>
-								<option value="2"  <? if($level == 2) echo "selected";?>>中级会员</option>
-								<option value="3"  <? if($level == 3) echo "selected";?>>高级会员</option>
+								<option value="0"  <?php if($level == 0) echo "selected";?>>普通用户</option>
+								<option value="1"  <?php if($level == 1) echo "selected";?>>初级会员</option>
+								<option value="2"  <?php if($level == 2) echo "selected";?>>中级会员</option>
+								<option value="3"  <?php if($level == 3) echo "selected";?>>高级会员</option>
 							</select>
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 				if ($hasShare == 1)
 				{
@@ -490,59 +490,59 @@ else
 				<tr class="editTr">
 					<td class="editLeftTd">是否分享</td>
 					<td class="editRightTd">
-						<input type="radio" name="share" value="1"<? if ($share == 1) echo " checked"?>>是
-						<input type="radio" name="share" value="0"<? if ($share == 0) echo " checked"?>>否
+						<input type="radio" name="share" value="1"<?php if ($share == 1) echo " checked"?>>是
+						<input type="radio" name="share" value="0"<?php if ($share == 0) echo " checked"?>>否
 						　（注：启用后打开页面较慢，请根据实际需求启用！）
 					</td>
 				</tr>
-				<?
+				<?php
 				}
 				?>
 				<tr class="editTr">
 					<td class="editLeftTd">发表时间</td>
-					<td class="editRightTd"><input type="text" name="create_time" value="<?=$create_time?>" maxlength="20" size="24"> 时间格式为2009-01-01 00:00:00</td>
+					<td class="editRightTd"><input type="text" name="create_time" value="<?php echo $create_time?>" maxlength="20" size="24"> 时间格式为2009-01-01 00:00:00</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">标题名称</td>
-					<td class="editRightTd"><input type="text" value="<?=$title?>" name="title" maxlength="100" size="50"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $title?>" name="title" maxlength="100" size="50"></td>
 				</tr>
-				<?
+				<?php
 				if(substr($class_id,0,3)=="103")
 				{
 				?>
 				<tr class="editTr">
 					<td class="editLeftTd">产品系列</td>
 					<td class="editRightTd">
-						<?
+						<?php
 						$sql = "select * from link_class  order by sortnum asc";
 						$rst = $db->query($sql);
 						while ($row = $db->fetch_array($rst))
 						{
 						?>
-						<input type="radio" name="series" value="<?=$row['id']?>" <?=$series==$row['id']?"checked":""?> /><?=$row['name']?>
-						<?
+						<input type="radio" name="series" value="<?php echo $row['id']?>" <?php echo $series==$row['id']?"checked":""?> /><?php echo $row['name']?>
+						<?php
 						}
 						?>
 					</td>
 				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">产品型号</td>
-					<td class="editRightTd"><input type="text" value="<?=$No?>" name="No" maxlength="100" size="50"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $No?>" name="No" maxlength="100" size="50"></td>
 				</tr>
 				
-				<?
+				<?php
 				}
 				
 				?>
 				<tr class="editTr" style="display:none">
 					<td class="editLeftTd">标题2</td>
-					<td class="editRightTd"><input type="text" value="<?=$title2?>" name="title2" maxlength="100" size="50"></td>
+					<td class="editRightTd"><input type="text" value="<?php echo $title2?>" name="title2" maxlength="100" size="50"></td>
 				</tr>
 					<tr class="editTr">
 						<td class="editLeftTd">文章类别</td>
 						<td class="editRightTd">
 							<select name="info_class" style="width:50%;">
-								<?
+								<?php
 								$sql = "select id, name from info_class order by id asc";
 								$rst = $db->query($sql);
 								while ($row = $db->fetch_array($rst))
@@ -579,7 +579,7 @@ else
 							</select>
 						</td>
 					</tr>
-				<?
+				<?php
 
 				if ($hasAuthor == 1)
 				{
@@ -587,10 +587,10 @@ else
 					<tr class="editTr">
 						<td class="editLeftTd">作者</td>
 						<td class="editRightTd">
-							<input type="text" value="<?=$author?>" name="author" maxlength="50" size="30">
+							<input type="text" value="<?php echo $author?>" name="author" maxlength="50" size="30">
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 
 				if ($hasSource == 1)
@@ -599,10 +599,10 @@ else
 					<tr class="editTr">
 						<td class="editLeftTd">来源</td>
 						<td class="editRightTd">
-							<input type="text" value="<?=$source?>" name="source" maxlength="50" size="30">
+							<input type="text" value="<?php echo $source?>" name="source" maxlength="50" size="30">
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 
 				if ($hasWebsite == 1)
@@ -610,9 +610,9 @@ else
 				?>
 					<tr class="editTr">
 						<td class="editLeftTd">链接网址</td>
-						<td class="editRightTd"><input type="text" value="<?=$website?>" name="website" maxlength="300" size="50"></td>
+						<td class="editRightTd"><input type="text" value="<?php echo $website?>" name="website" maxlength="300" size="50"></td>
 					</tr>
-				<?
+				<?php
 				}
 
 				if ($hasPic == 1)
@@ -622,17 +622,17 @@ else
 						<td class="editLeftTd">缩略图</td>
 						<td class="editRightTd">
 							<input type="file" name="pic" size="40">
-							<?
+							<?php
 							if ($pic != "")
 							{
 							?>
 								<input type="checkbox" name="del_pic" value="1"> 删除现有图片
-							<?
+							<?php
 							}
 							?>
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 
 				if ($hasAnnex == 1)
@@ -642,18 +642,18 @@ else
 						<td class="editLeftTd">附件</td>
 						<td class="editRightTd">
 							<input type="file" name="annex" size="40">
-							<?
+							<?php
 							echo "";
 							if ($annex != "")
 							{
 							?>
 								<input type="checkbox" name="del_annex" value="1"> 删除现有附件
-							<?
+							<?php
 							}
 							?>
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 
 				if ($hasKeyword == 1)
@@ -662,10 +662,10 @@ else
 					<tr class="editTr">
 						<td class="editLeftTd">关键词</td>
 						<td class="editRightTd">
-							<input type="text" value="<?=$keyword?>" name="keyword" maxlength="50" size="46">
+							<input type="text" value="<?php echo $keyword?>" name="keyword" maxlength="50" size="46">
 						</td>
 					</tr>
-				<?
+				<?php
 				}
 
 
@@ -676,10 +676,10 @@ else
 					$intro_name=($second_id=="104101"||$second_id=="108101")?"经纬度":"简介";
 				?>
 					<tr class="editTr">
-						<td class="editLeftTd"><?=$intro_name?></td>
+						<td class="editLeftTd"><?php echo $intro_name?></td>
 						<td class="editRightTd"><textarea name="intro"><?php echo $intro; ?></textarea></td>
 					</tr>
-				<?
+				<?php
 				}
 
 				if ($hasContent == 1)
@@ -689,7 +689,7 @@ else
 						<td class="editLeftTd">详细内容</td>
 						<td class="editRightTd"><textarea name="content"><?php echo $content; ?></textarea></td>
 					</tr>
-				<?
+				<?php
 				}
 				?>
 				<tr class="editFooterTr">
@@ -701,7 +701,7 @@ else
 			</table>
 		</form>
 		<script type="text/javascript">document.form1.title.focus();</script>
-		<?
+		<?php
 		$db->close();
 		?>
 	</body>
