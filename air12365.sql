@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- 主机: localhost
--- 生成日期: 2015 年 01 月 13 日 14:09
--- 服务器版本: 5.6.12-log
--- PHP 版本: 5.4.16
+-- Host: 127.0.0.1
+-- Generation Time: 2015-01-14 09:34:47
+-- 服务器版本： 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,10 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 数据库: `air12365`
+-- Database: `air12365`
 --
-CREATE DATABASE IF NOT EXISTS `air12365` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `air12365`;
 
 -- --------------------------------------------------------
 
@@ -88,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`id`, `name`, `pass`, `realname`, `grade`, `state`, `create_time`, `modify_time`, `login_count`) VALUES
-(1, 'admin', '0192023a7bbd73250516f069df18b500', '系统管理员', 8, 1, '2014-03-19 02:45:53', '2014-03-19 02:45:53', 2);
+(1, 'admin', '0192023a7bbd73250516f069df18b500', '系统管理员', 8, 1, '2014-03-19 02:45:53', '2014-03-19 02:45:53', 5);
 
 -- --------------------------------------------------------
 
@@ -121,7 +119,10 @@ CREATE TABLE IF NOT EXISTS `admin_login` (
 
 INSERT INTO `admin_login` (`admin_id`, `login_time`, `login_ip`) VALUES
 (1, '2015-01-13 11:01:35', '127.0.0.1'),
-(1, '2015-01-13 11:01:26', '127.0.0.1');
+(1, '2015-01-13 11:01:26', '127.0.0.1'),
+(1, '2015-01-14 01:01:35', '127.0.0.1'),
+(1, '2015-01-14 02:01:58', '127.0.0.1'),
+(1, '2015-01-14 04:01:12', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -181,7 +182,7 @@ INSERT INTO `advanced` (`id`, `sortnum`, `name`, `default_file`, `state`) VALUES
 (8, 80, '应聘人员', 'job_apply_list.php', 0),
 (11, 110, '个人会员管理', 'member_list.php', 1),
 (12, 15, '一级分类管理', 'base_class_list.php', 0),
-(13, 120, '报名管理', 'book_list.php', 0),
+(13, 120, '企业会员管理', 'member_company_list.php', 1),
 (14, 130, '电子杂志管理', 'album_class_list.php', 0),
 (15, 140, '员工管理', 'staff_list.php', 0),
 (16, 150, '资料批量转移', 'transfer.php', 0),
@@ -437,30 +438,6 @@ CREATE TABLE IF NOT EXISTS `info_class` (
   KEY `sortnum` (`sortnum`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- 转存表中的数据 `info_class`
---
-
-INSERT INTO `info_class` (`id`, `sortnum`, `name`, `en_name`, `pic`, `content`, `files`, `info_state`, `max_level`, `has_sub`, `sub_content`, `sub_pic`, `hasViews`, `hasState`, `hasPic`, `hasAnnex`, `hasIntro`, `hasShare`, `hasContent`, `hasContent2`, `hasWebsite`, `hasAuthor`, `hasSource`, `hasKeyword`, `hasLevel`, `state`) VALUES
-('101', 10, '品牌故事', '', '2014-06/140288670297539200.jpg', '<h2>\r\n	<br />\r\n</h2>', '', 'custom', 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, NULL, 0, 0, 0, 0, 0, 1),
-('102', 20, '新闻订阅', '', NULL, '<p>\r\n	新闻订阅\r\n</p>', '', 'custom', 2, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, 1),
-('103', 30, '菜单', '', NULL, '', '', 'custom', 2, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, 1),
-('104', 40, '招商加盟', '', NULL, '', '', 'custom', 2, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, 1),
-('105', 50, '人才招聘', '', NULL, '', '', 'custom', 2, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, 1),
-('106', 60, '联系我们', '', NULL, '', '', 'custom', 2, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, 1),
-('101101', 10, '发展历程', '', '', '', '', 'content', 0, 0, 1, 1, 1, 1, 1, 1, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('101102', 20, '公司荣誉', '', '', '', '', 'list', 0, 0, 1, 1, 1, 1, 1, 1, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('101103', 30, '公司理念', '', '', '', '', 'content', 0, 0, 1, 1, 1, 1, 1, 1, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('106101', 10, '联系方式', '', '', '', '', 'content', 0, 0, 0, 0, 1, 1, 1, 0, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('105101', 10, '诚聘英才', '', '', '', '', 'content', 0, 0, 0, 0, 1, 1, 1, 0, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('104101', 10, '加入我们', '', '', '', '', 'list', 0, 0, 0, 0, 1, 1, 1, 0, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('103101', 10, '咖啡系列', '', '', '', '', 'pic', 0, 0, 0, 0, 1, 1, 1, 0, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('102101', 10, '公司新闻', '', '', '', '', 'list', 0, 0, 0, 0, 1, 1, 1, 0, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('102102', 20, '行业新闻', '', '', '', '', 'list', 0, 0, 0, 0, 1, 1, 1, 0, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('103102', 20, '鲜奶系列', '', '', '', '', 'content', 0, 0, 0, 0, 1, 1, 1, 0, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('103103', 30, '朱古力系列', '', '', '', '', 'content', 0, 0, 0, 0, 1, 1, 1, 0, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1),
-('103104', 40, '茶叶系列', '', '', '', '', 'content', 0, 0, 0, 0, 1, 1, 1, 0, 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -594,7 +571,7 @@ INSERT INTO `link_class` (`id`, `sortnum`, `name`, `haspic`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `member` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `sortnum` int(11) NOT NULL,
   `user` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `user_no` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -609,21 +586,22 @@ CREATE TABLE IF NOT EXISTS `member` (
   `company` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `contact` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contact_phone` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tel` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '公司电话',
+  `admin_id` int(6) NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL,
   `update_time` datetime DEFAULT NULL,
   `login_time` datetime DEFAULT NULL,
   `login_num` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `member`
 --
 
-INSERT INTO `member` (`id`, `sortnum`, `user`, `user_no`, `user_type`, `pass`, `name`, `level`, `docu_type`, `docu_no`, `phone`, `email`, `company`, `address`, `contact`, `contact_phone`, `create_time`, `update_time`, `login_time`, `login_num`) VALUES
-(1, 10, 'cui', 'xc999000629', 0, 'e10adc3949ba59abbe56e057f20f883e', '崔云超', 1, 2, '342601198410270659', '13655603465', NULL, '万家热线', NULL, NULL, NULL, '0000-00-00 00:00:00', '2015-01-13 13:55:27', NULL, NULL),
-(2, 20, 'yangxiaoyan', 'xc999423453', 0, 'e10adc3949ba59abbe56e057f20f883e', '杨晓燕', 0, 0, '342601198410270659', '13655603465', NULL, '万家热线', NULL, NULL, NULL, '2015-01-13 13:55:11', '2015-01-13 14:07:52', NULL, NULL);
+INSERT INTO `member` (`id`, `sortnum`, `user`, `user_no`, `user_type`, `pass`, `name`, `level`, `docu_type`, `docu_no`, `phone`, `email`, `company`, `address`, `contact`, `tel`, `admin_id`, `create_time`, `update_time`, `login_time`, `login_num`) VALUES
+(1, 10, 'cui', 'xc999000629', 0, 'e10adc3949ba59abbe56e057f20f883e', '崔云超', 0, 2, '342601198410270659', '13655603465', NULL, '万家热线', NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '2015-01-14 02:12:24', NULL, NULL),
+(2, 20, 'yangxiaoyan', 'xc999423453', 0, 'e10adc3949ba59abbe56e057f20f883e', '杨晓燕', 0, 0, '342601198410270659', '13655603465', NULL, '万家热线', NULL, NULL, NULL, 0, '2015-01-13 13:55:11', '2015-01-13 14:07:52', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -667,6 +645,35 @@ INSERT INTO `message` (`id`, `sortnum`, `name`, `tel`, `phone`, `email`, `fax`, 
 (9, 90, 'ibw_xu256', NULL, '13655603465', '', '', NULL, '', NULL, 'uuyuy', '2014-06-16 16:35:18', NULL, NULL, '', 0),
 (10, 100, 'ibw_xu256ddd', NULL, '13655603465', '', '', NULL, '', NULL, 'uuyuy叮叮叮', '2014-06-16 16:35:45', NULL, NULL, '', 0),
 (11, 110, '叮叮叮', NULL, '18956564620', '', '', NULL, '', NULL, '叮叮叮', '2014-06-16 16:36:04', NULL, NULL, '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `sms`
+--
+
+CREATE TABLE IF NOT EXISTS `sms` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(90) COLLATE utf8_unicode_ci NOT NULL,
+  `content` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
+  `state` int(1) NOT NULL DEFAULT '1',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `sms_log`
+--
+
+CREATE TABLE IF NOT EXISTS `sms_log` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `sms_id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
