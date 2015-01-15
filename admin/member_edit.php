@@ -108,9 +108,7 @@ if(!empty($id)){
 	$sortnum=$db->getMax("member", "sortnum") + 10;
 	$user_no=getVipNo($db);
     $level=0;
-    
 }
-
 ?>
 <html>
 	<head>

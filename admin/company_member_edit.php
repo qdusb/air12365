@@ -93,11 +93,7 @@ if(!empty($id)){
 		$company	=$row['company'];
 
 		if($user_no==""){
-			if($level==1){
-				$user_no=getDiamondNo($db);
-			}else{
-				$user_no=getVipNo($db);
-			}
+			$user_no=getCompamyNo($db);
 		}
 	}else{
 		$db->close();
@@ -106,9 +102,7 @@ if(!empty($id)){
 }else{
 	$read_only="";
 	$sortnum=$db->getMax("member", "sortnum") + 10;
-	$user_no=getVipNo($db);
-    $level=0;
-    
+	$user_no=getCompamyNo($db);
 }
 
 ?>
