@@ -7,8 +7,8 @@ require(dirname(__FILE__) . "/excel_class.php");
 $docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
 $levels=array("VIP会员","钻石会员");
 $page = (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
-$listUrl = "member_list.php?page=$page";
-$editUrl = "member_edit.php?page=$page";
+$listUrl = "company_member_list.php?page=$page";
+$editUrl = "company_member_edit.php?page=$page";
 
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
@@ -94,9 +94,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 					$page_size = DEFAULT_PAGE_SIZE;
 					//总记录数
 					if($session_admin_grade==7){
-						$record_count = $db->getCount("member","admin_id={$session_admin_id} and user_type=0");
+						$record_count = $db->getCount("member","admin_id={$session_admin_id} and user_type=1");
 					}else{
-						$record_count = $db->getCount("member","and user_type=0");
+						$record_count = $db->getCount("member","and user_type=1");
 					}
 					$record_count = $db->getCount("member");
 					$page_count = ceil($record_count / $page_size);
@@ -154,9 +154,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 				<?php
 				$sql = "select * from member ";
 				if($session_admin_grade==7){
-					$sql.="where admin_id={$session_admin_id} and user_type=0";
+					$sql.="where admin_id={$session_admin_id} and user_type=1";
 				}else{
-					$sql.="where user_type=0";
+					$sql.="where user_type=1";
 				}
 				$sql .= "order by sortnum desc limit " . ($page - 1) * $page_size . ", " . $page_size;
 				$rst = $db->query($sql);

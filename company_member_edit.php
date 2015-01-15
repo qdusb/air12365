@@ -6,7 +6,7 @@ require(dirname(__FILE__) . "/config.php");
 $id		= (int)$_GET["id"];
 $page	= (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
 
-$listUrl = "member_list.php?page=$page";
+$listUrl = "company_member_list.php?page=$page";
 
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
@@ -14,7 +14,7 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 $read_only="readonly='readonly'";
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-	$pass		=trim($_POST['pass']);
+	$pass=trim($_POST['pass']);
 	$data=array(
 		"sortnum"=>(int)$_POST["sortnum"],
 		"user"=>$_POST['user'],
