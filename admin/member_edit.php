@@ -42,18 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$data['id']=$aid;
 			$data['pass']=md5($pass);
 			$data['create_time']=date("Y:m:d H:i:s");
-			$insert_sqls=array();
-			foreach($data as $key=>$val){
-				array_push($insert_sqls, $key."='".$val."'");
-			}
-			$sql = "insert into member set ".implode(",", $insert_sqls);
-			$rst = $db->query($sql);
-			$db->close();
-			if(!$rst){
-				info("新增失败");
-			}else{
+			if($db->insert_data("member",$data)){
 				header("location: $listUrl");
 				exit;
+			}else{
+				info("新增失败");
 			}
 		}
 	}else{
@@ -61,14 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$data['pass']=md5($pass);
 		}
 		$data['update_time']=date("Y:m:d H:i:s");
-		$update_sqls=array();
-		foreach($data as $key=>$val){
-			array_push($update_sqls, $key."='".$val."'");
-		}
-		$sql = "update member set ".implode(",", $update_sqls)." where id=$id";
-		$rst = $db->query($sql);
-		$db->close();
-		if ($rst){
+		if($db->update_data("member",$data,"id={$id}")){
 			header("location: $listUrl");
 			exit;
 		}else{
@@ -105,7 +91,7 @@ if(!empty($id)){
 	}
 }else{
 	$read_only="";
-	$sortnum=$db->getMax("member", "sortnum") + 10;
+	$sortnum=$db->getMax("member", "sortnum","user_type=0") + 10;
 	$user_no=getVipNo($db);
     $level=0;
 }

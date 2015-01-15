@@ -139,8 +139,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 					</td>
 				</tr>
 				<tr class="listHeaderTr">
-					<td width="5%"></td>
-					<td width="8%">用户名</td>
+					<td width="1%"></td>
+					<td width="5%">用户名</td>
 					<td width="10%">会员编号</td>
 					<td width="8%">姓名</td>
 					<td width="8%">证件类型</td>
@@ -154,9 +154,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 				<?php
 				$sql = "select * from member ";
 				if($session_admin_grade==7){
-					$sql.="where admin_id={$session_admin_id} and user_type=0";
+					$sql.="where admin_id={$session_admin_id} and user_type=0 ";
 				}else{
-					$sql.="where user_type=0";
+					$sql.="where user_type=0 ";
 				}
 				$sql .= "order by sortnum desc limit " . ($page - 1) * $page_size . ", " . $page_size;
 				$rst = $db->query($sql);

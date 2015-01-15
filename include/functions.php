@@ -7,8 +7,7 @@ function sendMessage($db,$id_array,$sms_id){
 		$phone=$db->getTableFieldValue("member","phone","where id={$id}");
 		if($phone){
 			$retval=sendMessageAdapter($phone,$content);
-			$sql="insert into sms_log set sms_id=$sms_id,member_id=$id";
-			$db->query($sql);
+			$db->insert_data("sms_log",array("sms_id"=>$sms_id,"member_id"=>$id));
 		}
 	}
 	return $retval;

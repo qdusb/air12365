@@ -139,15 +139,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 					</td>
 				</tr>
 				<tr class="listHeaderTr">
-					<td width="5%"></td>
-					<td width="8%">用户名</td>
+					<td width="1%"></td>
+					<td width="5%">用户名</td>
 					<td width="10%">会员编号</td>
-					<td width="8%">姓名</td>
-					<td width="8%">证件类型</td>
-					<td width="15%">证件编号</td>
-					<td width="8%">会员等级</td>
-					<td width="15%">联系方式</td>
-					<td width="15%">工作单位</td>
+					<td width="8%">公司名称</td>
+					<td width="8%">公司电话</td>
+					<td width="10%">公司联系人</td>
+					<td width="10%">联系人电话</td>
+					<td width="15%">地址</td>
 					<td>创建时间</td>
 				</tr>
 				
@@ -158,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 				}else{
 					$sql.="where user_type=1";
 				}
-				$sql .= "order by sortnum desc limit " . ($page - 1) * $page_size . ", " . $page_size;
+				$sql .= " order by sortnum desc limit " . ($page - 1) * $page_size . ", " . $page_size;
 				$rst = $db->query($sql);
 				while ($row = $db->fetch_array($rst))
 				{
@@ -168,12 +167,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 						<td><input type="checkbox" id="ids" name="ids[]" value="<?php echo $row["id"]?>"></td>
 						<td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["user"]?></a></td>
 						<td><?php echo $row["user_no"]?></td>
-						<td><?php echo $row["name"]?></td>
-						<td><?php echo $docu_types[$row['docu_type']];?></td>
-						<td><?php echo $row["docu_no"]?></td>
-						<td><?php echo $levels[$row['level']];?></td>
-						<td><?php echo $row["phone"]?></td>
-						<td><?php echo $row["company"]?></td> 
+						<td><?php echo $row["company"]?></td>
+						<td><?php echo $row['tel'];?></td>
+						<td><?php echo $row["contact"]?></td>
+						<td><?php echo $row['phone'];?></td>
+						<td><?php echo $row["address"]?></td>
 						<td><?php echo $row["create_time"]?></td>           
 					</tr>
 				<?php }?>

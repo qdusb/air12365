@@ -19,13 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		"sortnum"=>(int)$_POST["sortnum"],
 		"user"=>$_POST['user'],
 		"user_no"=>$_POST['user_no'],
-		"user_type"=>0,
-		"level"=>intval($_POST['level']),
-		"name"=>$_POST['name'],
-		"docu_type"=>$_POST['docu_type'],
-		"docu_no"=>$_POST['docu_no'],
-		"phone"=>$_POST['phone'],
+		"user_type"=>1,
 		"company"=>$_POST['company'],
+		"tel"=>$_POST['tel'],
+		"contact"=>$_POST['contact'],
+		"phone"=>$_POST['phone'],
+		"address"=>$_POST['address'],
 		"admin_id"=>$session_admin_id
 	);
 
@@ -42,18 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$data['id']=$aid;
 			$data['pass']=md5($pass);
 			$data['create_time']=date("Y:m:d H:i:s");
-			$insert_sqls=array();
-			foreach($data as $key=>$val){
-				array_push($insert_sqls, $key."='".$val."'");
-			}
-			$sql = "insert into member set ".implode(",", $insert_sqls);
-			$rst = $db->query($sql);
-			$db->close();
-			if(!$rst){
-				info("新增失败");
-			}else{
+			if($db->insert_data("member",$data)){
 				header("location: $listUrl");
 				exit;
+			}else{
+				info("新增失败");
 			}
 		}
 	}else{
@@ -61,14 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$data['pass']=md5($pass);
 		}
 		$data['update_time']=date("Y:m:d H:i:s");
-		$update_sqls=array();
-		foreach($data as $key=>$val){
-			array_push($update_sqls, $key."='".$val."'");
-		}
-		$sql = "update member set ".implode(",", $update_sqls)." where id=$id";
-		$rst = $db->query($sql);
-		$db->close();
-		if ($rst){
+
+		if($db->update_data("member",$data,"id={$id}")){
 			header("location: $listUrl");
 			exit;
 		}else{
@@ -85,15 +71,15 @@ if(!empty($id)){
 		$sortnum	= $row["sortnum"];
 		$user		=$row['user'];
 		$user_no	=$row['user_no'];
-		$level		=intval($row['level']);
-		$name		=$row['name'];
-		$docu_type	=$row['docu_type'];
-		$docu_no	=$row['docu_no'];
+		$address		=intval($row['level']);
+		$phone		=$row['phone'];
+		$contact	=$row['contact'];
+		$tel	=$row['tel'];
 		$phone		=$row['phone'];
 		$company	=$row['company'];
 
 		if($user_no==""){
-			$user_no=getCompamyNo($db);
+			$user_no=getCompanyNo($db);
 		}
 	}else{
 		$db->close();
@@ -101,8 +87,8 @@ if(!empty($id)){
 	}
 }else{
 	$read_only="";
-	$sortnum=$db->getMax("member", "sortnum") + 10;
-	$user_no=getCompamyNo($db);
+	$sortnum=$db->getMax("member", "sortnum","user_type=1") + 10;
+	$user_no=getCompanyNo($db);
 }
 
 ?>
@@ -163,23 +149,9 @@ if(!empty($id)){
 					<td class="editRightTd"><input type="text" name="user" maxlength="20" size="60" value="<?php echo $user?>" <?php echo $read_only?>/></td>
 				</tr>
 				<tr class="editTr">
-					<td class="editLeftTd">会员编号/级别</td>
+					<td class="editLeftTd">会员编号</td>
 					<td class="editRightTd">
                     <input type="text" name="user_no" id="user_no" maxlength="20" size="30" value="<?php echo $user_no?>"/>
-                    <input type="radio" value="0" name="level" <?php if($level == 0) echo "checked";?> class="user_no_type"/>Vip会员 &nbsp;
-                    <input type="radio" value="1" name="level" <?php if($level == 1) echo "checked";?> class="user_no_type"/>钻石会员
-                    <script>
-                    var diamond_no="<?php echo getDiamondNo($db);?>";
-                    var vip_no="<?php echo $user_no?>";
-                    $(function(){
-                        var $user_no=$("#user_no");
-                        $(".user_no_type").click(function(){
-                            var val=$(this).val();
-                            var no=val==0?vip_no:diamond_no
-                            $user_no.val(no);
-                        });
-                    })
-                    </script>
                     </td>
 				</tr>
 				<tr class="editTr">
@@ -187,32 +159,24 @@ if(!empty($id)){
 					<td class="editRightTd"><input type="password" name="pass" maxlength="20" size="60" value=""/></td>
 				</tr>
 				<tr class="editTr">
-					<td class="editLeftTd">姓名</td>
-					<td class="editRightTd"><input type="text" name="name" maxlength="20" size="60" value="<?php echo $name?>"/></td>
+					<td class="editLeftTd">公司名称</td>
+					<td class="editRightTd"><input type="text" name="company" maxlength="20" size="60" value="<?php echo $company?>"/></td>
 				</tr>
 				<tr class="editTr">
-					<td class="editLeftTd">证件类型</td>
-					<td class="editRightTd">
-						<?php
-						$docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
-						foreach($docu_types as $key=>$val){
-						?>
-						<input type="radio" name="docu_type" value="<?php echo $key?>" <?php if($key==$docu_type)echo "checked"?>/><?php echo $val ?>
-						<?php } ?>
-					</td>
+					<td class="editLeftTd">公司电话</td>
+					<td class="editRightTd"><input type="text" name="tel" maxlength="20" size="60" value="<?php echo $tel?>"/></td>
 				</tr>
 				<tr class="editTr">
-					<td class="editLeftTd">证件号码</td>
-					<td class="editRightTd"><input type="text" name="docu_no" maxlength="20" size="60" value="<?php echo $docu_no?>"/></td>
+					<td class="editLeftTd">公司联系人</td>
+					<td class="editRightTd"><input type="text" name="contact" maxlength="20" size="60" value="<?php echo $contact?>"/></td>
 				</tr>
 				<tr class="editTr">
-					<td class="editLeftTd">电话</td>
+					<td class="editLeftTd">联系人电话</td>
 					<td class="editRightTd"><input type="text" name="phone" maxlength="20" size="60" value="<?php echo $phone?>"/></td>
 				</tr>
-	
 				<tr class="editTr">
-					<td class="editLeftTd">工作单位</td>
-					<td class="editRightTd"><input type="text" name="company" maxlength="20" size="60" value="<?php echo $company?>"/></td>
+					<td class="editLeftTd">公司地址</td>
+					<td class="editRightTd"><input type="text" name="address" maxlength="20" size="60" value="<?php echo $address?>"/></td>
 				</tr>
 				<tr class="editFooterTr">
 					<td class="editFooterTd" colSpan="2">

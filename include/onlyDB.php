@@ -296,7 +296,30 @@ class onlyDB
 	{
 		return '`';
 	}
-
+	function update_data($table,$data,$where_condition){
+		if(empty($table)||count($data)<=0||empty($where_condition)){
+			return false;
+		}
+		$update_sqls=array();
+		foreach($data as $key=>$val){
+			array_push($update_sqls, $key."='".$val."'");
+		}
+		$sql = "update {$table} set ".implode(",", $update_sqls)." where {$where_condition}";
+		$rst = $this->query($sql);
+		return $rst;
+	}
+	function insert_data($table,$data=array()){
+		if(empty($table)||count($data)<=0){
+			return false;
+		}
+		$insert_sqls=array();
+		foreach($data as $key=>$val){
+			array_push($insert_sqls, $key."='".$val."'");
+		}
+		$sql = "insert into {$table} set ".implode(",", $insert_sqls);
+		$rst = $this->query($sql);
+		return $rst;
+	}
 	function db_backup($dbName = '')
 	{
 		if ($dbName == '') $dbName = $this->dbName;
