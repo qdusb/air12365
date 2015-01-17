@@ -53,10 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 		$retval=sendMessage($db,$id_array,$sms_id);
 		if($retval){
 			info("发送信息成功");
-		}else{
-			info("发送信息失败");
-		}
-		
+		}else {
+            info("发送信息失败");
+        }
 	}
 }
 ?>
@@ -149,8 +148,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 					<td width="15%">联系方式</td>
 					<td width="15%">工作单位</td>
 					<td>创建时间</td>
+					
 				</tr>
-				
 				<?php
 				$sql = "select * from member ";
 				if($session_admin_grade==7){

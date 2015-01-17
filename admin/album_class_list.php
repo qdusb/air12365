@@ -17,7 +17,6 @@ $editUrl		= "album_class_edit.php";
 
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
-
 //删除
 if ($id != "")
 {

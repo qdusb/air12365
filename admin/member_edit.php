@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				header("location: $listUrl");
 				exit;
 			}else{
-				info("新增失败");
+				info("新增失败,请确认用户名或者会员编号未被使用");
 			}
 		}
 	}else{
