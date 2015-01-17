@@ -296,6 +296,21 @@ class onlyDB
 	{
 		return '`';
 	}
+    function delete_data($table,$compare_colum,$conpare_value,$compare){
+        if($compare=="in"){
+            $sql = "delete from {$table} where {$compare_colum} in (" . implode(",", $conpare_value) . ")";
+        }else{
+            $sql = "delete from {$table} where {$compare_colum} $compare {$conpare_value}";
+        }
+        $rst = $db->query($sql);
+        if ($rst){
+            $db->query("commit");
+        }else{
+            $db->query("rollback");
+        }
+        return $rst;
+    }
+
 	function update_data($table,$data,$where_condition){
 		if(empty($table)||count($data)<=0||empty($where_condition)){
 			return false;
@@ -512,7 +527,7 @@ class onlyDB
 		return $row["cnt"];
 	}
 	
-	function getCount($table_name, $where_condition)
+	function getCount($table_name, $where_condition="")
 	{
 		if ($where_condition == "")
 		{
