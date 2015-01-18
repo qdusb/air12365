@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	$data=array(
 		"sortnum"=>(int)$_POST["sortnum"],
 		"user"=>$_POST['user'],
-		"user_no"=>$_POST['user_no'],
+		"user_no"=>strtolower($_POST['user_no']),
 		"user_type"=>1,
 		"company"=>$_POST['company'],
 		"tel"=>$_POST['tel'],
@@ -71,7 +71,7 @@ if(!empty($id)){
 		$sortnum	= $row["sortnum"];
 		$user		=$row['user'];
 		$user_no	=$row['user_no'];
-		$address		=intval($row['level']);
+		$address	=intval($row['level']);
 		$phone		=$row['phone'];
 		$contact	=$row['contact'];
 		$tel	=$row['tel'];

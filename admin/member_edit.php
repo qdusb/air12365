@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	$data=array(
 		"sortnum"=>(int)$_POST["sortnum"],
 		"user"=>$_POST['user'],
-		"user_no"=>$_POST['user_no'],
+		"user_no"=>strtolower($_POST['user_no']),
 		"user_type"=>0,
 		"level"=>intval($_POST['level']),
 		"name"=>$_POST['name'],
@@ -155,9 +155,11 @@ if(!empty($id)){
 				<tr class="editTr">
 					<td class="editLeftTd">会员编号/级别</td>
 					<td class="editRightTd">
-                    <input type="text" name="user_no" id="user_no" maxlength="20" size="30" value="<?php echo $user_no?>"/>
+                    <input type="text" name="user_no" id="user_no" maxlength="20" size="30" value="<?php echo $user_no?>" <?php echo $read_only?>/>
+
                     <input type="radio" value="0" name="level" <?php if($level == 0) echo "checked";?> class="user_no_type"/>Vip会员 &nbsp;
                     <input type="radio" value="1" name="level" <?php if($level == 1) echo "checked";?> class="user_no_type"/>钻石会员
+                    <?php if(empty($id)){?>
                     <script>
                     var diamond_no="<?php echo getDiamondNo($db);?>";
                     var vip_no="<?php echo $user_no?>";
@@ -170,6 +172,7 @@ if(!empty($id)){
                         });
                     })
                     </script>
+                    <?php }?>
                     </td>
 				</tr>
 				<tr class="editTr">

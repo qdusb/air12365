@@ -15,6 +15,9 @@ function sendMessage($db,$id_array,$sms_id){
 function sendMessageAdapter($phone,$content){
 	return "ok";
 }
+function getAirRecordData($db,$admin_id,$admin_grade){
+
+}
 function getPersonalMemberData($db,$admin_id,$admin_grade){
 	$docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
 	$levels=array("VIP会员","钻石会员");
