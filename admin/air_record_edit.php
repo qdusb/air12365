@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         "fly_date"=>$_POST['fly_date'],
         "arrive_date"=>$_POST['arrive_date'],
         "trip"=>$_POST['trip'],
+        "type"=>0,
         "ticket_price"=>$_POST['ticket_price'],
         "deposit"=>$_POST['deposit'],
         "admin_id"=>$session_admin_id

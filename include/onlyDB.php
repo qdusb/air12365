@@ -541,7 +541,30 @@ class onlyDB
 		$row = $this->fetch_array($rst);
 		return $row["cnt"];
 	}
-	
+	function getTableFieldValues($table, $fields, $where)
+    {
+        if ($table != "" && is_array($fields) && $where != "")
+        {
+            $sql = "select '".implode(",",$fields)."' from $table $where";
+            $rst = $this->query($sql);
+            if ($row = $this->fetch_array($rst))
+            {
+                $ret=array();
+                foreach($fields as $field){
+                    $ret[$field]=$row[$field];
+                }
+                return $ret;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
 	function getTableFieldValue($table, $getField, $where)
 	{
 		if ($table != "" && $getField != "" && $where != "")
