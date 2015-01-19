@@ -136,14 +136,21 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
                                         <td><a href="<?php echo $row["default_file"]?>" class="menuChild" target="main"><?php echo $row["name"]?></a></td>
                                     </tr>
 							<?php }}?>
+                            <?php
+                            $advances=array(
+                                "个人订单管理"=>"air_record_list.php",
+                                "企业订单管理"=>"company_record_list.php",
+                                "个人会员管理"=>"member_list.php",
+                                "企业会员管理"=>"company_member_list.php"
+                            );
+                            foreach($advances as $key=>$val){
+
+                            ?>
 							<tr height="20">
                                 <td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
-                                <td><a href="member_list.php" class="menuChild" target="main">个人会员管理</a></td>
+                                <td><a href="<?php echo $val?>" class="menuChild" target="main"><?php echo $key?></a></td>
                             </tr>
-                            <tr height="20">
-                                <td width="30" align="center"><img src="images/menu_icon.gif" width="9" height="9"></td>
-                                <td><a href="company_member_list.php" class="menuChild" target="main">企业会员管理</a></td>
-                            </tr>
+                            <?php }?>
                             <tr height="4">
                                 <td colspan="2"></td>
                             </tr>

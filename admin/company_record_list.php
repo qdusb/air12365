@@ -6,9 +6,9 @@ require(dirname(__FILE__) . "/config.php");
 require(dirname(__FILE__) . "/excel_class.php");
 
 $page = (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
-$listUrl = "air_record_list.php?page=$page";
-$editUrl = "air_record_edit.php?page=$page";
-$record_type=0;
+$listUrl = "company_record_list.php?page=$page";
+$editUrl = "company_record_edit.php?page=$page";
+$record_type=1;
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
 
@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $action		=$_POST['action'];
     /*下载*/
     if ($action == "download"){
-        $data=getAirRecordData($db,$session_admin_id,$session_admin_grade);
-        Create_Excel_File("personal_air_record.xls",$data);
+        $data=getCompanyAirRecordData($db,$session_admin_id,$session_admin_grade);
+        Create_Excel_File("company_air_record.xls",$data);
     }elseif ($action == "delete"){
         $id_array = $_POST["ids"];
         if (!is_array($id_array)){
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
     <tr class="position">
-        <td class="position">当前位置: 管理中心 -&gt; 高级管理 -&gt; 个人会员登机信息管理</td>
+        <td class="position">当前位置: 管理中心 -&gt; 高级管理 -&gt; 企业会员登机信息管理</td>
     </tr>
 </table>
 <table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -90,6 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         <tr class="listHeaderTr">
             <td width="1%"></td>
             <td width="10%">会员编号</td>
+            <td width="10%">企业名称</td>
             <td width="10%">乘机人</td>
             <td width="8%">起飞时间</td>
             <td width="15%">到达时间</td>
@@ -110,12 +111,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $rst = $db->query($sql);
         while ($row = $db->fetch_array($rst))
         {
-            $user_no=$db->getTableFieldValue("member","user_no","where id={$row['user_id']}");
+            $ret=$db->getTableFieldValues("member",array("company","user_no"),"where id={$row['user_id']}");
             $css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
             ?>
             <tr class="<?php echo $css?>">
                 <td><input type="checkbox" id="ids" name="ids[]" value="<?php echo $row["id"]?>"></td>
-                <td><?php echo $user_no?></td>
+                <td><?php echo $ret['user_no']?></td>
+                <td><?php echo $ret['company']?></td>
                 <td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["passenger"]?></a></td>
                 <td><?php echo $row['fly_date']?></td>
                 <td><?php echo $row["arrive_date"]?></td>

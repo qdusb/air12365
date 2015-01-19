@@ -15,6 +15,34 @@ function sendMessage($db,$id_array,$sms_id){
 function sendMessageAdapter($phone,$content){
 	return "ok";
 }
+
+function getCompanyAirRecordData($db,$admin_id,$admin_grade){
+    $air_records=array();
+    if($admin_grade==7) {
+        $sql="select * from air_record where type=1 and admin_id={$admin_id} order by sortnum asc";
+    }else{
+        $sql="select * from air_record where type=1  order by sortnum asc";
+    }
+    $rst = $db->query($sql);
+    while($row = $db->fetch_array($rst)){
+        $ret=$db->getTableFieldValue("member","user_no","where id={$row['user_id']}");
+        $row['user_no']=$ret['user_no'];
+        $air_records[]=$row;
+    }
+    $table_trs=array("用户编号","登机人","起飞时间","到达时间","行程","票面价格","预存款","创建时间");
+    $data="<table border='1' bordercolor='#999999' width='100%' bordercolor='#000000'>";
+    $data.="<tr class='listHeaderTr'>";
+    foreach($table_trs as $td){
+        $data.=("<td>".$td."</td>");
+    }
+    $data.="</tr>";
+    foreach($air_records as $key=>$row){
+        $bg=$key%2==0?"#FFFF00":"#FFFFFF";
+        $data.=("<tr bgcolor={$bg}><td>".$row['user_no']."</td><td>".$row['passenger']."</td><td>".$row["fly_date"]."</td><td>".$row["arrive_date"]."</td><td>".$row['trip']."</td><td>".$row["ticket_price"]."</td><td>".$row["deposit"]."</td><td>".$row["create_time"]."</td></tr>");
+    }
+    $data.="</table>";
+    return $data;
+}
 function getAirRecordData($db,$admin_id,$admin_grade){
     $air_records=array();
     if($admin_grade==7) {
@@ -24,12 +52,11 @@ function getAirRecordData($db,$admin_id,$admin_grade){
     }
     $rst = $db->query($sql);
     while($row = $db->fetch_array($rst)){
-        $ret=$db->getTableFieldValues("member",array("name","user_no"),"where id=$user_id");
-        $row['name']=$ret['name'];
+        $ret=$db->getTableFieldValue("member","user_no","where id={$row['user_id']}");
         $row['user_no']=$ret['user_no'];
         $air_records[]=$row;
     }
-    $table_trs=array("用户编号","登机人","起飞时间","到达时间","行程","票面价格","预存款");
+    $table_trs=array("用户编号","登机人","起飞时间","到达时间","行程","票面价格","预存款","创建时间");
     $data="<table border='1' bordercolor='#999999' width='100%' bordercolor='#000000'>";
     $data.="<tr class='listHeaderTr'>";
     foreach($table_trs as $td){
@@ -37,9 +64,8 @@ function getAirRecordData($db,$admin_id,$admin_grade){
     }
     $data.="</tr>";
     foreach($air_records as $key=>$row){
-        $vip=$levels[$row['level']];
         $bg=$key%2==0?"#FFFF00":"#FFFFFF";
-        $data.=("<tr bgcolor={$bg}><td>".$row['user']."</td><td>".$vip."</td><td>".$row["user_no"]."</td><td>".$row["name"]."</td><td>".$docu."</td><td>".$row["docu_no"]."</td><td>".$row["phone"]."</td><td>".$row["company"]."</td><td>".$row["create_time"]."</td></tr>");
+        $data.=("<tr bgcolor={$bg}><td>".$row['user_no']."</td><td>".$row['passenger']."</td><td>".$row["fly_date"]."</td><td>".$row["arrive_date"]."</td><td>".$row['trip']."</td><td>".$row["ticket_price"]."</td><td>".$row["deposit"]."</td><td>".$row["create_time"]."</td></tr>");
     }
     $data.="</table>";
     return $data;

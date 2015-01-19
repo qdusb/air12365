@@ -8,10 +8,10 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_no		=$_POST['user_no'];
-    $sql="select id,name from member where user_no='{$user_no}' limit 1";
+    $sql="select id,name,user_type,contact from member where user_no='{$user_no}' limit 1";
     $rst=$db->query($sql);
     if($row=$db->fetch_array($rst)){
-        echo json_encode(array("retval"=>"ok","user_id"=>$row['id'],"name"=>$row['name']));
+        echo json_encode(array("retval"=>"ok","contact"=>$row["contact"],"user_id"=>$row['id'],"name"=>$row['name'],"user_type"=>$row['user_type']));
     }else{
         echo json_encode(array("retval"=>"failure"));
     }

@@ -545,7 +545,7 @@ class onlyDB
     {
         if ($table != "" && is_array($fields) && $where != "")
         {
-            $sql = "select '".implode(",",$fields)."' from $table $where";
+            $sql = "select ".implode(",",$fields)." from $table $where limit 1";
             $rst = $this->query($sql);
             if ($row = $this->fetch_array($rst))
             {
