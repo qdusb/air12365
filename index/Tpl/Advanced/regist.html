@@ -1,0 +1,66 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.2.min.js"></script>
+<div class="container">
+	<div class="wrap clearfix">
+		<div class="form-login">
+			<p>请输入用户名和密码并点击注册按钮</p>
+			<form action="" name="form_message" method="post">
+				<input name="type" type="hidden" value="{$type}" />
+				<ul>
+					<li class="field">
+						<div class="input clearfix">
+							<label>用户名</label>
+							<input name="username" type="text" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					<li class="field">
+						<div class="input clearfix">
+							<label>密码</label>
+							<input name="pwd" type="password" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					<li class="field">
+						<div class="input clearfix">
+							<label>再次输入</label>
+							<input name="pwd2" type="password" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					<li class="submit-field">
+						<div class="input clearfix"><input type="button" value="注册" id="btn-reg" class="btn-reg" /></div>
+					</li>
+				</ul>
+			</form>
+			<script type="text/javascript">
+		    $(function(){
+		      var url="{:U('Advanced/doRegist')}";
+		      $("#btn-reg").click(function(){
+		      	 var type=$("input[name=type]").val();
+		      	 var name=$("input[name=username]").val();
+		      	 var pwd=$("input[name=pwd]").val();
+		      	 var pwd2=$("input[name=pwd2]").val();
+		      	 if($.trim(name).length<6){
+		      	 	alert("用户名少于6位");
+		      	 	$("input[name=username]").focus();
+		      	 }
+		      	 if($.trim(pwd).length<8){
+		      	 	alert("密码不能少于8位");
+		      	 	$("input[name=pwd]").focus();
+		      	 }
+		      	 if($.trim(pwd)!=$.trim(pwd2)){
+		      	 	alert("两次输入的密码不一致，请确认");
+		      	 	$("input[name=pwd2]").focus();
+		      	 }
+		      	 var data={"username":name,"pwd":pwd,"type":type};
+		      	 alert(data);
+		      	 return false;
+		         $.ajax({url:url,data:{},dataType: "json",type:"POST",success:function(data){
+		              
+		            }});
+		      });
+		    })
+		    </script>
+			
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
