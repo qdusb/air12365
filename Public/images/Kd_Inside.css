@@ -1,0 +1,110 @@
+@charset "utf-8";
+
+.container .wrap { padding:5px; 0}
+.wrap .sidebar { float:left; width:100px; padding:25px; }
+.wrap .main { float:right; width:809px; padding:20px; border-left:#c1bdbe 1px solid; }
+
+.colPicTitle { width:100px; font-size:20px; font-weight:normal; }
+.colPicTitle em { display:block; font-size:12px; }
+
+.menu dl { padding:20px 0; font-size:15px; }
+.menu dl dt { background:url(ico.jpg) no-repeat left center; font-family:"微软雅黑"; }
+.menu dl dt a { position:relative; display:block; width:235px; padding:5px 0 5px 25px; color:#999697; line-height:22px; }
+.menu dl dt a:hover, .menu dl dt .current { color:#000; text-decoration:none; }
+
+.menu dd a { display:block; padding:3px 0 3px 30px; font-size:13px; color:#666; line-height:20px; }
+.menu dd a:hover, .menu dd .current { color:#333; text-decoration:none; }
+
+.location { width:722px; height:42px; margin-bottom:20px; background:url(location.jpg) no-repeat; }
+.colCurTit { float:left; padding:0 10px; font:100 14px "微软雅黑"; line-height:42px; }
+.breadcrumbs { float:right; padding:0 20px; color:#333; line-height:42px; }
+.breadcrumbs a,.breadcrumbs a:hover { color:#000; }
+
+.userInfo { margin-bottom:20px; }
+.userInfo dt  { float:left; }
+.userInfo dd { float:left; width:500px; padding:5px 0 5px 15px; font-size:15px; line-height:100%; }
+.userInfo dd em { display:block; margin-top:20px; font-size:12px; }
+
+.form-login { padding:15px 0 30px 110px; font-size:14px; }
+.form-login p { margin-bottom:20px; border-bottom:#000 1px dashed; line-height:50px; }
+.form-login .field { clear:both; }
+.form-login li.field label { display:block; float:left; width:70px; line-height:24px; }
+.form-login .input { padding:5px 0; zoom:1; }
+.form-login .field:after { content:'\20'; display:block; height:0; clear:both; }
+.form-login .text { height:20px; padding:1px 3px; border:1px solid #000; color:#000; background:none; font-size:14px; }
+.form-login .submit-field { padding-top:40px; }
+.form-login .submit-field .input * { display:inline-block; width:94px; height:30px; background:#2366b6; border-radius:5px; color:#fff; text-align:center; line-height:30px; border:none; overflow:hidden; font-size:14px; font-family:'Microsoft Yahei'; *display:inline; *zoom:1; vertical-align:middle; }
+.form-login .btn-reg { margin-right:30px; }
+
+/* article */
+.artbox { margin:0 15px 30px; text-align:center; }
+.artbox h1 { padding-bottom:10px; font-size:16px; line-height:26px; }
+.artbox .info { padding:0; background:#eee; line-height:25px; }
+.article { padding-bottom:30px; font-size:13px; line-height:200%; word-wrap:break-word; text-align:justify; }
+
+.top { padding:0 45px 20px; text-align:right; }
+
+/* other */
+.prev_next { margin:0 20px 30px; padding:15px; border:#dfdfdf 1px solid; text-align:left; }
+.prev_next li { height:25px; font-weight:bold; line-height:25px; }
+.prev_next li a { font-weight:normal; }
+
+/* pic-item */
+.w { margin:0; overflow:hidden; }
+.w .pic-item { float:left; margin:0; color:#6C6D61; display:inline; text-align:center; }
+.w .pic-item .list-pic { display:block; margin:0 auto; border:#ccc 1px solid; line-height:105px; }
+.w .pic-item dl { height:25px; line-height:25px; background:#00a9a7; }
+.w .pic-item dl a { color:#fff; }
+
+/* list */
+.list { margin:0 30px 30px; clear:both; }
+.list ul li { padding:6px; background:url(line_01.gif) repeat-x left bottom; line-height:20px; clear:both; }
+.list ul li a { padding-left:5px; }
+.list ul li a:hover { text-decoration:underline; }
+.list .date { float:right; padding-left:9px; font-size:11px; font-family:Arial; }
+.list .ico { float:left; width:6px; _width:3px; height:20px; margin:0; background:url(point_01.gif) no-repeat left 9px; }
+
+/* page */
+.page { margin:0 20px 30px; padding:15px 20px 0; color:#000; line-height:24px; }
+.page a { margin:0 5px; color:#000; }
+.page a:hover { text-decoration:underline; }
+.page .current { padding:2px 4px; background:#0848ae; color:#fff; }
+.page .current:hover { color:#fff; }
+.page span { float:right; }
+.page strong { color:#0848ae; }
+
+/* message */
+.message { margin:0 30px 30px; clear:both; }
+.message-list { margin-bottom:5px; padding:5px; border-bottom:1px dashed #D7D7D7; }
+.message-list .m-title { padding:0; color:#d00000; font-weight:bold; line-height:20px; }
+.message-list .m-title span { float:right; color:#999; font-weight:100; }
+.message-list .m-info { padding:5px 0; line-height:24px; }
+.message-list .r-title { padding:0; color:#525252; line-height:20px; }
+.message-list .r-info { padding:5px 0; line-height:24px; }
+
+/* hr */
+.hr { margin:0 30px 30px; clear:both; }
+.hr-list { margin-bottom:5px; padding:5px; border-bottom:1px dashed #D7D7D7; }
+.hr-list .title { padding:0; color:#d00000; font-weight:bold; line-height:20px; }
+.hr-list .title span { float:right; color:#999; font-weight:100; }
+.hr-list .info { padding:5px 0; line-height:24px; }
+.hr-list .apply { padding:5px; text-align:right; }
+
+/* contact */
+.contact { margin:0 20px 30px; clear:both;  padding:10px 20px; line-height:200%; color:#666; word-wrap:break-word; word-break:break-all; }
+
+/* form */
+.form-panel { margin:0 30px 30px; clear:both; }
+.form-panel h4 { margin-bottom:10px; padding:2px 20px; background:#eee; color:#333; line-height:22px; }
+.form-panel .tips { padding:10px 0 10px 110px; color:#CC3732; font-weight:bold; font-size:13px; text-align:left; }
+.form-panel .field { clear:both; }
+.form-panel li.field label { display:block; float:left; width:100px; line-height:24px; text-align:right; }
+.form-panel .input { padding:5px 0; color:#666; zoom:1; }
+.form-panel .input span label { display:inline; float:none; }
+.form-panel .field:after { content:'\20'; display:block; height:0; clear:both; }
+.form-panel .text { height:20px; padding:1px 3px; border:1px solid #D0D0D0; background:#F2F2F2; color:#666; }
+.form-panel .textarea { width:450px; height:100px; padding:1px 3px; border:1px solid #D0D0D0; background:#F2F2F2; color:#666; }
+.form-panel .submit-field { padding:0 10px 20px 100px; clear:both; }
+.form-panel .submit-field input { margin-right:10px; }
+.form-panel .submit-field .btn-submit { width:78px; height:24px; border:none; background:url(btn.jpg) no-repeat; cursor:pointer; }
+.form-panel .submit-field .btn-reset { width:78px; height:24px; border:none; background:url(btn.jpg) no-repeat; cursor:pointer; }

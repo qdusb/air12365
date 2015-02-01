@@ -1,0 +1,21 @@
+@charset "utf-8";
+.loginWrap { width:972px; margin:0 auto; padding:40px 0 20px; border-bottom:#d8d4d5 1px solid; }
+.loginWrap .hd { float:left; width:210px; height:30px; }
+.loginWrap li { float:left; width:80px; height:30px; padding-left:25px; background:url(point.jpg) no-repeat left center; font-size:14px; line-height:30px; }
+.loginWrap li.on { background:url(pointOn.jpg) no-repeat left center; }
+
+.loginWrap .bd { float:right; width:720px; height:30px; font-size:15px; }
+.login p { float:left; width:220px; display:inline }
+.login p.name { margin-right:20px; }.login p.pas { margin-right:50px; }
+.login p.name,.login p.pas { width:218px; height:28px; border:#a8a5a5 1px solid; border-radius:5px; }
+.login p label { display:inline-block; width:40px; border-right:#d8d4d5 1px solid; text-align:center; line-height:28px; color:#777575; *display:inline; *zoom:1; }
+.login p input { width:170px; height:28px; vertical-align:middle; background:none; text-indent:1em; border:none; }
+.login .btn * { display:inline-block; width:94px; height:30px; background:#2366b6; border-radius:5px; color:#fff; text-align:center; line-height:30px; border:none; overflow:hidden; *display:inline; *zoom:1; vertical-align:middle; }
+.login .btn a { margin-left:16px; }
+.login p.btn { width:210px; }
+
+.picShow { padding:10px 5px; }
+.picShow .hd { float:left; width:25px; padding:10px; font-size:20px; text-align:center; line-height:20px; color:#fff; background:#0053b7; border-radius:5px; }
+.picShow .bd { float:right; width:940px; }
+.picShow .bd li { float:left; width:78px; text-align:center; }
+.picShow .bd li p { margin-top:20px; }
