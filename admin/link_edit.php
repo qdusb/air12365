@@ -171,7 +171,7 @@ else
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr class="position">
-				<td class="position">当前位置: 管理中心 -&gt; <?phpecho $class_name?> -&gt; 新增/编辑</td>
+				<td class="position">当前位置: 管理中心 -&gt; <?php echo $class_name?> -&gt; 新增/编辑</td>
 			</tr>
 		</table>
 		<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">

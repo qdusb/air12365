@@ -99,14 +99,14 @@ function setBaseWebConfig()
 {
 	$configs=array();
 	$db=M("config_base");
-	$row=$db->where("id=1")->select();
-	$config=$row[0];
+	$config=$db->where("id=1")->find();
 	C("CONFIG_NAME",$config["name"]);
 	C("CONFIG_TITLE",$config["title"]);
 	C("CONFIG_ICP",$config["icp"]);
 	C("CONFIG_KEYWORD",$config["keyword"]);
 	C("CONFIG_DESCRIPTION",$config["description"]);
 	C("CONFIG_ADDRESS",$config["address"]);
+	C("CONFIG_CONTACT",$config["contact"]);
 	C("CONFIG_JAVASCRIPT",$config["javascript"]);
 
 	$ad="";

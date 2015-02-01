@@ -107,13 +107,13 @@ if ($id != "")
 							if ($class_id == $row["id"])
 							{
 						?>
-								<option value="<?phpecho $row["id"]?>" selected><?phpecho $row["name"]?></option>
+								<option value="<?php echo $row["id"]?>" selected><?php echo $row["name"]?></option>
 						<?php
 							}
 							else
 							{
 						?>
-								<option value="<?phpecho $row["id"]?>"><?phpecho $row["name"]?></option>
+								<option value="<?php echo $row["id"]?>"><?php echo $row["name"]?></option>
 						<?php
 							}
 						}

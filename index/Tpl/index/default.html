@@ -1,31 +1,74 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>信望餐饮</title>
-<link rel="stylesheet" href="images/base.css" />
-<link rel="stylesheet" href="images/home.css" />
-<script src="js/jquery-1.7.2.min.js"></script>
-<script src="js/jquery.SuperSlide.2.1.1.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<meta content="{$config_keyword}" name="keywords">
+<meta content="{$config_description}" name="description">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/images/Kd_Common.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/images/Kd_Default.css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.SuperSlide.2.1.js"></script>
 </head>
 <body>
-<div class="wrapper">
-	<div class="header">
-		<div class="topArea">
-			<h2 class="logo"><a href="default.html">信望餐饮</a></h2>
-			<div class="nav">
-				<ul class="navs clearfix">
-					<li class="n1"><a href="default.html">品牌故事</a></li>
-					<li class="n2"><a href="#" class="current">新闻订阅</a></li>
-					<li class="n3"><a href="#">菜 单</a></li>
-					<li class="n4"><a href="#">招商加盟</a></li>
-					<li class="n5"><a href="#">人才招聘</a></li>
-					<li class="n6"><a href="#">联系我们</a></li>
+<div class="header">
+	<div class="wrap clearfix">
+		<h1 class="logo"><a href="{:U('Index/index')}"><img src="__PUBLIC__/images/logo.jpg" width="273" height="89" /></a></h1>
+		<p class="topTel">客服电话：<em>0551-65151513</em></p>
+	</div>
+	<div class="banner">
+		<div class="bd">
+			<ul>
+				<li style="background:url(__PUBLIC__/images/banner.jpg) no-repeat center top"><a href=""></a></li>
+				<li style="background:url(__PUBLIC__/images/banner.jpg) no-repeat center top"><a href=""></a></li>
+				<li style="background:url(__PUBLIC__/images/banner.jpg) no-repeat center top"><a href=""></a></li>
+			</ul>
+		</div>
+		<div class="hd"><ul></ul></div>
+	</div>
+</div>
+<div class="container">
+	<div class="wrap">
+		<div class="loginWrap clearfix">
+			<ul class="hd">
+				<li>普通用户</li>
+				<li>企业用户</li>
+			</ul>
+			<div class="bd">
+				<div class="login clearfix">
+					<form method="post" action="">
+						<p class="name"><label>账号</label><input type="text" name="name" /></p>
+						<p class="pas"><label>密码</label><input type="password" name="pas" /></p>
+						<p class="btn"><button type="submit">登陆</button> <a target="_blank" href="{:U(regist/personal)}">注册</a></p>
+					</form>
+				</div>
+				<div class="login clearfix">
+					<form method="post" action="">
+						<p class="name"><label>账号</label><input type="text" name="name" /></p>
+						<p class="pas"><label>密码</label><input type="password" name="pas" /></p>
+						<p class="btn"><button type="submit">登陆</button> <a target="_blank" href="{:U(regist/company)}">注册</a></p>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="picShow clearfix">
+			<div class="hd">网上值机</div>
+			<div class="bd">
+				<ul>
+				<foreach name="links" item="v">
+				<li><img src="{:C('UPLOAD_PATH')}{$v.pic}" width="50" height="50" /><p>{$v.name}</p></li>
+				</foreach>
 				</ul>
 			</div>
 		</div>
 	</div>
 </div>
-<!--[if lte IE 6]><script src="js/iepng.js"></script><![endif]-->
-</body>
-</html>
+<script type="text/javascript">
+	jQuery(".banner").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:true,autoPlay:true,interTime:5000});
+	jQuery(".loginWrap").slide({titCell:".hd li",mainCell:".bd"});
+	jQuery(".picShow").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:12,interTime:50});
+</script>
+<include file="Public:footer"/>
+
+
