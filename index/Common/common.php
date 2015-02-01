@@ -9,6 +9,41 @@ update 2014.6.10
 常用链接跳转
 请及时更新
 */
+function getMemberNo($type)
+{
+	if($type==0){
+		return getDiamondNo();
+	}else{
+		return getVipNo();
+	}
+}
+function getCompanyNo(){
+	$num=(string)rand(0,999);
+	$len=strlen($num);
+	for($i=0;$i<3-$len;$i++){
+		$num="0".$num;
+	}
+	$user_no="xc999".$num."888";
+	$retval=M("member")->where("user_no='{$user_no}'")->find();
+	while(!empty($retval)){
+		$user_no=getCompanyNo();
+	}
+	return $user_no;
+}
+function getDiamondNo(){
+	$num=(string)rand(1,999);
+	while($num=="888")$num=(string)rand(1,999);
+	$len=strlen($num);
+	for($i=0;$i<6-$len;$i++){
+		$num="0".$num;
+	}
+	$user_no="xc999".$num;
+	$retval=M("member")->where("user_no='{$user_no}'")->find();
+	while(!empty($retval)){
+		$user_no=getCompanyNo();
+	}
+	return $user_no;
+}
 function getLinkURL($class_id)
 {
 	if($class_id=="103")
