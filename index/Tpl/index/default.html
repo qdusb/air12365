@@ -20,9 +20,9 @@
 	<div class="banner">
 		<div class="bd">
 			<ul>
-				<li style="background:url(__PUBLIC__/images/banner.jpg) no-repeat center top"><a href=""></a></li>
-				<li style="background:url(__PUBLIC__/images/banner.jpg) no-repeat center top"><a href=""></a></li>
-				<li style="background:url(__PUBLIC__/images/banner.jpg) no-repeat center top"><a href=""></a></li>
+                <foreach name="banners" item="v">
+				<li style="background:url({:C('UPLOAD_PATH')}{$v.pic}) no-repeat center top"><a href=""></a></li>
+                </foreach>
 			</ul>
 		</div>
 		<div class="hd"><ul></ul></div>
