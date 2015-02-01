@@ -43,6 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         }else{
             info("新增失败");
         }
+        $record_data=array(
+            "record_id"=>$db->getMax("air_record","id"),
+            "admin_id"=>$session_admin_id
+        );
+        $db->insert_data("record_log",$record_data);
     }else{
 
         $data['update_time']=date("Y:m:d H:i:s");

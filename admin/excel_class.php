@@ -492,7 +492,7 @@ $date=$date>25568?$date:25569;
 $f_i=$this->xf['format'][$val];
 if(preg_match("/[m|d|y]/i",$this->format[$f_i])!=0){
     if(strrpos($this->format[$f_i],'[')!=FALSE) {
-        $tmp = preg_replace("/(\[\/?)(\w+)([^\]]*\])/","'\\1'.''.'\\3'",$this->format[$f_i]);
+        $tmp = preg_replace_callback_callback("/(\[\/?)(\w+)([^\]]*\])/","'\\1'.''.'\\3'",$this->format[$f_i]);
     if(preg_match("/[m|d|y]/i",$tmp)!=0)
        return TRUE;
      else

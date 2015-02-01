@@ -452,7 +452,7 @@ class Services_JSON
     */
     function reduce_string($str)
     {
-        $str = preg_replace(array(
+        $str = preg_replace_callback_callback(array(
 
                 // eliminate single line comments in '// ...' form
                 '#^\s*//(.+)$#m',
