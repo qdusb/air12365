@@ -3,7 +3,7 @@ class UserAction extends BasicAction
 {
 	public function index(){
 		$user=session('user');
-
+		$info_type=I("info_type","","htmlspecialchars");
 		if(empty($user)){
 			U("Index/index","","",true);
 		}else{
@@ -16,7 +16,11 @@ class UserAction extends BasicAction
 			}
 		}
 		$this->assign("title","会员页面"."-".C("CONFIG_TITLE"));
-		$this->display("index");
+		if($info_type=="info"){
+			$this->display("info");
+		}else{
+			$this->display("index");
+		}
 	}
 	public function login(){
 		if($this->isPost()){

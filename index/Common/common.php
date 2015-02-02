@@ -1,14 +1,13 @@
 <?php
 /*
 author reevesc cui
-update 2014.6.10
-常用配置函数
 */
 
-/*
-常用链接跳转
-请及时更新
-*/
+
+function sendMessageAdapter($phone,$content){
+	return "ok";
+}
+
 function getMemberNo($type)
 {
 	if($type==0){
@@ -62,37 +61,7 @@ function getVipNo(){
 }
 function getLinkURL($class_id)
 {
-	if($class_id=="103")
-	{
-		$url=U("Info/menu");
-	}
-	else if(strlen($class_id)==6&&substr($class_id,0,3)=="103")
-	{
-		$db=M("info");
-		$id=$db->where("class_id={$class_id}")->getfield("id");
-		$url=U("Display/index",array("id"=>$id,"type"=>"pic"));
-	}
-	else if($class_id=="106101"||$class_id=="106")
-	{
-		$url=U("Advanced/contact");
-	}
-	else if($class_id=="106102")
-	{
-		$url=U("Advanced/message");
-	}
-	else if($class_id=="104101"||$class_id=="104")
-	{
-		$url=U("Advanced/join");
-	}
-	else if($class_id=="105101"||$class_id=="105")
-	{
-		$url=U("HR/index");
-	}
-	else
-	{
-		$url=U("Info/index?class_id=$class_id");
-		
-	}
+	$url="";
 	return $url;
 }
 /*分页*/
