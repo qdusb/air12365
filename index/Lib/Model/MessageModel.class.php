@@ -7,12 +7,7 @@ class MessageModel extends Model{
     array('content','require','留言内容不能为空'),
   );
 	public function checkPhone($data){
-		$strRule="/^1[358]\d{9}$/";
-		if(preg_match($strRule,$data)==0)
-		{
-			return false;
-		}
-		return true;
+		return preg_match("/^1[345678]\d{9}$/",$data);
 	}
 }
 ?>

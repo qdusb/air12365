@@ -1,9 +1,6 @@
 <?php
 /*
 author reevesc cui
-update 2014.6.10
-高级页面非常规页面
-比如留言，联系我们,搜索页面
 */
 class AdvancedAction extends BasicAction
 {
@@ -101,10 +98,9 @@ class AdvancedAction extends BasicAction
 					"content"=>$content,
 					"create_time"=>date("Y-m-d H:i:s")
 					);
-				$rst=$db->data($data)->add();
+				$rst=$db->add($data);
 				if($rst){
 					$returnInfo="ok";
-					//$this->success("提交成功");
 				}else{
 					$returnInfo="error";
 				}
