@@ -5,6 +5,24 @@ class UserAction extends BasicAction
 		$this->assign("title","会员页面"."-".C("CONFIG_TITLE"));
 		$this->display("index");
 	}
+	public function login(){
+		if($this->isPost()){
+			$pass=I("pas","","htmlspecialchars");
+			$user=I("name","","htmlspecialchars");
+			if(empty($pass)||empty($user)){
+				U("Index/index",array("retval"=>1),"",true);
+			}
+			$db=M("member");
+			$pass=md5($pass);
+			$retval=$db->where("user='{$user}' and pass='{$pass}'")->find();
+			if($retval){
+				session('user',$user); 
+				U("User/index","","",true);
+			}else{
+				U("Index/index",array("retval"=>2),"",true);
+			}
+		}
+	}
 	public function regist(){
 		$type	=I("type","0","htmlspecialchars");
 		$db=M("member");
