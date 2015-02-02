@@ -1,0 +1,25 @@
+<include file="Public:header"/>
+<div class="container">
+	<div class="wrap clearfix">
+		<div class="sidebar">
+			<h2 class="colPicTitle">用户中心<em>user center</em></h2>
+			<div class="menu">
+				<dl>
+					<dt><a href="#" class="current"><em></em>个人信息</a></dt>
+					<dt><a href="{:U('User/index',array('info_type'=>'info'))}" ><em></em>账号信息</a></dt>
+					<dt><a href="{:U('User/recordList')}"><em></em>订单中心</a></dt>
+				</dl>
+			</div>
+		</div>
+		<div class="main">
+			<div class="article">
+				<form action="{:U('User/updateInfo')}" method="post">
+					<textarea name="intro">{$user.intro}</textarea>
+					<input type="submit" value="更改">
+				</form>
+			</div>
+		</div>
+	</div>
+	<p class="wrapBt"></p>
+</div>
+<include file="Public:footer"/>

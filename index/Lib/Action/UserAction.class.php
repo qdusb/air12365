@@ -48,6 +48,20 @@ class UserAction extends BasicAction
 	}
 	public function recordList(){
 		$user=session('user');
+		if(empty($user)){
+			U("Index/index","","",true);
+		}else{
+			$db=M("member");
+			$user=$db->where("user='{$user}'")->find();
+			if(empty($user)){
+				U("Index/index","","",true);
+			}else{
+				$this->assign("user",$user);
+			}
+		}
+		$type=I("page",1,"intval");
+		
+		$this->display("record_list");
 	}
 	public function update(){
 		if($this->isPost()){
