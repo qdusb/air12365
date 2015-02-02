@@ -16,8 +16,7 @@ class BasicAction extends Action{
 		if(!empty($this->class_id)){
 			$this->setIDConfig($this->class_id);
 		}
-		
-
+	
 		setBaseWebConfig();
 		/*一级导航*/
 		$navs=getBaseClass(6);

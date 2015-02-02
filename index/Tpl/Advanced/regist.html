@@ -38,8 +38,8 @@
 		      	 var name=$("input[name=username]").val();
 		      	 var pwd=$("input[name=pwd]").val();
 		      	 var pwd2=$("input[name=pwd2]").val();
-		      	 if($.trim(name).length<6){
-		      	 	alert("用户名少于6位");
+		      	 if($.trim(name).length<2){
+		      	 	alert("用户名少于2位");
 		      	 	$("input[name=username]").focus();
 		      	 }
 		      	 if($.trim(pwd).length<8){
@@ -51,15 +51,17 @@
 		      	 	$("input[name=pwd2]").focus();
 		      	 }
 		      	 var data={"username":name,"pwd":pwd,"type":type};
-		      	 alert(data);
-		      	 return false;
-		         $.ajax({url:url,data:{},dataType: "json",type:"POST",success:function(data){
-		              
-		            }});
+		      	 $.ajax({url:url,data:data,dataType: "json",type:"POST",success:function(data){
+		      	 	if(data.returnInfo=="success"){
+		               alert("注册成功");
+		               window.location.href="User/index";
+		      	 	}else{
+		      	 		alert(data.returnInfo);
+		      	 	}
+		          }});
 		      });
 		    })
 		    </script>
-			
 		</div>
 	</div>
 </div>

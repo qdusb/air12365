@@ -10,41 +10,7 @@ class AdvancedAction extends BasicAction
 	function index(){
 		$this->error("非法请求");
 	}
-	function regist(){
-		$type	=I("type","0","htmlspecialchars");
-		$this->assign("type",$type);
-		$this->display("regist");
-	}
-	function doRegist(){
-		if($this->isAjax()){
-			$db=M("member");
-			$type	=I("type","0","htmlspecialchars");
-			$pass=I("pwd","","htmlspecialchars");
-			$user=I("username","","htmlspecialchars");
-			if(empty($pass)||empty($user)){
-				$this->error("抱歉，参数不能为空",U("Index/index"));
-			}
-			$retval=$db->where("user='{$user}'")->find();
-			if(!empty($retval)){
-				echo json_encode(array('returnInfo'=>"抱歉，此用户名已被使用！"));
-			}
-			
-			$data=array(
-				"sortnum"=>$db->where("user_type={$type}")->max("sortnum")+10,
-				"user"=>$user,
-				"pass"=>md5($pass),
-				"user_no"=>getMemberNo($type)
-				);
-			$rst=$db->data($data)->add();
-			if($rst){
-				echo json_encode(array('returnInfo'=>"sucess"));
-			}else{
-				$this->error("抱歉，此页面不存在",U("Advanced/regist",array("type"=>$type)));
-			}
-		}else{
-			$this->error("抱歉，此页面不存在,马上跳回首页",U("Index/index"));
-		}
-	}
+	
 	/*招商加盟*/
 	function join(){
 		$class_id="104101";

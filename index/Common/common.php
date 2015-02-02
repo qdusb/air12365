@@ -12,9 +12,9 @@ update 2014.6.10
 function getMemberNo($type)
 {
 	if($type==0){
-		return getDiamondNo();
-	}else{
 		return getVipNo();
+	}else{
+		return getCompanyNo();
 	}
 }
 function getCompanyNo(){
@@ -40,7 +40,23 @@ function getDiamondNo(){
 	$user_no="xc999".$num;
 	$retval=M("member")->where("user_no='{$user_no}'")->find();
 	while(!empty($retval)){
-		$user_no=getCompanyNo();
+		$user_no=getDiamondNo();
+	}
+	return $user_no;
+}
+function getVipNo(){
+	$num=(string)mt_rand(1000,999999);
+	
+	while($num=="888")$num=(string)mt_rand(1,999999);
+	$len=strlen($num);
+	for($i=0;$i<6-$len;$i++){
+		$num="0".$num;
+	}
+	$user_no="xc999".$num;
+	
+	$retval=M("member")->where("user_no='{$user_no}'")->find();
+	while(!empty($retval)){
+		$user_no=getVipNo();
 	}
 	return $user_no;
 }
