@@ -46,6 +46,17 @@ class UserAction extends BasicAction
 			}
 		}
 	}
+	public function recordList(){
+		$user=session('user');
+	}
+	public function update(){
+		if($this->isPost()){
+		}
+	}
+	public function updateInfo(){
+		if($this->isPost()){
+		}
+	}
 	public function regist(){
 		$type	=I("type","0","htmlspecialchars");
 		$db=M("member");
