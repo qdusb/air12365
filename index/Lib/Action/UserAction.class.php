@@ -2,11 +2,25 @@
 class UserAction extends BasicAction
 {
 	public function index(){
+		$user=session('user');
+
+		if(empty($user)){
+			U("Index/index","","",true);
+		}else{
+			$db=M("member");
+			$user=$db->where("user='{$user}'")->find();
+			if(empty($user)){
+				U("Index/index","","",true);
+			}else{
+				$this->assign("user",$user);
+			}
+		}
 		$this->assign("title","会员页面"."-".C("CONFIG_TITLE"));
 		$this->display("index");
 	}
 	public function login(){
 		if($this->isPost()){
+			$type=I("type",0,"htmlspecialchars");
 			$pass=I("pas","","htmlspecialchars");
 			$user=I("name","","htmlspecialchars");
 			if(empty($pass)||empty($user)){
@@ -17,6 +31,11 @@ class UserAction extends BasicAction
 			$retval=$db->where("user='{$user}' and pass='{$pass}'")->find();
 			if($retval){
 				session('user',$user); 
+				$data=array(
+					"login_time"=>date("Y-m-d H:i:s"),
+					"login_num"=>$retval['login_num']+1
+					);
+				$db->where("user='{$user}'")->save($data);
 				U("User/index","","",true);
 			}else{
 				U("Index/index",array("retval"=>2),"",true);
@@ -54,7 +73,9 @@ class UserAction extends BasicAction
 				"level"=>0,
 				"admin_id"=>0,
 				"pass"=>md5($pass),
-				"user_no"=>getMemberNo($type)
+				"user_no"=>getMemberNo($type),
+				"login_time"=>date("Y-m-d H:i:s"),
+				"login_num"=>1
 				);
 			$rst=$db->data($data)->add();
 			if($rst){
