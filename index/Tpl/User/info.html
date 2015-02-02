@@ -1,0 +1,37 @@
+<include file="Public:header"/>
+<div class="container">
+	<div class="wrap clearfix">
+		<div class="sidebar">
+			<h2 class="colPicTitle">用户中心<em>user center</em></h2>
+			<div class="menu">
+				<dl>
+					<dt><a href="{:U('User/index')}"><em></em>个人信息</a></dt>
+					<dt><a href="#" class="current"><em></em>账号信息</a></dt>
+					<dt><a href="{:U('User/recordList')}"><em></em>订单中心</a></dt>
+				</dl>
+			</div>
+		</div>
+		<div class="main">
+			<dl class="userInfo clearfix">
+				<dt><img src="__PUBLIC__/images/userPic.jpg" width="102" height="58" /></dt>
+				<dd>{$user.name}<em>最新登陆：{$user.login_time}</em></dd>
+			</dl>
+			<form action="{:U('User/update')}" method="post">
+			<div class="article">
+				<p>账号：{$user.user}</p>
+				
+				<p>等级：
+				<if condition="$user['level'] eq 0 ">1级（普通会员）
+			    <else /> 2级（钻石会员）
+			    </if>
+			    </p>
+				<p>账户安全级别：中等</p>
+				<p>个人积分：0分</p>
+				<p>手机号码：{$user.phone}</p>
+				<p>注册邮箱：{$user.email}</p>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
