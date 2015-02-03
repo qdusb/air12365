@@ -25,7 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		"docu_type"=>$_POST['docu_type'],
 		"docu_no"=>$_POST['docu_no'],
 		"phone"=>$_POST['phone'],
+		"email"=>$_POST['email'],
 		"company"=>$_POST['company'],
+		"intro"=>$_POST['intro'],
 		"admin_id"=>$session_admin_id
 	);
 
@@ -76,7 +78,10 @@ if(!empty($id)){
 		$docu_type	=$row['docu_type'];
 		$docu_no	=$row['docu_no'];
 		$phone		=$row['phone'];
+		$email		=$row['email'];
 		$company	=$row['company'];
+		$payment	=$row['payment'];
+		$intro	=$row['intro'];
 
 		if($user_no==""){
 			if($level==1){
@@ -152,6 +157,10 @@ if(!empty($id)){
 					<td class="editLeftTd">用户名</td>
 					<td class="editRightTd"><input type="text" name="user" maxlength="20" size="60" value="<?php echo $user?>" <?php echo $read_only?>/></td>
 				</tr>
+				<!-- <tr class="editTr">
+					<td class="editLeftTd">预付款</td>
+					<td class="editRightTd"><input type="text" name="payment" maxlength="20" size="60" value="<?php echo $payment?>"/></td>
+				</tr> -->
 				<tr class="editTr">
 					<td class="editLeftTd">会员编号/级别</td>
 					<td class="editRightTd">
@@ -202,10 +211,18 @@ if(!empty($id)){
 					<td class="editLeftTd">电话</td>
 					<td class="editRightTd"><input type="text" name="phone" maxlength="20" size="60" value="<?php echo $phone?>"/></td>
 				</tr>
-	
+				<tr class="editTr">
+					<td class="editLeftTd">邮箱</td>
+					<td class="editRightTd"><input type="text" name="email" maxlength="20" size="60" value="<?php echo $email?>"/></td>
+				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">工作单位</td>
 					<td class="editRightTd"><input type="text" name="company" maxlength="20" size="60" value="<?php echo $company?>"/></td>
+				</tr>
+				<tr class="editTr">
+					<td class="editLeftTd">自我介绍</td>
+					<td class="editRightTd"><textarea name="intro" style="resize: none;width: 600px;height:400px;max-width:600px;max-height:200px;background:#FFFFFF;"><?php echo $intro?></textarea>
+					<br></td>
 				</tr>
 				<tr class="editFooterTr">
 					<td class="editFooterTd" colSpan="2">

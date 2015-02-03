@@ -12,6 +12,9 @@ class UserAction extends BasicAction
 			if(empty($user)){
 				U("Index/index","","",true);
 			}else{
+				$docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
+				$user['docu_name']=$docu_types[$user['docu_type']];
+				$user['integral']=intval(M("air_record")->where("user_id={$user['id']}")->sum("ticket_price"));
 				$this->assign("user",$user);
 			}
 		}
@@ -59,16 +62,44 @@ class UserAction extends BasicAction
 				$this->assign("user",$user);
 			}
 		}
-		$type=I("page",1,"intval");
-		
+		$db=M("air_record");
+		$records=$db->where("user_id={$user['id']}")->order("sortnum desc")->select();
+		$this->assign("records",$records);
+		$this->assign("title","会员页面"."-".C("CONFIG_TITLE"));
 		$this->display("record_list");
 	}
 	public function update(){
 		if($this->isPost()){
+			$user=session('user');
+			$user_type=I("user_type",0);
+			if($user_type==0){
+				$data=array(
+					"name"=>I("name","","htmlspecialchars"),
+					"company"=>I("company","","htmlspecialchars"),
+					"phone"=>I("phone","","htmlspecialchars"),
+					"email"=>I("email","","htmlspecialchars"),
+					"update_time"=>date("Y-m-d H:i:s")
+				);
+			}else{
+				$data=array(
+					"address"=>I("address","","htmlspecialchars"),
+					"tel"=>I("tel","","htmlspecialchars"),
+					"contact"=>I("contact","","htmlspecialchars"),
+					"phone"=>I("phone","","htmlspecialchars"),
+					"update_time"=>date("Y-m-d H:i:s")
+				);
+			}
+			M("member")->where("user='{$user}'")->save($data);
+			U("index",array("info_type"=>"info"),"",true);
 		}
 	}
 	public function updateInfo(){
 		if($this->isPost()){
+			$intro=I("intro","","htmlspecialchars");
+			$user=session('user');
+			$data=array("intro"=>$intro,"update_time"=>date("Y-m-d H:i:s"));
+			M("member")->where("user='{$user}'")->save($data);
+			U("index","","",true);
 		}
 	}
 	public function regist(){
@@ -77,6 +108,10 @@ class UserAction extends BasicAction
 		$this->assign("title","会员注册-".C("CONFIG_TITLE"));
 		$this->assign("type",$type);
 		$this->display("regist");
+	}
+	public function loginout(){
+		session('user',null);
+		U("Index/index","","",true);
 	}
 	public function doRegist(){
 		if($this->isAjax()){
@@ -98,7 +133,7 @@ class UserAction extends BasicAction
 			$data=array(
 				"sortnum"=>$db->where("user_type={$type}")->max("sortnum")+10,
 				"user"=>$user,
-				"user_type"=>0,
+				"user_type"=>$type,
 				"level"=>0,
 				"admin_id"=>0,
 				"pass"=>md5($pass),

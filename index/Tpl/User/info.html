@@ -3,11 +3,12 @@
 	<div class="wrap clearfix">
 		<div class="sidebar">
 			<h2 class="colPicTitle">用户中心<em>user center</em></h2>
-			<div class="menu">
+			<div class="menu" style="width:60px">
 				<dl>
 					<dt><a href="{:U('User/index')}"><em></em>个人信息</a></dt>
 					<dt><a href="#" class="current"><em></em>账号信息</a></dt>
 					<dt><a href="{:U('User/recordList')}"><em></em>订单中心</a></dt>
+					<dt><a href="{:U('User/loginout')}"><em></em>退出</a></dt>
 				</dl>
 			</div>
 		</div>
@@ -17,19 +18,36 @@
 				<dd>{$user.name}<em>最新登陆：{$user.login_time}</em></dd>
 			</dl>
 			<form action="{:U('User/update')}" method="post">
+			<input type="hidden" name="user_type" value="{$user.user_type}">
 			<div class="article">
 				<p>账号：{$user.user}</p>
-				
-				<p>等级：
-				<if condition="$user['level'] eq 0 ">1级（普通会员）
-			    <else /> 2级（钻石会员）
+				<p>编号：{$user.user_no}</p>
+				<if condition="$user['user_type'] eq 0 ">
+					<p>会员性质:个人会员</p>
+					<p>等级：
+						<if condition="$user['level'] eq 0 ">1级（普通会员）
+					    <else /> 2级（钻石会员）
+					    </if>
+				    </p>
+				    <p>预付款(元):{$user.payment}</p>
+				    <p>账户安全级别：中等</p>
+					<p>个人积分：{$user.integral}分</p>
+					<p>姓名：<input type="text" name="name" value="{$user.name}"></p>
+					<p>证件类型：{$user.docu_name}</p>
+					<p>证件编号：{$user.docu_no}</p>
+					<p>工作单位：<input type="text" name="company" value="{$user.company}"></p>
+					<p>手机号码：<input type="text" name="phone" value="{$user.phone}"></p>
+					<p>注册邮箱：<input type="email" name="email" value="{$user.email}"></p>
+				<else />
+					<p>会员性质:企业会员</p>
+					<p>公司名称：{$user.company}</p>
+					<p>公司地址：<input type="text" name="address" value="{$user.address}"></p>
+					<p>公司电话：<input type="text" name="tel" value="{$user.tel}"></p>
+					<p>公司联系人：<input type="text" name="contact" value="{$user.contact}"></p>
+					<p>公司联系人电话：<input type="text" name="phone" value="{$user.phone}"></p>
 			    </if>
-			    </p>
-				<p>账户安全级别：中等</p>
-				<p>个人积分：0分</p>
-				<p>手机号码：{$user.phone}</p>
-				<p>注册邮箱：{$user.email}</p>
 			</div>
+			<div><input type="submit" value="更改" size="30"></div>
 			</form>
 		</div>
 	</div>

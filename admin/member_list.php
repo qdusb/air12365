@@ -146,6 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             <td width="15%">证件编号</td>
             <td width="8%">会员等级</td>
             <td width="15%">联系方式</td>
+            <td width="15%">注册邮箱</td>
             <td width="15%">工作单位</td>
             <td>创建时间</td>
 
@@ -172,12 +173,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 <td><?php echo $row["docu_no"]?></td>
                 <td><?php echo $levels[$row['level']];?></td>
                 <td><?php echo $row["phone"]?></td>
+                <td><?php echo $row["email"]?></td>
                 <td><?php echo $row["company"]?></td>
                 <td><?php echo $row["create_time"]?></td>
             </tr>
         <?php }?>
         <tr class="listFooterTr">
-            <td colspan="10"><?php echo $page_str?></td>
+            <td colspan="12"><?php echo $page_str?></td>
         </tr>
     </table>
 </form>

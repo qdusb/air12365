@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		"contact"=>$_POST['contact'],
 		"phone"=>$_POST['phone'],
 		"address"=>$_POST['address'],
+		"intro"=>$_POST['intro'],
 		"admin_id"=>$session_admin_id
 	);
 
@@ -77,6 +78,7 @@ if(!empty($id)){
 		$tel	=$row['tel'];
 		$phone		=$row['phone'];
 		$company	=$row['company'];
+		$intro	=$row['intro'];
 
 		if($user_no==""){
 			$user_no=getCompanyNo($db);
@@ -177,6 +179,11 @@ if(!empty($id)){
 				<tr class="editTr">
 					<td class="editLeftTd">公司地址</td>
 					<td class="editRightTd"><input type="text" name="address" maxlength="20" size="60" value="<?php echo $address?>"/></td>
+				</tr>
+				<tr class="editTr">
+					<td class="editLeftTd">自我介绍</td>
+					<td class="editRightTd"><textarea name="intro" style="resize: none;width: 600px;height:400px;max-width:600px;max-height:200px;background:#FFFFFF;"><?php echo $intro?></textarea>
+					<br></td>
 				</tr>
 				<tr class="editFooterTr">
 					<td class="editFooterTd" colSpan="2">
