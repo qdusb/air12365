@@ -120,6 +120,15 @@ class UserAction extends BasicAction
 			$type=I("type","0","htmlspecialchars");
 			$pass=I("pwd","","htmlspecialchars");
 			$user=I("username","","htmlspecialchars");
+			$phone=I("phone","","htmlspecialchars");
+			$docu_type=I("docu_type","","htmlspecialchars");
+			$docu_no=I("docu_no","","htmlspecialchars");
+			$email=I("email","","htmlspecialchars");
+			$name=I("name","","htmlspecialchars");
+			$company=I("company","","htmlspecialchars");
+			$address=I("address","","htmlspecialchars");
+			$intro=I("intro","","htmlspecialchars");
+
 			if(empty($pass)||empty($user)){
 				echo json_encode(array('returnInfo'=>"抱歉，参数不能为空！"));
 				exit;
@@ -129,21 +138,46 @@ class UserAction extends BasicAction
 				echo json_encode(array('returnInfo'=>"抱歉，此用户名已被使用！"));
 				exit;
 			}
-			
-			$data=array(
-				"sortnum"=>$db->where("user_type={$type}")->max("sortnum")+10,
-				"user"=>$user,
-				"user_type"=>$type,
-				"level"=>0,
-				"admin_id"=>0,
-				"pass"=>md5($pass),
-				"user_no"=>getMemberNo($type),
-				"login_time"=>date("Y-m-d H:i:s"),
-				"login_num"=>1
+			if($type==0){
+				$data=array(
+					"sortnum"=>$db->where("user_type={$type}")->max("sortnum")+10,
+					"user"=>$user,
+					"user_type"=>0,
+					"intro"=>$intro,
+					"name"=>$name,
+					"docu_type"=>$docu_type,
+					"docu_no"=>$docu_no,
+					"level"=>0,
+					"admin_id"=>0,
+					"phone"=>$phone,
+					"email"=>$email,
+					"pass"=>md5($pass),
+					"user_no"=>getMemberNo($type),
+					"login_time"=>date("Y-m-d H:i:s"),
+					"login_num"=>1
 				);
+			}else{
+				$data=array(
+					"sortnum"=>$db->where("user_type={$type}")->max("sortnum")+10,
+					"user"=>$user,
+					"user_type"=>1,
+					"admin_id"=>0,
+					"phone"=>$phone,
+					"intro"=>$intro,
+					"company"=>$company,
+					"address"=>$address,
+					"email"=>$email,
+					"pass"=>md5($pass),
+					"user_no"=>getMemberNo($type),
+					"login_time"=>date("Y-m-d H:i:s"),
+					"login_num"=>1
+				);
+			}
+			
 			$rst=$db->data($data)->add();
 			if($rst){
-				session('user',$user); 
+				session('user',$user);
+				sendMessageAdapter($phone,"恭喜你注册成功，你的用户名是: {$user},密码是: {$pass},请妥善保存");
 				echo json_encode(array('returnInfo'=>"success"));
 			}else{
 				echo json_encode(array('returnInfo'=>"抱歉，注册失败！"));

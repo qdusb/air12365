@@ -17,6 +17,7 @@ function getMemberNo($type)
 	}
 }
 function getCompanyNo(){
+
 	$num=(string)rand(0,999);
 	$len=strlen($num);
 	for($i=0;$i<3-$len;$i++){
@@ -26,9 +27,11 @@ function getCompanyNo(){
 	$retval=M("member")->where("user_no='{$user_no}'")->find();
 	while(!empty($retval)){
 		$user_no=getCompanyNo();
+		$retval=M("member")->where("user_no='{$user_no}'")->find();
 	}
 	return $user_no;
 }
+
 function getDiamondNo(){
 	$num=(string)rand(1,999);
 	while($num=="888")$num=(string)rand(1,999);
@@ -40,19 +43,18 @@ function getDiamondNo(){
 	$retval=M("member")->where("user_no='{$user_no}'")->find();
 	while(!empty($retval)){
 		$user_no=getDiamondNo();
+		$retval=M("member")->where("user_no='{$user_no}'")->find();
 	}
 	return $user_no;
 }
 function getVipNo(){
 	$num=(string)mt_rand(1000,999999);
-	
 	while($num=="888")$num=(string)mt_rand(1,999999);
 	$len=strlen($num);
 	for($i=0;$i<6-$len;$i++){
 		$num="0".$num;
 	}
 	$user_no="xc999".$num;
-	
 	$retval=M("member")->where("user_no='{$user_no}'")->find();
 	while(!empty($retval)){
 		$user_no=getVipNo();

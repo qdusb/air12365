@@ -25,9 +25,69 @@
 							<input name="pwd2" type="password" size="20" maxlength="50" class="text" />
 						</div>
 					</li>
+					<li class="field">
+						<div class="input clearfix">
+							<label>电话</label>
+							<input name="phone" type="text" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					<li class="field">
+						<div class="input clearfix">
+							<label>电子邮箱</label>
+							<input name="email" type="email" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					
+					<if condition="$type eq 0 ">
+					<li class="field">
+						<div class="input clearfix">
+							<label>姓名</label>
+							<input name="name" type="text" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					
+					<li class="field">
+						<div class="input clearfix">
+							<label>证件类型</label>
+							<?php
+								$docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
+								foreach($docu_types as $key=>$val){
+								?>
+								<input type="radio" name="docu_type" value="<?php echo $key?>" <?php if($key==$docu_type)echo "checked"?>/><?php echo $val ?>
+							<?php } ?>
+						</div>
+					</li>
+					<li class="field">
+						<div class="input clearfix">
+							<label>证件号码</label>
+							<input name="docu_no" type="text" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					<else />
+					<li class="field">
+						<div class="input clearfix">
+							<label>公司名称</label>
+							<input name="company" type="text" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					<if condition="$type eq 0 ">
+					<li class="field">
+						<div class="input clearfix">
+							<label>公司地址</label>
+							<input name="address" type="text" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					</if>
+					<li class="field">
+						<div class="input clearfix">
+							<label>简介</label>
+							<textarea name="intro" style="resize: none;width: 600px;height:400px;max-width:200px;max-height:200px;background:#f0eced;"></textarea>
+						</div>
+					</li>
 					<li class="submit-field">
 						<div class="input clearfix"><input type="button" value="注册" id="btn-reg" class="btn-reg" /></div>
 					</li>
+					
 				</ul>
 			</form>
 			<script type="text/javascript">
@@ -39,19 +99,51 @@
 		      	 var name=$("input[name=username]").val();
 		      	 var pwd=$("input[name=pwd]").val();
 		      	 var pwd2=$("input[name=pwd2]").val();
+		      	 var phone=$("input[name=phone]").val();
+		      	 var email=$("input[name=email]").val();
+		      	 var read_name=$("input[name=name]").val();
+		      	 var docu_type=$("input[name='docu_type']:checked").val();
+		      	 var docu_no=$("input[name=docu_no]").val();
+		      	 var company=$("input[name=company]").val();
+		      	 var address=$("input[name=address]").val();
+		      	 var intro=$("textarea[name=intro]").val();
 		      	 if($.trim(name).length<2){
 		      	 	alert("用户名少于2位");
 		      	 	$("input[name=username]").focus();
+		      	 	return false;
 		      	 }
 		      	 if($.trim(pwd).length<8){
 		      	 	alert("密码不能少于8位");
 		      	 	$("input[name=pwd]").focus();
+		      	 	return false;
 		      	 }
 		      	 if($.trim(pwd)!=$.trim(pwd2)){
 		      	 	alert("两次输入的密码不一致，请确认");
 		      	 	$("input[name=pwd2]").focus();
+		      	 	return false;
 		      	 }
-		      	 var data={"username":name,"pwd":pwd,"type":type};
+		      	 if(!/1[3|4|5|6|7|8|9]\d{9}/.exec(phone)){
+					alert("手机格式不正确");
+		      	 	$("input[name=phone]").focus();
+		      	 	return false;
+		      	 }
+		      	 if(!/\w{2,}\@\w+\.[a-zA-Z]+/.exec(email)){
+					alert("邮箱格式不正确");
+		      	 	$("input[name=email]").focus();
+		      	 	return false;
+		      	 }
+		      	 if(type==1&&company==""){
+		      	 	alert("公司名称不能为空！");
+		      	 	$("input[name=company]").focus();
+		      	 	return false;
+		      	 }
+		      	 if(type==0&&docu_no==""){
+		      	 	alert("证件号码不能为空！");
+		      	 	$("input[name=company]").focus();
+		      	 	return false;
+		      	 }
+		      	 var data={"username":name,"pwd":pwd,"type":type,"phone":phone,"email":email,"name":read_name,"docu_type":docu_type,"docu_no":docu_no,"company":company,"address":address,"intro":intro};
+
 		      	 $.ajax({url:url,data:data,dataType: "json",type:"POST",success:function(data){
 		      	 	if(data.returnInfo=="success"){
 		               alert("注册成功");
