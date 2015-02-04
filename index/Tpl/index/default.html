@@ -59,7 +59,7 @@
 			<div class="bd">
 				<ul>
 				<foreach name="links" item="v">
-				<li><img src="{:C('UPLOAD_PATH')}{$v.pic}" width="50" height="50" /><p>{$v.name}</p></li>
+				<li><a href="{$v.url}" target="_blank"><img src="{:C('UPLOAD_PATH')}{$v.pic}" width="50" height="50" /><p>{$v.name}</p></a></li>
 				</foreach>
 				</ul>
 			</div>

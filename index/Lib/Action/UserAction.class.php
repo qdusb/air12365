@@ -114,7 +114,7 @@ class UserAction extends BasicAction
 		U("Index/index","","",true);
 	}
 	public function doRegist(){
-		if($this->isAjax()){
+	//	if($this->isAjax()){
 			$db=M("member");
 			$type=I("type","0","htmlspecialchars");
 			$pass=I("pwd","","htmlspecialchars");
@@ -181,9 +181,9 @@ class UserAction extends BasicAction
 			}else{
 				echo json_encode(array('returnInfo'=>"抱歉，注册失败！"));
 			}
-		}else{
+		/*}else{
 			$this->error("抱歉，此页面不存在,马上跳回首页",U("Index/index"));
-		}
+		}*/
 	}
 	
 }
