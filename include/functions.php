@@ -130,6 +130,7 @@ function getCompanyNo($db){
 	$cnt=$db->getCount("member","user_no='{$user_no}'");
 	while($cnt>0){
 		$user_no=getCompanyNo();
+		$cnt=$db->getCount("member","user_no='{$user_no}'");
 	}
 	return $user_no;
 }
@@ -144,6 +145,7 @@ function getDiamondNo($db){
 	$cnt=$db->getCount("member","user_no='{$user_no}'");
 	while($cnt>0){
 		$user_no=getDiamondNo();
+		$cnt=$db->getCount("member","user_no='{$user_no}'");
 	}
 	return $user_no;
 }
@@ -161,6 +163,7 @@ function getVipNo($db){
 	$cnt=$db->getCount("member","user_no='{$user_no}'");
 	while($cnt>0){
 		$user_no=getVipNo();
+		$cnt=$db->getCount("member","user_no='{$user_no}'");
 	}
 	return $user_no;
 }
@@ -175,7 +178,6 @@ function getMicroTime()
 	return (double)$b + (double)$a;
 }
 
-
 /*
  *	得到指定文件的扩展名
 */
@@ -184,7 +186,6 @@ function getFileExt($filename = "")
 	$dot = strrpos($filename, ".");
 	return substr($filename, $dot + 1);
 }
-
 
 /*
  *	利用UNIX时间戳返回一个唯一的文件名，不含后缀
