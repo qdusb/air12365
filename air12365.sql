@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- 主机: localhost
--- 生成日期: 2015 年 01 月 18 日 14:39
--- 服务器版本: 5.6.12-log
--- PHP 版本: 5.4.16
+-- Host: 127.0.0.1
+-- Generation Time: 2015-02-04 10:31:39
+-- 服务器版本： 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,10 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 数据库: `air12365`
+-- Database: `air12365`
 --
-CREATE DATABASE IF NOT EXISTS `air12365` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `air12365`;
 
 -- --------------------------------------------------------
 
@@ -139,23 +137,16 @@ CREATE TABLE IF NOT EXISTS `advanced` (
 --
 
 INSERT INTO `advanced` (`id`, `sortnum`, `name`, `default_file`, `state`) VALUES
-(9, 90, '留言簿', 'message_list.php', 0),
 (1, 10, '基本设置', 'config_base.php', 1),
-(3, 30, '链接管理', 'link_list.php', 0),
+(3, 30, '链接管理', 'link_list.php', 1),
 (4, 40, '链接分类管理', 'link_class_list.php', 0),
-(5, 50, 'Banner管理', 'banner_list.php', 0),
+(5, 50, 'Banner管理', 'banner_list.php', 1),
 (6, 60, 'Banner分类管理', 'banner_class_list.php', 0),
-(10, 180, '加入我们', 'joinus_list.php', 0),
-(7, 70, '个人登机记录', 'air_record_list.php', 1),
-(8, 80, '应聘人员', 'job_apply_list.php', 0),
+(7, 70, '个人登机记录', 'air_record_list.php', 0),
 (11, 110, '个人会员管理', 'member_list.php', 0),
 (12, 15, '一级分类管理', 'base_class_list.php', 0),
 (13, 120, '企业会员管理', 'member_company_list.php', 0),
-(14, 130, '电子杂志管理', 'album_class_list.php', 0),
-(15, 140, '员工管理', 'staff_list.php', 0),
-(16, 150, '资料批量转移', 'transfer.php', 0),
-(19, 200, '短信管理', 'sms_list.php', 1),
-(18, 190, '批量上传', 'batch_upload_list.php', 0);
+(19, 200, '短信管理', 'sms_list.php', 1);
 
 -- --------------------------------------------------------
 
@@ -192,6 +183,7 @@ INSERT INTO `adver` (`id`, `title`, `mode`, `url`, `width`, `height`, `time`, `p
 CREATE TABLE IF NOT EXISTS `air_record` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sortnum` int(11) NOT NULL,
+  `type` int(10) unsigned NOT NULL,
   `user_id` int(10) NOT NULL,
   `admin_id` int(10) NOT NULL,
   `passenger` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -203,14 +195,14 @@ CREATE TABLE IF NOT EXISTS `air_record` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `air_record`
 --
 
-INSERT INTO `air_record` (`id`, `sortnum`, `user_id`, `admin_id`, `passenger`, `fly_date`, `arrive_date`, `trip`, `ticket_price`, `deposit`, `create_time`, `update_time`) VALUES
-(1, 10, 5, 0, '杨晓燕', '2014-12-15 16:36:00', '2014-12-15 22:36:00', '合肥-乌鲁木齐', 1060, 6000, '2015-01-18 21:41:31', '2015-01-18 13:53:38');
+INSERT INTO `air_record` (`id`, `sortnum`, `type`, `user_id`, `admin_id`, `passenger`, `fly_date`, `arrive_date`, `trip`, `ticket_price`, `deposit`, `create_time`, `update_time`) VALUES
+(10, 10, 1, 8, 0, '桃子', '2015-01-18 09:40:00', '2015-01-18 16:30:00', '合肥-武汉', 600, 600, '2015-02-03 14:02:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -238,7 +230,8 @@ CREATE TABLE IF NOT EXISTS `banner` (
 --
 
 INSERT INTO `banner` (`id`, `class_id`, `sortnum`, `title`, `content`, `url`, `pic`, `pic2`, `width`, `height`, `state`) VALUES
-(1, 1, 10, '图片1', '', '', '2014-03/139519447704288600.jpg', '', 0, 0, 1);
+(1, 1, 10, '图片1', '', '', '2015-02/142303083865791100.jpg', '', 0, 0, 1),
+(2, 1, 20, '图片2', '', '', '2015-02/142303085803314500.jpg', '', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -260,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `banner_class` (
 --
 
 INSERT INTO `banner_class` (`id`, `sortnum`, `name`, `add_deny`, `delete_deny`) VALUES
-(1, 10, '页面Banner', 0, 0);
+(1, 10, '首页Banner', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -288,7 +281,7 @@ CREATE TABLE IF NOT EXISTS `config_base` (
 --
 
 INSERT INTO `config_base` (`id`, `name`, `address`, `address2`, `title`, `icp`, `keyword`, `description`, `contact`, `javascript`, `views`) VALUES
-(1, '信望餐饮', '<p>\r\n	信望餐饮\r\n</p>\r\n<p>\r\n	电话：021-5111-3643\r\n</p>\r\n<p>\r\n	传真：021-5111-3654\r\n</p>\r\n<p>\r\n	邮箱：isao.yoshida@ifst.com.cn\r\n</p>\r\n<p>\r\n	地址:上海市中山西路933号虹桥银城大厦26层2601-2608室(200051)\r\n</p>', '信望餐饮', '信望餐饮', '皖ICP备08000675号', '安振产业投资集团信望餐饮', '信望餐饮', '<p>\r\n	贵宾热线：0551-63411788 2014信望餐饮 版权所有 皖ICP备0908659号 免责声明 技术支持：安徽网新\r\n</p>', '', 173);
+(1, '合肥晨飞网络', '', '合肥晨飞网络', '合肥晨飞网络', '皖ICP备08000675号', '合肥晨飞网络', '合肥晨飞网络', '安徽旭驰票务代理有限公司@2015版权所有 &nbsp;客服热线：0551-65151513　　　设计策划：合肥晨飞网络_一站式网络整合营销服务商！', '', 173);
 
 -- --------------------------------------------------------
 
@@ -480,7 +473,8 @@ CREATE TABLE IF NOT EXISTS `link` (
 --
 
 INSERT INTO `link` (`id`, `class_id`, `sortnum`, `name`, `url`, `pic`, `state`) VALUES
-(1, '1', 10, '中国银行', 'http://www.ibw.cn', '2014-06/140288545125279900.jpg', 1);
+(1, '1', 10, '中国银行', 'http://www.ibw.cn', '2015-02/142303091650204800.jpg', 1),
+(2, '1', 20, '东方不败2', '', '2015-02/142303092317885900.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -513,6 +507,8 @@ CREATE TABLE IF NOT EXISTS `member` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sortnum` int(11) NOT NULL,
   `user` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `payment` decimal(8,2) NOT NULL DEFAULT '0.00',
+  `integral` int(11) NOT NULL DEFAULT '0',
   `user_no` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_type` int(1) unsigned NOT NULL DEFAULT '0',
   `pass` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -527,25 +523,15 @@ CREATE TABLE IF NOT EXISTS `member` (
   `contact` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tel` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '公司电话',
   `admin_id` int(6) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
+  `intro` text COLLATE utf8_unicode_ci,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT NULL,
   `login_time` datetime DEFAULT NULL,
-  `login_num` datetime DEFAULT NULL,
+  `login_num` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user` (`user`),
   UNIQUE KEY `user_no` (`user_no`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
-
---
--- 转存表中的数据 `member`
---
-
-INSERT INTO `member` (`id`, `sortnum`, `user`, `user_no`, `user_type`, `pass`, `name`, `level`, `docu_type`, `docu_no`, `phone`, `email`, `company`, `address`, `contact`, `tel`, `admin_id`, `create_time`, `update_time`, `login_time`, `login_num`) VALUES
-(1, 10, 'cui', 'xc999000796', 0, 'e10adc3949ba59abbe56e057f20f883e', '崔云超', 1, 2, '342601198410270659', '13655603465', NULL, '万家热线8888', NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '2015-01-15 15:17:34', NULL, NULL),
-(2, 20, 'yangxiaoyan', 'xc999423453', 0, 'e10adc3949ba59abbe56e057f20f883e', '杨晓燕', 0, 0, '342601198410270659', '13655603465', NULL, '万家热线6666', NULL, NULL, NULL, 0, '2015-01-13 13:55:11', '2015-01-15 15:17:29', NULL, NULL),
-(3, 30, 'hd', 'xc999000793', 0, '25d55ad283aa400af464c76d713c07ad', '华东杨晓燕', 1, 0, '365656554', '13655603465', NULL, '万家热线333', NULL, NULL, NULL, 0, '2015-01-14 14:32:44', '2015-01-15 15:17:21', NULL, NULL),
-(4, 10, 'wjrx', 'xc999678888', 1, '25d55ad283aa400af464c76d713c07ad', NULL, 0, 0, NULL, '15066668888', NULL, '万家热线', '安徽合肥原创动漫产业园7L', '葛星', '0551-65658989', 0, '2015-01-15 14:35:26', NULL, NULL, NULL),
-(5, 40, 'hdcui', 'xc999000863', 0, '25d55ad283aa400af464c76d713c07ad', '崔云超', 1, 0, '342601198410270659', '13655603465', NULL, '万家热线333666', NULL, NULL, NULL, 0, '2015-01-15 15:18:00', '2015-01-15 15:19:38', NULL, NULL);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
