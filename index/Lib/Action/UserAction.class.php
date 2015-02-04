@@ -116,7 +116,6 @@ class UserAction extends BasicAction
 	public function doRegist(){
 		if($this->isAjax()){
 			$db=M("member");
-
 			$type=I("type","0","htmlspecialchars");
 			$pass=I("pwd","","htmlspecialchars");
 			$user=I("username","","htmlspecialchars");
