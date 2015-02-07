@@ -114,7 +114,7 @@ class UserAction extends BasicAction
 		U("Index/index","","",true);
 	}
 	public function doRegist(){
-	//	if($this->isAjax()){
+		if($this->isAjax()){
 			$db=M("member");
 			$type=I("type","0","htmlspecialchars");
 			$pass=I("pwd","","htmlspecialchars");
@@ -137,6 +137,7 @@ class UserAction extends BasicAction
 				echo json_encode(array('returnInfo'=>"抱歉，此用户名已被使用！"));
 				exit;
 			}
+			$user_no=getMemberNo($type);
 			if($type==0){
 				$data=array(
 					"sortnum"=>$db->where("user_type={$type}")->max("sortnum")+10,
@@ -151,7 +152,7 @@ class UserAction extends BasicAction
 					"phone"=>$phone,
 					"email"=>$email,
 					"pass"=>md5($pass),
-					"user_no"=>getMemberNo($type),
+					"user_no"=>$user_no,
 					"login_time"=>date("Y-m-d H:i:s"),
 					"login_num"=>1
 				);
@@ -167,7 +168,7 @@ class UserAction extends BasicAction
 					"address"=>$address,
 					"email"=>$email,
 					"pass"=>md5($pass),
-					"user_no"=>getMemberNo($type),
+					"user_no"=>$user_no,
 					"login_time"=>date("Y-m-d H:i:s"),
 					"login_num"=>1
 				);
@@ -176,14 +177,14 @@ class UserAction extends BasicAction
 			$rst=$db->data($data)->add();
 			if($rst){
 				session('user',$user);
-				sendMessageAdapter($phone,"恭喜你注册成功，你的用户名是: {$user},密码是: {$pass},请妥善保存");
+				sendMessageAdapter($phone,"恭喜你注册成功，你的用户名是: {$user},密码是: {$pass},会员号:{$user_no}请妥善保存");
 				echo json_encode(array('returnInfo'=>"success"));
 			}else{
 				echo json_encode(array('returnInfo'=>"抱歉，注册失败！"));
 			}
-		/*}else{
+		}else{
 			$this->error("抱歉，此页面不存在,马上跳回首页",U("Index/index"));
-		}*/
+		}
 	}
 	
 }

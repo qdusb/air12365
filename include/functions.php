@@ -1,5 +1,46 @@
 <?php
-function sendMessage($db,$id_array,$sms_id){
+
+function sendMessages($db,$id_array,$sms_id,$sendTime=0){
+
+	$retval="";
+	$content=$db->getTableFieldValue("sms","content","where id={$sms_id}");
+	$phones=array();
+	foreach($id_array as $id){
+		$phone=$db->getTableFieldValue("member","phone","where id={$id}");
+		array_push($phones, $phone);
+	}
+	if(count($phones)>0){
+		sendMessagesAdapter($phones,$content,$sendTime);
+	}
+	return $retval;
+}
+function sendMessagesAdapter($phones,$content,$sendTime=0){
+	$content=$content."【旭驰】";
+	$sms_url="http://118.145.18.236:9999/sms.aspx";
+	$url = 'http://www.waqiang.com/index.php/url/shorten';
+    $data = array(
+        'action' => "send",
+        'userid' => '686',
+        "account"=>"xchk",
+        "password"=>"xchk001",
+        "mobile"=>implode(",",$phones),
+        "content"=>$content,
+        "sendTime"=>$sendTime
+    );
+    $curlObj = curl_init();
+    $options = array(
+        CURLOPT_URL => $sms_url,
+        CURLOPT_POST => TRUE, //使用post提交
+        CURLOPT_RETURNTRANSFER => TRUE, //接收服务端范围的html代码而不是直接浏览器输出
+        CURLOPT_TIMEOUT => 4,
+        CURLOPT_POSTFIELDS => http_build_query($data), //post的数据
+    );
+    curl_setopt_array($curlObj, $options);
+    $response = curl_exec($curlObj);
+    curl_close($curlObj);
+    return $response;
+}
+function sendMessage($db,$id_array,$sms_id,$sendTime=0){
 
 	$retval="";
 	$content=$db->getTableFieldValue("sms","content","where id={$sms_id}");
@@ -12,8 +53,31 @@ function sendMessage($db,$id_array,$sms_id){
 	}
 	return $retval;
 }
-function sendMessageAdapter($phone,$content){
-	return "ok";
+function sendMessageAdapter($phone,$content,$sendTime=0){
+	$content=$content."【旭驰】";
+	$sms_url="http://118.145.18.236:9999/sms.aspx";
+	$url = 'http://www.waqiang.com/index.php/url/shorten';
+    $data = array(
+        'action' => "send",
+        'userid' => '686',
+        "account"=>"xchk",
+        "password"=>"xchk001",
+        "mobile"=>$phone,
+        "content"=>$content,
+        "sendTime"=>$sendTime
+    );
+    $curlObj = curl_init();
+    $options = array(
+        CURLOPT_URL => $sms_url,
+        CURLOPT_POST => TRUE, //使用post提交
+        CURLOPT_RETURNTRANSFER => TRUE, //接收服务端范围的html代码而不是直接浏览器输出
+        CURLOPT_TIMEOUT => 4,
+        CURLOPT_POSTFIELDS => http_build_query($data), //post的数据
+    );
+    curl_setopt_array($curlObj, $options);
+    $response = curl_exec($curlObj);
+    curl_close($curlObj);
+    return $response;
 }
 
 function getCompanyAirRecordData($db,$admin_id,$admin_grade){

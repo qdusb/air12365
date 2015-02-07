@@ -15,6 +15,8 @@ $read_only="readonly='readonly'";
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$pass		=trim($_POST['pass']);
+	$user=$_POST['user'];
+	$user_no=strtolower($_POST['user_no']);
 	$data=array(
 		"sortnum"=>(int)$_POST["sortnum"],
 		"user"=>$_POST['user'],
@@ -45,11 +47,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$data['pass']=md5($pass);
 			$data['create_time']=date("Y:m:d H:i:s");
 			if($db->insert_data("member",$data)){
+				sendMessageAdapter($_POST['phone'],"恭喜你注册成功，你的用户名是: {$user},密码是: {$pass},会员号:{$user_no}请妥善保存");
 				header("location: $listUrl");
 				exit;
 			}else{
 				info("新增失败,请确认用户名或者会员编号未被使用");
 			}
+
 		}
 	}else{
 		if(!empty($pass)){

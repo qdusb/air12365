@@ -4,8 +4,32 @@ author reevesc cui
 */
 
 
-function sendMessageAdapter($phone,$content){
-	return "ok";
+function sendMessageAdapter($phone,$content,$sendTime=0){
+	$content=$content."【旭驰】";
+	$sms_url="http://118.145.18.236:9999/sms.aspx";
+	$url = 'http://www.waqiang.com/index.php/url/shorten';
+    $data = array(
+        'action' => "send",
+        'userid' => '686',
+        "account"=>"xchk",
+        "password"=>"xchk001",
+        "mobile"=>$phone,
+        "content"=>$content,
+        "sendTime"=>$sendTime
+    );
+    $curlObj = curl_init();
+    $options = array(
+        CURLOPT_URL => $sms_url,
+        CURLOPT_POST => TRUE, //使用post提交
+        CURLOPT_RETURNTRANSFER => TRUE, //接收服务端范围的html代码而不是直接浏览器输出
+        CURLOPT_TIMEOUT => 4,
+        CURLOPT_POSTFIELDS => http_build_query($data), //post的数据
+    );
+    curl_setopt_array($curlObj, $options);
+    $response = curl_exec($curlObj);
+    curl_close($curlObj);
+    return $response;
+	
 }
 
 function getMemberNo($type)
