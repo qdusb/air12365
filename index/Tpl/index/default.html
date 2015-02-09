@@ -3,7 +3,7 @@
 	<div class="wrap">
 		<div class="loginWrap clearfix">
 			<ul class="hd">
-				<li>普通用户</li>
+				<li>个人用户</li>
 				<li>企业用户</li>
 			</ul>
 			<div class="bd">
@@ -47,7 +47,7 @@
 </script>
 <script type="text/javascript">
 	jQuery(".banner").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:true,autoPlay:true,interTime:5000});
-	jQuery(".loginWrap").slide({titCell:".hd li",mainCell:".bd"});
+	jQuery(".loginWrap").slide({trigger:"click",titCell:".hd li",mainCell:".bd"});
 	jQuery(".picShow").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:12,interTime:50});
 </script>
 <include file="Public:footer"/>

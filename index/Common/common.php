@@ -270,6 +270,7 @@ function getClassValue($class_id)
      		"forth_id"		=>$forth_id,
      		"class_id"		=>$class_id,
      		"base_name"		=>$db->where("id=$base_id")->getfield("name"),
+     		"base_en_name"	=>$db->where("id=$base_id")->getfield("en_name"),
      		"second_name"	=>$db->where("id=$second_id")->getfield("name"),
      		"third_name"	=>$db->where("id=$third_id")->getfield("name"),
      		"forth_name"	=>$db->where("id=$forth_id")->getfield("name"),

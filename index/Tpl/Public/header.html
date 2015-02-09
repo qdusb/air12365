@@ -15,16 +15,14 @@
 <div class="header">
 	<div class="wrap clearfix">
 		<h1 class="logo"><a href="{:U('Index/index')}"><img src="__PUBLIC__/images/logo.jpg" width="273" height="89" /></a></h1>
-		<div class="topArea">
-			<div class="nav">
-				<ul class="navs clearfix">
-					<foreach name="navs" item="v">
-					<li class="{$v.class}">
-						<a href="{$v.url}" <if condition="$v['id'] eq $id_configs['base_id']">class="current" </if> >{$v.name}</a>
-					</li>
-					</foreach>
-				</ul>
-			</div>
+		<div class="nav">
+			<ul class="navs clearfix">
+				<foreach name="navs" item="v">
+				<li class="{$v.class}">
+					<a href="{$v.url}" <if condition="$v['id'] eq $id_configs['base_id']">class="current" </if> >{$v.name}</a>
+				</li>
+				</foreach>
+			</ul>
 		</div>
 		<p class="topTel">客服电话：<em>0551-65151513</em></p>
 	</div>

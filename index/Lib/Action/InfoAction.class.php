@@ -8,14 +8,18 @@ class InfoAction extends BasicAction{
 	public function home(){
 		$this->error("抱歉，此页面不存在,马上跳回首页",U("Index/index"));
 	}
+
 	public function index(){
+
 		$page_id=I("page_id","1","htmlspecialchars");
+
 		if(empty($this->class_id)){
 			$this->error("页面不存在");
 		}
 		$class_id=$this->configs["class_id"];
 		$info_state=$this->configs["info_state"];
-
+		$this->setIDConfig($class_id);
+		
 		/*分页设置*/
 		switch($info_state)
 		{
