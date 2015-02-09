@@ -1,0 +1,38 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.2.min.js"></script>
+<div class="container">
+<script type="text/javascript">
+	var retval={$retval};
+	if(retval==1){
+		alert("用户名和密码不能为空！");
+	}else if(retval==2){
+		alert("用户名或密码错误！");
+	}
+</script>
+	<div class="wrap clearfix">
+		<div class="form-login">
+			<p>用户登录</p>
+			<form action="{:U('User/login')}" name="form_message" method="post">
+			<input name="backUrl" type="hidden" size="20" maxlength="50" value="User/showLogin" class="text" />
+				<ul>
+					<li class="field">
+						<div class="input clearfix">
+							<label>用户名</label>
+							<input name="name" type="text" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					<li class="field">
+						<div class="input clearfix">
+							<label>密码</label>
+							<input name="pas" type="password" size="20" maxlength="50" class="text" />
+						</div>
+					</li>
+					<li class="submit-field">
+						<div class="input clearfix"><input type="submit" value="登录" id="btn-reg" class="btn-reg" /></div>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>

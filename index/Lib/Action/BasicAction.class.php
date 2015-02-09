@@ -19,13 +19,13 @@ class BasicAction extends Action{
 	
 		setBaseWebConfig();
 		/*一级导航*/
-		$navs=getBaseClass(6);
-		$this->assign("navs",$navs);
+		$this->navs=getBaseClass(10);
+		$this->assign("navs",$this->navs);
 		/*所有的二级导航*/
 		$this->categorys=getAllCategorys();
 		$this->assign("categorys",$this->categorys);
 		/*默认为内页样式*/
-		$this->assign("css_file","inside.css");
+		$this->assign("css_file","Kd_Inside.css");
 	}
 	protected function setIDConfig($class_id){
 		

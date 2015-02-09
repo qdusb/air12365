@@ -138,8 +138,8 @@ $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $co
 							<?php }}?>
                             <?php
                             $advances=array(
-                                "个人订单管理"=>"air_record_list.php",
-                                "企业订单管理"=>"company_record_list.php",
+                                //"个人订单管理"=>"air_record_list.php",
+                               // "企业订单管理"=>"company_record_list.php",
                                 "个人会员管理"=>"member_list.php",
                                 "企业会员管理"=>"company_member_list.php"
                             );

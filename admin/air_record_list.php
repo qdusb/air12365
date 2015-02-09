@@ -6,8 +6,12 @@ require(dirname(__FILE__) . "/config.php");
 require(dirname(__FILE__) . "/excel_class.php");
 
 $page = (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
-$listUrl = "air_record_list.php?page=$page";
-$editUrl = "air_record_edit.php?page=$page";
+$uid     = (int)$_GET["uid"];
+$search     = (string)$_GET["search"];
+
+$listUrl = "air_record_list.php?page=$page&uid=$uid&search=$search";
+$backUrl = "member_list.php?page=$page&uid=$uid&search=$search";
+$editUrl = "air_record_edit.php?page=$page&uid=$uid&search=$search";
 $record_type=0;
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
@@ -59,6 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 <table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
     <tr height="30">
         <td>
+            <a href="<?php echo $backUrl?>">[返回列表]</a>&nbsp;
             <a href="<?php echo $listUrl?>">[刷新列表]</a>&nbsp;
             <a href="javascript:reverseCheck(document.form1.ids);">[反向选择]</a>&nbsp;
             <a href="javascript:if(delCheck(document.form1.ids)) {document.form1.action.value = 'delete';document.form1.submit();}">[删除]</a>&nbsp;
@@ -95,16 +100,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             <td width="15%">到达时间</td>
             <td width="8%">行程</td>
             <td width="15%">票面金额</td>
-            <td width="15%">预存款</td>
+            <td width="15%">积分</td>
             <td>创建时间</td>
 
         </tr>
         <?php
-        $sql = "select * from air_record";
+        $sql = "select * from air_record where type=$record_type";
         if($session_admin_grade==7){
-            $sql.=" where admin_id={$session_admin_id} and type=$record_type";
-        }else{
-            $sql.=" where type=$record_type";
+            $sql.=" and admin_id={$session_admin_id}";
+        }
+        if(!empty($uid)){
+            $sql.=" and user_id={$uid} ";
         }
         $sql .= " order by sortnum desc limit " . ($page - 1) * $page_size . ", " . $page_size;
         $rst = $db->query($sql);

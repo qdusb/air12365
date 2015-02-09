@@ -3,21 +3,17 @@
 	<div class="wrap clearfix">
 		<div class="sidebar">
 			<h2 class="colPicTitle">用户中心<em>user center</em></h2>
-			<div class="menu">
-				<dl>
-					<dt><a href="{:U('User/index')}" ><em></em>个人信息</a></dt>
-					<dt><a href="{:U('User/index',array('info_type'=>'info'))}" ><em></em>账号信息</a></dt>
-					<dt><a href="{:U('User/recordList')}" class="current"><em></em>订单中心</a></dt>
-					<dt><a href="{:U('User/loginout')}"><em></em>退出</a></dt>
-				</dl>
-			</div>
+			<include file="Public:user_menu" index='0' />
 		</div>
 		<div class="main">
 			<table style="font-size:13px;"  width="720px" border="1" size="14" cellspacing="2" cellpadding="0" align="center">
-				<tr align="center"><td width="5%">序号</td><td width="15%" >乘机人</td><td width="15%">行程</td><td width="20%">起飞时间</td><td width="20%">到达时间</td><td align="right" width="12.5%" >票面金额(元)</td><td align="right" width="12.5%">预存款(元)</td></tr>
+				<tr align="center"><td width="5%">序号</td><td width="15%" >乘机人</td><td width="15%">行程</td><td width="20%">起飞时间</td><td width="20%">到达时间</td><td align="right" width="12.5%" >票面金额(元)</td><td align="right" width="12.5%">积分</td></tr>
 				<foreach name="records" item="v">
 				<tr align="center"><td>{$key+1}</td><td >{$v.passenger}</td><td>{$v.trip}</td><td>{$v.fly_date}</td><td>{$v.arrive_date}</td><td align="right">{$v.ticket_price}</td><td align="right">{$v.deposit}</td></tr>
 				</foreach>
+
+				</foreach>
+				<tr align="center"><td colspan="3">统计</td><td >金额总和</td><td>{$user.total_ticket_value}(元)</td><td >积分</td><td>{$user.integral}</td></tr>
 			</table>
 		</div>
 	</div>

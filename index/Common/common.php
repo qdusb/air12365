@@ -87,7 +87,16 @@ function getVipNo(){
 }
 function getLinkURL($class_id)
 {
-	$url="";
+	if($class_id=="101")
+	{
+		$url=U("User/showLogin");
+	}
+	
+	else
+	{
+		$url=U("Info/index?class_id=$class_id");
+		
+	}
 	return $url;
 }
 /*分页*/

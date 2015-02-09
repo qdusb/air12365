@@ -3,22 +3,11 @@
 	<div class="wrap clearfix">
 		<div class="sidebar">
 			<h2 class="colPicTitle">用户中心<em>user center</em></h2>
-			<div class="menu">
-				<dl>
-					<dt><a href="#" class="current"><em></em>个人信息</a></dt>
-					<dt><a href="{:U('User/index',array('info_type'=>'info'))}" ><em></em>账号信息</a></dt>
-					<dt><a href="{:U('User/recordList')}"><em></em>订单中心</a></dt>
-					<dt><a href="{:U('User/loginout')}"><em></em>退出</a></dt>
-				</dl>
-			</div>
+			<include file="Public:user_menu" index='0' />
 		</div>
 		<div class="main">
 			<div class="article">
-				<form action="{:U('User/updateInfo')}" method="post">
-					<textarea name="intro" style="resize: none;width: 600px;height:400px;max-width:600px;max-height:400px;background:#f0eced;">{$user.intro}</textarea>
-					<br>
-					<input type="submit" value="更改" size="30">
-				</form>
+				
 			</div>
 		</div>
 	</div>

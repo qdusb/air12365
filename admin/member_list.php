@@ -7,9 +7,9 @@ require(dirname(__FILE__) . "/excel_class.php");
 $docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
 $levels=array("VIP会员","钻石会员");
 $page = (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
+$search     = (string)$_GET["search"];
 $listUrl = "member_list.php?page=$page";
 $editUrl = "member_edit.php?page=$page";
-
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
 
@@ -86,7 +86,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             <a href="javascript:document.form1.action.value = 'download';document.form1.submit();">[数据导出]</a>&nbsp;&nbsp;
             <a href="javascript:return false;" id="send_message">[发送短信]</a>
         </td>
-
+        <td align="left">
+            <form name="searchForm" method="get" action="" style="margin:0px;">
+                可以查询姓名，手机号，用户名：<input name="search" type="text" value="<?php echo $search?>" size="30" maxlength="50" />
+                <input type="submit" value="查询" style="width:60px;">
+            </form>
+        </td>
         <td align="right">
             <?php
             //设置每页数
@@ -141,24 +146,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             <td width="1%"></td>
             <td width="5%">用户名</td>
             <td width="10%">会员编号</td>
+            <td width="5%">会员积分</td>
             <td width="8%">姓名</td>
-            <td width="8%">证件类型</td>
             <td width="15%">证件编号</td>
-            <td width="8%">会员等级</td>
             <td width="15%">联系方式</td>
             <td width="15%">注册邮箱</td>
             <td width="15%">工作单位</td>
-            <td>创建时间</td>
+            <td>飞行记录</td>
 
         </tr>
         <?php
-        $sql = "select * from member ";
+        $sql = "select * from member where user_type=0";
         if($session_admin_grade==7){
-            $sql.="where admin_id={$session_admin_id} and user_type=0 ";
-        }else{
-            $sql.="where user_type=0 ";
+            $sql.=" and admin_id={$session_admin_id} ";
         }
-        $sql .= "order by sortnum desc limit " . ($page - 1) * $page_size . ", " . $page_size;
+        if(!empty($search)){
+            $sql.=" and ( name like '%{$search}%' or user like '%{$search}%' or phone like '%{$search}%' )";
+        }
+        $sql .= " order by sortnum desc limit " . ($page - 1) * $page_size . ", " . $page_size;
         $rst = $db->query($sql);
         while ($row = $db->fetch_array($rst))
         {
@@ -168,18 +173,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 <td><input type="checkbox" id="ids" name="ids[]" value="<?php echo $row["id"]?>"></td>
                 <td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["user"]?></a></td>
                 <td><?php echo $row["user_no"]?></td>
+                <td><?php echo $row["integral"]?></td>
                 <td><?php echo $row["name"]?></td>
-                <td><?php echo $docu_types[$row['docu_type']];?></td>
                 <td><?php echo $row["docu_no"]?></td>
-                <td><?php echo $levels[$row['level']];?></td>
                 <td><?php echo $row["phone"]?></td>
                 <td><?php echo $row["email"]?></td>
                 <td><?php echo $row["company"]?></td>
-                <td><?php echo $row["create_time"]?></td>
+                <td>
+                <?php
+                $view_url="air_record_list.php?uid={$row['id']}&page=$page&search={$search}";
+                $edit_url="air_record_edit.php?uid={$row['id']}&page=$page&search={$search}";
+                ?>
+                <a href="<?php echo $view_url ?>">查看</a>
+                &nbsp;&nbsp; &nbsp;&nbsp;
+                <a href="<?php echo $edit_url ?>">添加</a>
+                </td>
             </tr>
         <?php }?>
         <tr class="listFooterTr">
-            <td colspan="12"><?php echo $page_str?></td>
+            <td colspan="10"><?php echo $page_str?></td>
         </tr>
     </table>
 </form>

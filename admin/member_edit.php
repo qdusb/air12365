@@ -5,8 +5,8 @@ require(dirname(__FILE__) . "/config.php");
 
 $id		= (int)$_GET["id"];
 $page	= (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
-
-$listUrl = "member_list.php?page=$page";
+$search     = (string)$_GET["search"];
+$listUrl = "member_list.php?page=$page&search=$search";
 
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		"email"=>$_POST['email'],
 		"company"=>$_POST['company'],
 		"intro"=>$_POST['intro'],
+		"integral"=>$_POST['integral'],
 		"admin_id"=>$session_admin_id
 	);
 
@@ -84,7 +85,7 @@ if(!empty($id)){
 		$phone		=$row['phone'];
 		$email		=$row['email'];
 		$company	=$row['company'];
-		$payment	=$row['payment'];
+		$integral	=$row['integral'];
 		$intro	=$row['intro'];
 
 		if($user_no==""){
@@ -161,10 +162,10 @@ if(!empty($id)){
 					<td class="editLeftTd">用户名</td>
 					<td class="editRightTd"><input type="text" name="user" maxlength="20" size="60" value="<?php echo $user?>" <?php echo $read_only?>/></td>
 				</tr>
-				<!-- <tr class="editTr">
-					<td class="editLeftTd">预付款</td>
-					<td class="editRightTd"><input type="text" name="payment" maxlength="20" size="60" value="<?php echo $payment?>"/></td>
-				</tr> -->
+				<tr class="editTr">
+					<td class="editLeftTd">积分</td>
+					<td class="editRightTd"><input type="text" name="integral" maxlength="20" size="60" value="<?php echo $integral?>"/></td>
+				</tr>
 				<tr class="editTr">
 					<td class="editLeftTd">会员编号/级别</td>
 					<td class="editRightTd">

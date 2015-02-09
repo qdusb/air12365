@@ -3,14 +3,7 @@
 	<div class="wrap clearfix">
 		<div class="sidebar">
 			<h2 class="colPicTitle">用户中心<em>user center</em></h2>
-			<div class="menu" style="width:60px">
-				<dl>
-					<dt><a href="{:U('User/index')}"><em></em>个人信息</a></dt>
-					<dt><a href="#" class="current"><em></em>账号信息</a></dt>
-					<dt><a href="{:U('User/recordList')}"><em></em>订单中心</a></dt>
-					<dt><a href="{:U('User/loginout')}"><em></em>退出</a></dt>
-				</dl>
-			</div>
+			<include file="Public:user_menu" index='0' />
 		</div>
 		<div class="main">
 			<dl class="userInfo clearfix">
@@ -22,6 +15,7 @@
 			<div class="article">
 				<p>账号：{$user.user}</p>
 				<p>编号：{$user.user_no}</p>
+				<p>积分：{$user.integral}分</p>
 				<if condition="$user['user_type'] eq 0 ">
 					<p>会员性质:个人会员</p>
 					<p>等级：
@@ -30,8 +24,6 @@
 					    </if>
 				    </p>
 				    <p>预付款(元):{$user.payment}</p>
-				    <p>账户安全级别：中等</p>
-					<p>个人积分：{$user.integral}分</p>
 					<p>姓名：<input type="text" name="name" value="{$user.name}"></p>
 					<p>证件类型：{$user.docu_name}</p>
 					<p>证件编号：{$user.docu_no}</p>
@@ -46,6 +38,8 @@
 					<p>公司联系人：<input type="text" name="contact" value="{$user.contact}"></p>
 					<p>公司联系人电话：<input type="text" name="phone" value="{$user.phone}"></p>
 			    </if>
+			    <p>简介</p>
+			    <textarea name="intro" style="resize: none;width: 600px;height:400px;max-width:500px;max-height:200px;background:#f0eced;">{$user.intro}</textarea>
 			</div>
 			<div><input type="submit" value="更改" size="30"></div>
 			</form>

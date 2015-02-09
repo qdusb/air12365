@@ -7,8 +7,10 @@ require(dirname(__FILE__) . "/excel_class.php");
 $docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
 $levels=array("VIP会员","钻石会员");
 $page = (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
-$listUrl = "company_member_list.php?page=$page";
-$editUrl = "company_member_edit.php?page=$page";
+$search     = (string)$_GET["search"];
+
+$listUrl = "company_member_list.php?page=$page&search=$search";
+$editUrl = "company_member_edit.php?page=$page&search=$search";
 
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
@@ -141,13 +143,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 				<tr class="listHeaderTr">
 					<td width="1%"></td>
 					<td width="5%">用户名</td>
+					<td width="5%">会员积分</td>
 					<td width="10%">会员编号</td>
 					<td width="8%">公司名称</td>
 					<td width="8%">公司电话</td>
 					<td width="10%">公司联系人</td>
 					<td width="10%">联系人电话</td>
-					<td width="15%">地址</td>
-					<td>创建时间</td>
+					<td width="10%">地址</td>
+					<td width="10%">飞行记录</td>
+					<td width="10%">创建时间</td>
 				</tr>
 				
 				<?php
@@ -166,17 +170,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 					<tr class="<?php echo $css?>">
 						<td><input type="checkbox" id="ids" name="ids[]" value="<?php echo $row["id"]?>"></td>
 						<td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["user"]?></a></td>
+						<td><?php echo $row["integral"]?></td>
 						<td><?php echo $row["user_no"]?></td>
 						<td><?php echo $row["company"]?></td>
 						<td><?php echo $row['tel'];?></td>
 						<td><?php echo $row["contact"]?></td>
 						<td><?php echo $row['phone'];?></td>
-						<td><?php echo $row["address"]?></td>
-						<td><?php echo $row["create_time"]?></td>           
+						<td><?php $row["address"]?></td>
+						 <td>
+		                <?php
+		                $view_url="company_record_list.php?uid={$row['id']}&page=$page&search={$search}";
+		                $edit_url="company_record_edit.php?uid={$row['id']}&page=$page&search={$search}";
+		                ?>
+		                <a href="<?php echo $view_url ?>">查看</a>
+		                &nbsp;&nbsp; &nbsp;&nbsp;
+		                <a href="<?php echo $edit_url ?>">添加</a>
+		                </td>
+						<td><?php echo date("Y-m-d",strtotime( $row["create_time"]))?></td>           
 					</tr>
 				<?php }?>
 				<tr class="listFooterTr">
-					<td colspan="10"><?php echo $page_str?></td>
+					<td colspan="11"><?php echo $page_str?></td>
 				</tr>
 				</table>
 			</form>

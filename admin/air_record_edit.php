@@ -4,9 +4,11 @@ require(dirname(__FILE__) . "/isadmin.php");
 require(dirname(__FILE__) . "/config.php");
 
 $id		= (int)$_GET["id"];
+$uid     = (int)$_GET["uid"];
+$search     = (string)$_GET["search"];
 $page	= (int)$_GET["page"] > 0 ? (int)$_GET["page"] : 1;
 
-$listUrl = "air_record_list.php?page=$page";
+$listUrl = "member_list.php?page=$page&search=$search";
 
 //连接数据库
 $db = new onlyDB($config["db_host"], $config["db_user"], $config["db_pass"], $config["db_name"]);
@@ -34,10 +36,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     if($id<1)
     {
+        
+
         if(empty($user_id)) {
             info("请填写正确的用户编号");
         }
         if($db->insert_data("air_record",$data)){
+            //添加积分
+            $deposit=(int)$_POST['deposit'];
+            $sql="update member set integral=integral+$deposit where id=$user_id";
+            $db->query($sql);
             header("location: $listUrl");
             exit;
         }else{
@@ -66,7 +74,7 @@ if(!empty($id)){
     $rst = $db->query($sql);
     if ($row = $db->fetch_array($rst))
     {
-        $sortnum	= $row["sortnum"];
+        $sortnum	=$row["sortnum"];
         $user_id	=$row['user_id'];
         $passenger	=$row['passenger'];
         $fly_date	=$row['fly_date'];
@@ -80,10 +88,17 @@ if(!empty($id)){
         info("指定的记录不存在！");
     }
 }else{
+    $user_id=$uid;
+    $sql = "select * from member where id=$uid";
+    $rst = $db->query($sql);
+    if ($row = $db->fetch_array($rst))
+    {
+        $sortnum=$row['sortnum'];
+        $user_no=$row['user_no'];
+        $passenger  =$row['name'];
+        $level=$row['level'];
+    }
     $read_only="";
-    $sortnum=$db->getMax("air_record", "sortnum") + 10;
-    $user_no="xc999";
-    $level=0;
 }
 ?>
 <html>
@@ -96,6 +111,7 @@ if(!empty($id)){
     <link href="images/admin.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="images/common.js"></script>
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
     <script type="text/javascript">
         function check(form)
         {
@@ -142,7 +158,7 @@ if(!empty($id)){
             <td class="editLeftTd">会员编号</td>
             <td class="editRightTd">
                 <input type="text" name="user_no" id="user_no" maxlength="20" size="60" value="<?php echo $user_no?>" <?php echo $read_only?>/>&nbsp;&nbsp;
-                <?php if(empty($id)){?>
+                <?php if(empty($uid)){?>
                 <button type="button" id="num_check">检测会员编号</button>
                     <script>
                         $(function(){
@@ -192,11 +208,11 @@ if(!empty($id)){
 
         <tr class="editTr">
             <td class="editLeftTd">起飞时间</td>
-            <td class="editRightTd"><input type="text" name="fly_date" maxlength="20" size="60" value="<?php echo $fly_date?>"/>格式如:2015-1-18 9:40</td>
+            <td class="editRightTd"><input class="Wdate" type="text" name="fly_date" maxlength="20" size="60" value="<?php echo $fly_date?>" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/></td>
         </tr>
         <tr class="editTr">
             <td class="editLeftTd">到达时间</td>
-            <td class="editRightTd"><input type="text" name="arrive_date" maxlength="20" size="60" value="<?php echo $arrive_date?>"/>格式如:2015-1-18 16:30</td>
+            <td class="editRightTd"><input class="Wdate" type="text" name="arrive_date" maxlength="20" size="60" value="<?php echo $arrive_date?>" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/></td>
         </tr>
         <tr class="editTr">
             <td class="editLeftTd">行程</td>
@@ -207,7 +223,7 @@ if(!empty($id)){
             <td class="editRightTd"><input type="text" name="ticket_price" maxlength="20" size="60" value="<?php echo $ticket_price?>"/></td>
         </tr>
         <tr class="editTr">
-            <td class="editLeftTd">预存款</td>
+            <td class="editLeftTd">积分</td>
             <td class="editRightTd"><input type="text" name="deposit" maxlength="20" size="60" value="<?php echo $deposit?>"/></td>
         </tr>
         <tr class="editFooterTr">

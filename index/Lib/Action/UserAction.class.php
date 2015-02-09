@@ -1,7 +1,7 @@
 <?php
 class UserAction extends BasicAction
 {
-	public function index(){
+	public function info(){
 		$user=session('user');
 		$info_type=I("info_type","","htmlspecialchars");
 		if(empty($user)){
@@ -14,24 +14,32 @@ class UserAction extends BasicAction
 			}else{
 				$docu_types=array("身份证","军官证","护照","港澳通行证","入台证");
 				$user['docu_name']=$docu_types[$user['docu_type']];
-				$user['integral']=intval(M("air_record")->where("user_id={$user['id']}")->sum("ticket_price"));
 				$this->assign("user",$user);
 			}
 		}
 		$this->assign("title","会员页面"."-".C("CONFIG_TITLE"));
-		if($info_type=="info"){
-			$this->display("info");
-		}else{
-			$this->display("index");
+		$this->display("info");
+	}
+	public function index(){
+		$user=session('user');
+		if(empty($user)){
+			U("Index/index","","",true);
 		}
+		$this->redirect("User/info");
+	}
+	public function showLogin(){
+		$retval=I("retval",0);
+		$this->assign("retval",$retval);
+		$this->display("show_login");
 	}
 	public function login(){
+		$backUrl=I("backUrl","Index/index","htmlspecialchars");
 		if($this->isPost()){
 			$type=I("type",0,"htmlspecialchars");
 			$pass=I("pas","","htmlspecialchars");
 			$user=I("name","","htmlspecialchars");
 			if(empty($pass)||empty($user)){
-				U("Index/index",array("retval"=>1),"",true);
+				U($backUrl,array("retval"=>1),"",true);
 			}
 			$db=M("member");
 			$pass=md5($pass);
@@ -43,9 +51,34 @@ class UserAction extends BasicAction
 					"login_num"=>$retval['login_num']+1
 					);
 				$db->where("user='{$user}'")->save($data);
-				U("User/index","","",true);
+				U("User/recordList","","",true);
 			}else{
-				U("Index/index",array("retval"=>2),"",true);
+				
+				U($backUrl,array("retval"=>2),"",true);
+			}
+		}
+	}
+	public function changePass(){
+		$user=session('user');
+		if(empty($user)){
+			U("Index/index","","",true);
+		}
+		$this->display("change_pass");
+	}
+	public function doChangePass(){
+		if($this->isAjax()){
+			$old_pass=I("old_pass","","htmlspecialchars");
+			$new_pass=I("new_pass","","htmlspecialchars");
+			$user=session('user');
+			$pass=M("member")->where("user='{$user}'")->getField('pass');
+			if(md5($old_pass)!=$pass){
+				echo json_encode(array('returnInfo'=>"抱歉，原密码不正确！"));
+				exit;
+			}else{
+				$data=array("pass"=>md5($new_pass));
+				M('member')->where("user='{$user}'")->save($data);
+				echo json_encode(array('returnInfo'=>"更改成功"));
+				exit;
 			}
 		}
 	}
@@ -56,10 +89,13 @@ class UserAction extends BasicAction
 		}else{
 			$db=M("member");
 			$user=$db->where("user='{$user}'")->find();
+
 			if(empty($user)){
 				U("Index/index","","",true);
 			}else{
+				$user['total_ticket_value']=intval(M("air_record")->where("user_id={$user['id']}")->sum("ticket_price"));
 				$this->assign("user",$user);
+
 			}
 		}
 		$db=M("air_record");
@@ -78,7 +114,8 @@ class UserAction extends BasicAction
 					"company"=>I("company","","htmlspecialchars"),
 					"phone"=>I("phone","","htmlspecialchars"),
 					"email"=>I("email","","htmlspecialchars"),
-					"update_time"=>date("Y-m-d H:i:s")
+					"update_time"=>date("Y-m-d H:i:s"),
+					"intro"=>$intro,
 				);
 			}else{
 				$data=array(
@@ -86,7 +123,8 @@ class UserAction extends BasicAction
 					"tel"=>I("tel","","htmlspecialchars"),
 					"contact"=>I("contact","","htmlspecialchars"),
 					"phone"=>I("phone","","htmlspecialchars"),
-					"update_time"=>date("Y-m-d H:i:s")
+					"update_time"=>date("Y-m-d H:i:s"),
+					"intro"=>$intro,
 				);
 			}
 			M("member")->where("user='{$user}'")->save($data);
