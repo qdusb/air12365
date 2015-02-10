@@ -46,6 +46,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             $deposit=(int)$_POST['deposit'];
             $sql="update member set integral=integral+$deposit where id=$user_id";
             $db->query($sql);
+            //添加积分日志
+            $data_log=array(
+                "admin_id"=>$session_admin_id,
+                "member_id"=>$user_id,
+                "integral"=>$deposit,
+                "operation"=>"通过添加飞行纪录添加积分"
+            );
+            $db->insert_data("integral_log",$data_log);
             header("location: $listUrl");
             exit;
         }else{

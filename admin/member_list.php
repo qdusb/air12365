@@ -168,12 +168,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         while ($row = $db->fetch_array($rst))
         {
             $css = ($css == "listTr") ? "listAlternatingTr" : "listTr";
+            $view_url="integral_list.php?uid={$row['id']}&page=$page&search={$search}";$edit_url="air_record_edit.php?uid={$row['id']}&page=$page&search={$search}";
             ?>
             <tr class="<?php echo $css?>">
                 <td><input type="checkbox" id="ids" name="ids[]" value="<?php echo $row["id"]?>"></td>
                 <td><a href="<?php echo $editUrl?>&id=<?php echo $row["id"]?>"><?php echo $row["user"]?></a></td>
                 <td><?php echo $row["user_no"]?></td>
-                <td><?php echo $row["integral"]?></td>
+                <td><a href="<?php echo $view_url ?>"><?php echo $row["integral"]?></a></td>
                 <td><?php echo $row["name"]?></td>
                 <td><?php echo $row["docu_no"]?></td>
                 <td><?php echo $row["phone"]?></td>

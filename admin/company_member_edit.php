@@ -46,7 +46,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$data['create_time']=date("Y:m:d H:i:s");
 			if($db->insert_data("member",$data)){
 				sendMessageAdapter($_POST['phone'],"恭喜你注册成功，你的用户名是: {$user},密码是: {$pass},会员号:{$user_no}请妥善保存");
-				header("location: $listUrl");
+                //添加积分日志
+                $data_log=array(
+                    "admin_id"=>$session_admin_id,
+                    "member_id"=>$aid,
+                    "integral"=>(int)$_POST['integral'],
+                    "operation"=>"通过修改用户积分更改积分"
+                );
+                $db->insert_data("integral_log",$data_log);
+                header("location: $listUrl");
 				exit;
 			}else{
 				info("新增失败");
@@ -57,6 +65,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$data['pass']=md5($pass);
 		}
 		$data['update_time']=date("Y:m:d H:i:s");
+        //添加积分日志
+        $integral=(int)$_POST['integral'];
+        $old_integral=(int)$db->getTableFieldValue("member","integral","where id={$id}");
+        $delta_integral=$integral- $old_integral;
+        $data_log=array(
+            "admin_id"=>$session_admin_id,
+            "member_id"=>$id,
+            "integral"=>$delta_integral,
+            "operation"=>"通过修改用户积分更改积分",
+        );
+        $db->insert_data("integral_log",$data_log);
 
 		if($db->update_data("member",$data,"id={$id}")){
 			header("location: $listUrl");
@@ -82,6 +101,7 @@ if(!empty($id)){
 		$phone		=$row['phone'];
 		$company	=$row['company'];
 		$intro	=$row['intro'];
+        $integral	=$row['integral'];
 
 		if($user_no==""){
 			$user_no=getCompanyNo($db);
@@ -153,6 +173,10 @@ if(!empty($id)){
 					<td class="editLeftTd">用户名</td>
 					<td class="editRightTd"><input type="text" name="user" maxlength="20" size="60" value="<?php echo $user?>" <?php echo $read_only?>/></td>
 				</tr>
+                <tr class="editTr">
+                    <td class="editLeftTd">积分</td>
+                    <td class="editRightTd"><input type="text" name="integral" maxlength="20" size="60" value="<?php echo $integral?>"/></td>
+                </tr>
 				<tr class="editTr">
 					<td class="editLeftTd">会员编号</td>
 					<td class="editRightTd">

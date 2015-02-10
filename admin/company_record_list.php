@@ -78,11 +78,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $page_size = DEFAULT_PAGE_SIZE;
             //总记录数
             if($session_admin_grade==7){
-                $record_count = $db->getCount("member","admin_id={$session_admin_id} and type=$record_type");
+                $record_count = $db->getCount("air_record","admin_id={$session_admin_id} and user_id=$uid");
             }else{
-                $record_count = $db->getCount("member","and type=$record_type");
+                $record_count = $db->getCount("air_record"," user_id=$uid");
             }
-            $record_count = $db->getCount("member");
             $page_count = ceil($record_count / $page_size);
             $page_str = page($page, $page_count, $pageUrl);
             echo $page_str;
