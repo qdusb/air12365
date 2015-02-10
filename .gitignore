@@ -1,3 +1,6 @@
 /index/Runtime/
+/index/Runtime/Cache/
 .project
 .amateras
+.settings/
+.buildpath
