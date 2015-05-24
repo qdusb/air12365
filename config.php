@@ -5,7 +5,7 @@ error_reporting(1);
 //数据库连接
 $config["db_host"] = 'localhost';
 $config["db_user"] = "root";
-$config["db_pass"] = "";
+$config["db_pass"] = "123456";
 $config["db_name"] = 'air12365';
 
 //系统配置

@@ -15,6 +15,8 @@
 <div class="header">
 	<div class="wrap clearfix">
 		<h1 class="logo"><a href="<?php echo U('Index/index');?>"><img src="__PUBLIC__/images/logo.jpg" width="273" height="89" /></a></h1>
+		<p class="topTel">客服电话：<em>0551-65151513</em></p>
+		<div class="clear"></div>
 		<div class="nav">
 			<ul class="navs clearfix">
 				<?php if(is_array($navs)): foreach($navs as $key=>$v): ?><li class="<?php echo ($v["class"]); ?>">
@@ -22,7 +24,6 @@
 				</li><?php endforeach; endif; ?>
 			</ul>
 		</div>
-		<p class="topTel">客服电话：<em>0551-65151513</em></p>
 	</div>
 	<?php if($css_file == 'Kd_Default.css'): ?><div class="banner">
 		<div class="bd">
